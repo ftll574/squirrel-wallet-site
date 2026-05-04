@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>使用支援 / Support — Squirrel Wallet</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="prose">
+    <header class="page-header">
+      <a href="/" class="back-link">← Squirrel Wallet</a>
+      <nav class="lang-toggle">
+        <a href="#zh">中文</a> · <a href="#en">English</a>
+      </nav>
+    </header>
+
+    <!-- ════════════════════════════════════════ Chinese ════════════════════════════════════════ -->
+    <article id="zh" lang="zh-Hant">
+      <h1>使用支援</h1>
+      <p class="meta">如果你在使用 Squirrel Wallet 時遇到任何問題，下面是常見問題與聯絡方式。</p>
+
+      <div class="contact-box">
+        <p style="margin: 0 0 8px;">直接寫信給我們：</p>
+        <a class="email" href="mailto:support@squirrelwallet.app">support@squirrelwallet.app</a>
+        <p style="margin: 12px 0 0; font-size: 14px; color: var(--color-text-muted);">
+          通常 1–2 個工作天內回覆。
+        </p>
+      </div>
+
+      <h2>常見問題</h2>
+      <div class="faq">
+        <details>
+          <summary>AI 辨識失敗怎麼辦？</summary>
+          <p>App 內建三家視覺語言模型（OpenRouter / Gemini / Groq）會自動 fallback，但若三家都暫時無法回應，可能是當天網路或 API 服務問題。建議：</p>
+          <ul>
+            <li>稍後重試（5–10 分鐘後通常恢復）</li>
+            <li>確認手機網路正常</li>
+            <li>實在不行可以手動輸入票券資訊或改掃條碼</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>票券資料會上傳到雲端嗎？</summary>
+          <p>不會。所有票券、優惠券、條碼、截圖都儲存在你裝置的本地資料庫（Hive）中，不會上傳到任何伺服器。詳情請看 <a href="/privacy/">隱私權政策</a>。</p>
+          <p>唯一會「離開裝置」的資料是 AI 辨識時主動傳送的圖片 — 而且不附帶任何使用者識別資訊。</p>
+        </details>
+
+        <details>
+          <summary>換新手機後，票券資料會跟著過去嗎？</summary>
+          <p>目前需要手動操作：在舊手機進入「設定 → 備份與還原」匯出備份檔案（`.zip`），轉到新手機後再從同一個入口匯入即可。</p>
+          <p>未來版本會加入 iCloud 自動同步功能，使用 Apple ID 跨裝置自動同步。</p>
+        </details>
+
+        <details>
+          <summary>eSIM 為什麼點下去沒反應？</summary>
+          <p>eSIM 安裝需要：</p>
+          <ul>
+            <li>iOS 12.1+ 或 Android 9+ 且裝置支援 eSIM（iPhone XS 之後的機型大多支援）</li>
+            <li>正確的 LPA 啟用碼（格式為 <code>LPA:1$smdp.address$activationcode</code>）</li>
+          </ul>
+          <p>若點下去 iOS 沒跳出系統設定，請確認：(1) 裝置有支援 eSIM、(2) LPA 字串格式正確（可在票券詳情頁手動編輯）。</p>
+        </details>
+
+        <details>
+          <summary>條碼掃描掃不到？</summary>
+          <p>請確認：</p>
+          <ul>
+            <li>已授權相機權限（設定 → Squirrel Wallet → 相機 開啟）</li>
+            <li>光線充足、條碼平整無皺摺</li>
+            <li>手機與條碼距離約 10–20 公分</li>
+          </ul>
+          <p>實在掃不到可以截圖票券條碼，從相簿選取後用 AI 辨識備援。</p>
+        </details>
+
+        <details>
+          <summary>怎麼回報 bug 或建議新功能？</summary>
+          <p>請寫信到 <a href="mailto:support@squirrelwallet.app">support@squirrelwallet.app</a>，附上：</p>
+          <ul>
+            <li>你用的裝置型號 + iOS 版本</li>
+            <li>App 版本（在「設定 → 關於」看得到）</li>
+            <li>問題重現步驟（如果方便的話附上截圖）</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>App 是免費的嗎？</summary>
+          <p>是的，目前完全免費，沒有廣告、沒有訂閱、沒有 in-app purchase。AI 辨識使用免費 VLM 模型額度。</p>
+        </details>
+      </div>
+    </article>
+
+    <hr class="lang-divider">
+
+    <!-- ════════════════════════════════════════ English ════════════════════════════════════════ -->
+    <article id="en" lang="en">
+      <h1>Support</h1>
+      <p class="meta">If you run into any issues using Squirrel Wallet, here are the common questions and how to reach us.</p>
+
+      <div class="contact-box">
+        <p style="margin: 0 0 8px;">Email us directly:</p>
+        <a class="email" href="mailto:support@squirrelwallet.app">support@squirrelwallet.app</a>
+        <p style="margin: 12px 0 0; font-size: 14px; color: var(--color-text-muted);">
+          We usually respond within 1–2 business days.
+        </p>
+      </div>
+
+      <h2>FAQ</h2>
+      <div class="faq">
+        <details>
+          <summary>AI recognition failed — what should I do?</summary>
+          <p>The App has three Vision Language Model providers (OpenRouter / Gemini / Groq) and falls back across them automatically. If all three are temporarily down, you can:</p>
+          <ul>
+            <li>Try again in 5–10 minutes</li>
+            <li>Check that your network connection is OK</li>
+            <li>Or just enter the ticket details manually / scan the barcode</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>Is my ticket data uploaded to the cloud?</summary>
+          <p>No. All tickets, coupons, barcodes, and screenshots are stored locally on your device using Hive. Nothing is uploaded to any server. See the <a href="/privacy/">Privacy Policy</a> for full details.</p>
+          <p>The only data that ever leaves your device is the image you explicitly send for AI recognition — and even then, no user-identifying metadata is attached.</p>
+        </details>
+
+        <details>
+          <summary>Will my data move with me to a new phone?</summary>
+          <p>Right now this is a manual step: open <em>Settings → Backup & Restore</em> on the old phone, export the backup file (`.zip`), transfer it to the new phone, and import from the same screen.</p>
+          <p>A future version will add automatic iCloud sync (using your Apple ID) so this happens transparently.</p>
+        </details>
+
+        <details>
+          <summary>The eSIM install button does nothing?</summary>
+          <p>eSIM installation requires:</p>
+          <ul>
+            <li>iOS 12.1+ or Android 9+, on hardware that supports eSIM (most iPhones since iPhone XS)</li>
+            <li>A valid LPA activation code in the form <code>LPA:1$smdp.address$activationcode</code></li>
+          </ul>
+          <p>If tapping the button doesn't bring up the system installer, check that (1) your device supports eSIM, (2) the LPA string is well-formed (you can edit it on the ticket detail screen).</p>
+        </details>
+
+        <details>
+          <summary>Barcode scanning isn't picking anything up?</summary>
+          <p>Please check:</p>
+          <ul>
+            <li>Camera permission is granted (<em>Settings → Squirrel Wallet → Camera</em>)</li>
+            <li>The barcode is well-lit and not too creased</li>
+            <li>You're holding the phone roughly 10–20 cm from the barcode</li>
+          </ul>
+          <p>If scanning still fails, you can screenshot the ticket and use the AI recognition path from your photo library as a fallback.</p>
+        </details>
+
+        <details>
+          <summary>How do I report a bug or request a feature?</summary>
+          <p>Email <a href="mailto:support@squirrelwallet.app">support@squirrelwallet.app</a> with:</p>
+          <ul>
+            <li>Your device model + iOS / Android version</li>
+            <li>The App version (visible in <em>Settings → About</em>)</li>
+            <li>Steps to reproduce, plus a screenshot if possible</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>Is the App free?</summary>
+          <p>Yes — completely free, no ads, no subscription, no in-app purchases. The AI recognition uses the free tier of each VLM provider.</p>
+        </details>
+      </div>
+    </article>
+
+    <footer class="page-footer">
+      <p>© 2026 Squirrel Wallet · <a href="/">squirrelwallet.app</a></p>
+    </footer>
+  </main>
+</body>
+</html>
