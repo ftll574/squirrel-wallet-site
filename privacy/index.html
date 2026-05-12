@@ -33,6 +33,21 @@
       font-family: "SF Mono", Menlo, Consolas, monospace;
       font-size: 0.9em;
     }
+    pre {
+      background: var(--color-primary-soft);
+      padding: 14px 16px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 13px;
+      line-height: 1.55;
+      margin: 12px 0;
+    }
+    pre code {
+      background: transparent;
+      padding: 0;
+      border-radius: 0;
+      font-size: inherit;
+    }
     blockquote {
       border-left: 3px solid var(--color-primary);
       padding: 4px 16px;
@@ -158,8 +173,19 @@
     條碼 / QR Code 區域</strong>。這個動作完全在您的裝置上發生，不需要您
     手動操作。
   </p>
+  <p>遮罩流程（概念虛擬碼，僅作說明用）：</p>
+  <pre><code>function maskBarcodes(image):
+    barcodes ← detectBarcodes(image)        # 本機 ML 模型，不上雲端
+    if barcodes is empty:
+        return image (no masking needed)
+    canvas ← decode(image)
+    for each barcode in barcodes:
+        bbox ← barcode.bounds + 8px padding  # 涵蓋條碼 quiet zone
+        canvas.fillRect(bbox, color=BLACK)   # 純黑覆蓋
+    return encodeJpeg(canvas, quality=90)</code></pre>
   <p>
-    實作位置：<a href="https://github.com/zhenyuwang/Squirrel-Wallet/blob/main/squirrel_wallet_flutter/lib/application/services/barcode_masking_service.dart"><code>barcode_masking_service.dart</code></a>（程式碼公開）。
+    偵測失敗或像素填充失敗時，App <strong>會中止上傳</strong>而非送出未遮罩
+    的原圖（強制中止，不降級）。
   </p>
   <p>
     目的：條碼是您的票券價值載體（兌換碼、eSIM LPA、會員號碼、付款 QR），
@@ -167,51 +193,42 @@
   </p>
 
   <h4>3.2 我們會把圖片送到哪裡</h4>
-  <p>
-    依您 App 版本（Free / Pro）與後端可用性，圖片<strong>可能</strong>會被
-    送到下列其中一個或多個供應商：
-  </p>
   <table>
     <thead>
       <tr>
         <th>供應商</th>
-        <th>模型類別</th>
+        <th>模型</th>
+        <th>用途</th>
         <th>隱私政策</th>
         <th>資料保留</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>OpenRouter</td>
-        <td>Free tier 多顆 VLM</td>
-        <td><a href="https://openrouter.ai/privacy">openrouter.ai/privacy</a></td>
-        <td>Free tier 可能用於模型訓練，<strong>請自行評估</strong></td>
-      </tr>
-      <tr>
-        <td>Google AI Studio (Gemini)</td>
-        <td>Free tier Gemini Flash</td>
-        <td><a href="https://ai.google.dev/gemini-api/terms">Gemini API terms</a></td>
-        <td>Free tier 可能用於模型訓練</td>
-      </tr>
-      <tr>
-        <td>Groq</td>
-        <td>Free tier Llama-3.2 Vision</td>
-        <td><a href="https://groq.com/privacy-policy/">groq.com/privacy-policy</a></td>
-        <td>Free tier 不訓練（依其當下政策）</td>
-      </tr>
-      <tr>
-        <td>OpenAI (Pro 訂閱)</td>
-        <td>gpt-4o-mini 分類器</td>
+        <td>OpenAI</td>
+        <td>gpt-4o-mini</td>
+        <td>Free / Pro 票券辨識 + Pro 影像分類</td>
         <td><a href="https://openai.com/policies/privacy-policy">openai.com policy</a></td>
-        <td>API 預設 30 天保留、不訓練</td>
+        <td>API 預設 <strong>30 天保留、不訓練</strong></td>
+      </tr>
+      <tr>
+        <td>OpenAI</td>
+        <td>gpt-4o</td>
+        <td>Pro 訂閱影像辨識主模型</td>
+        <td>同上</td>
+        <td>同上</td>
       </tr>
     </tbody>
   </table>
   <p>
-    <strong>我們無法控制這些第三方供應商的資料保留 / 訓練政策</strong>。
-    Squirrel Wallet 提供的條碼遮罩是一道防線，但您仍應評估自身敏感資料的
-    風險。如果您不希望任何圖片離開裝置，請<strong>不要使用 AI 辨識功能</strong>，
-    改用手動輸入或條碼掃描（這兩個功能完全在本機運作）。
+    <strong>我們不使用 OpenRouter / Google AI Studio / Groq 等其他第三方
+    推論供應商</strong>。所有 AI 影像辨識皆透過 OpenAI 的 API 直接呼叫。
+  </p>
+  <p>
+    <strong>我們無法控制 OpenAI 的政策變更</strong>。Squirrel Wallet 提供
+    的條碼遮罩是一道防線，但您仍應評估自身敏感資料的風險。如果您不希望
+    任何圖片離開裝置，請<strong>不要使用 AI 辨識功能</strong>，改用手動
+    輸入或條碼掃描（這兩個功能完全在本機運作）。
   </p>
 
   <h4>3.3 隨同圖片傳輸的內容</h4>
@@ -286,7 +303,6 @@
   <h3>8. 聯絡我們</h3>
   <ul>
     <li>Email: <a href="mailto:support@squirrelwallet.app">support@squirrelwallet.app</a></li>
-    <li>GitHub Issues: <a href="https://github.com/zhenyuwang/Squirrel-Wallet/issues">github.com/zhenyuwang/Squirrel-Wallet/issues</a></li>
   </ul>
 
   <hr class="lang-divider">
@@ -320,42 +336,70 @@
 
   <h3>3. AI Recognition (VLM) — Important Disclosure</h3>
   <p>
-    When you use the "scan ticket via AI" feature, the app sends an image to
-    a third-party Vision-Language-Model provider to extract ticket metadata
-    (title, expiry, merchant).
+    When you use the "scan ticket via AI" feature, the app sends an image
+    to OpenAI to extract ticket metadata (title, expiry, merchant).
   </p>
 
   <h4>3.1 Barcode masking</h4>
   <p>
     <strong>Before any upload, the app automatically detects and blacks out
     every barcode / QR code in the image on-device.</strong> This happens
-    entirely on your device — no manual action required. Source:
-    <a href="https://github.com/zhenyuwang/Squirrel-Wallet/blob/main/squirrel_wallet_flutter/lib/application/services/barcode_masking_service.dart"><code>barcode_masking_service.dart</code></a>.
+    entirely on your device — no manual action required.
+  </p>
+  <p>Masking flow (conceptual pseudocode, illustrative only):</p>
+  <pre><code>function maskBarcodes(image):
+    barcodes ← detectBarcodes(image)        # local ML model, never leaves device
+    if barcodes is empty:
+        return image (no masking needed)
+    canvas ← decode(image)
+    for each barcode in barcodes:
+        bbox ← barcode.bounds + 8px padding  # cover the barcode quiet zone
+        canvas.fillRect(bbox, color=BLACK)   # solid black fill
+    return encodeJpeg(canvas, quality=90)</code></pre>
+  <p>
+    If detection or pixel-fill fails, the app <strong>aborts the upload</strong>
+    rather than degrading to the unmasked original. There is no fallback
+    path that sends the original image when masking partially fails.
   </p>
   <p>
     Rationale: barcodes carry the value of the ticket (redemption codes,
     eSIM LPA, membership numbers, payment QRs). Masking ensures that even
-    if a provider retains the image, it cannot be used to redeem your tickets.
+    if the provider retains the image, it cannot be used to redeem your tickets.
   </p>
 
   <h4>3.2 Where the masked image goes</h4>
   <table>
     <thead>
-      <tr><th>Provider</th><th>Models</th><th>Privacy policy</th><th>Retention</th></tr>
+      <tr><th>Provider</th><th>Model</th><th>Use</th><th>Privacy policy</th><th>Retention</th></tr>
     </thead>
     <tbody>
-      <tr><td>OpenRouter</td><td>Free-tier VLMs</td><td><a href="https://openrouter.ai/privacy">openrouter.ai/privacy</a></td><td>Free tier may be used for training — <strong>review their policy</strong></td></tr>
-      <tr><td>Google AI Studio (Gemini)</td><td>Free-tier Gemini Flash</td><td><a href="https://ai.google.dev/gemini-api/terms">Gemini API terms</a></td><td>Free tier may be used for training</td></tr>
-      <tr><td>Groq</td><td>Free-tier Llama-3.2 Vision</td><td><a href="https://groq.com/privacy-policy/">groq.com/privacy-policy</a></td><td>Free tier does not train (per current policy)</td></tr>
-      <tr><td>OpenAI (Pro only)</td><td>gpt-4o-mini classifier</td><td><a href="https://openai.com/policies/privacy-policy">openai.com policy</a></td><td>API default 30-day retention, no training</td></tr>
+      <tr>
+        <td>OpenAI</td>
+        <td>gpt-4o-mini</td>
+        <td>Free / Pro ticket extraction + Pro image-kind classifier</td>
+        <td><a href="https://openai.com/policies/privacy-policy">openai.com policy</a></td>
+        <td>API default <strong>30-day retention, no training</strong></td>
+      </tr>
+      <tr>
+        <td>OpenAI</td>
+        <td>gpt-4o</td>
+        <td>Pro subscription primary extraction model</td>
+        <td>same as above</td>
+        <td>same as above</td>
+      </tr>
     </tbody>
   </table>
   <p>
-    <strong>We do not control these third parties' retention / training
-    policies.</strong> Barcode masking is one line of defence — you should
-    still assess the sensitivity of your data. If you prefer no image ever
-    leaves your device, <strong>do not use AI recognition</strong>; use
-    manual entry or barcode scanning instead (both run entirely on-device).
+    <strong>We do not use OpenRouter / Google AI Studio / Groq or any
+    other third-party inference provider.</strong> All AI image recognition
+    is called directly against the OpenAI API.
+  </p>
+  <p>
+    <strong>We do not control OpenAI's policy changes.</strong> Barcode
+    masking is one line of defence — you should still assess the
+    sensitivity of your data. If you prefer no image ever leaves your
+    device, <strong>do not use AI recognition</strong>; use manual entry
+    or barcode scanning instead (both run entirely on-device).
   </p>
 
   <h4>3.3 What travels with the image (and what doesn't)</h4>
@@ -413,7 +457,6 @@
   <h3>8. Contact</h3>
   <ul>
     <li>Email: <a href="mailto:support@squirrelwallet.app">support@squirrelwallet.app</a></li>
-    <li>GitHub Issues: <a href="https://github.com/zhenyuwang/Squirrel-Wallet/issues">github.com/zhenyuwang/Squirrel-Wallet/issues</a></li>
   </ul>
 
   <footer class="page-footer">
