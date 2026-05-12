@@ -57,8 +57,9 @@
     <details>
       <summary>AI 辨識失敗 / 結果不準怎麼辦？</summary>
       <p>
-        我們同時對接 OpenRouter、Google Gemini、Groq 三家免費 VLM，會自動
-        fallback。如果三家都失敗，可能是：
+        我們透過 OpenAI（gpt-5.4 / gpt-5.4-mini）辨識票券圖片。Pro 版主
+        模型若遇到可重試錯誤時會自動切換到 mini 版本，Free 版則直接使用
+        mini。如果辨識仍然失敗，可能是：
       </p>
       <ul>
         <li><strong>網路問題</strong> — 切換到行動網路 / Wi-Fi 再試一次。</li>
@@ -186,9 +187,11 @@
     <details>
       <summary>AI recognition failed / result inaccurate — what now?</summary>
       <p>
-        We route through OpenRouter, Google Gemini, and Groq free-tier
-        VLMs with automatic fallback. If all three fail, the cause is
-        usually one of:
+        We route image recognition through OpenAI
+        (gpt-5.4 / gpt-5.4-mini). Pro subscribers automatically fall
+        back from the primary model to gpt-5.4-mini on retryable
+        errors; the Free tier uses gpt-5.4-mini directly. If
+        recognition still fails, common causes are:
       </p>
       <ul>
         <li><strong>Network</strong> — switch between Wi-Fi and cellular

@@ -3,65 +3,652 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Squirrel Wallet — AI 票券 / 優惠券管理</title>
-  <meta name="description" content="Squirrel Wallet 是一款專為票券、優惠券與 eSIM 設計的本地優先錢包 App。AI 自動辨識票面內容、條碼掃描、本地儲存、不收集個資。">
-  <meta property="og:title" content="Squirrel Wallet">
-  <meta property="og:description" content="AI 票券 / 優惠券管理。本地優先、隱私至上。">
+  <title>Squirrel Wallet — 票券・條碼・eSIM 一手掌握</title>
+  <meta name="description" content="把演唱會票、團購優惠券、旅遊 eSIM 都收進一個 Apple Wallet 風格的卡片堆疊。AI 拍一張就幫你填好，條碼上傳前先在裝置打碼，資料只留在你手機上。">
+  <meta name="theme-color" content="#5B4BFF">
+
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="alternate icon" href="/assets/favicon.svg">
+  <link rel="apple-touch-icon" href="/assets/favicon.svg">
+
+  <!-- Open Graph / social -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://squirrelwallet.app/">
-  <link rel="stylesheet" href="/styles.css">
+  <meta property="og:title" content="Squirrel Wallet — 票券・條碼・eSIM 一手掌握">
+  <meta property="og:description" content="把演唱會票、團購優惠券、旅遊 eSIM 都收進一個 Apple Wallet 風格的卡片堆疊。AI 拍一張就幫你填好，條碼上傳前先在裝置打碼。">
+  <meta property="og:image" content="https://squirrelwallet.app/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="zh_TW">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Structured data — SoftwareApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "Squirrel Wallet",
+    "alternateName": "松鼠票夾",
+    "operatingSystem": "iOS, Android",
+    "applicationCategory": "ProductivityApplication",
+    "offers": [
+      { "@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "USD" },
+      { "@type": "Offer", "name": "Pro Monthly", "price": "2.99", "priceCurrency": "USD" },
+      { "@type": "Offer", "name": "Pro Annual", "price": "19.99", "priceCurrency": "USD" }
+    ],
+    "publisher": { "@type": "Person", "name": "Squirrel Wallet" }
+  }
+  </script>
 </head>
 <body>
-  <main>
-    <section class="hero">
-      <div class="hero-mark" aria-hidden="true">🐿️</div>
-      <h1>Squirrel Wallet</h1>
-      <p class="tagline">
-        AI 自動辨識的票券、優惠券與 eSIM 錢包。<br>
-        所有資料只存在你的手機上。
+
+<!-- ============================================================
+     STICKY NAV
+     ============================================================ -->
+<nav class="site-nav" aria-label="Site navigation">
+  <a href="#zh" class="brand">
+    <!-- Inline glyph — same path as /assets/brand/logo.svg, kept inline for zero-roundtrip render -->
+    <svg viewBox="0 0 64 64" aria-hidden="true" style="color: var(--color-primary);">
+      <path d="M20 52 Q4 42 8 22 Q14 6 32 8 Q44 10 44 22 Q44 30 36 30 Q30 30 30 24 Q30 20 34 20" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      <ellipse cx="36" cy="44" rx="12" ry="14" fill="currentColor"/>
+      <circle cx="46" cy="28" r="10" fill="currentColor"/>
+      <path d="M42 19 L44 11 L50 17 Z" fill="currentColor"/>
+      <circle cx="49" cy="27" r="1.9" fill="#FFFFFF"/>
+    </svg>
+    <span>Squirrel Wallet</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#personas">場景</a></li>
+    <li><a href="#ai">AI</a></li>
+    <li><a href="#esim">eSIM</a></li>
+    <li><a href="#privacy">隱私</a></li>
+    <li><a href="#pricing">Pro</a></li>
+  </ul>
+  <div class="lang-toggle">
+    <a href="#zh" class="is-active">繁中</a>
+    <span class="lang-divider-inline" aria-hidden="true">·</span>
+    <a href="#en">EN</a>
+  </div>
+</nav>
+
+<main class="landing">
+
+  <!-- ============================================================
+       ZH-TW BLOCK
+       ============================================================ -->
+  <section class="lang-section" id="zh" lang="zh-Hant">
+
+    <!-- 1. Hero -->
+    <section class="hero" data-reveal>
+      <div class="hero__copy">
+        <h1>票券・條碼・eSIM<br>一手掌握</h1>
+        <p class="hero__tagline">演唱會、團購、旅遊 eSIM 都收進一個 Apple Wallet 風格的卡片堆疊。拍一張，AI 幫你填好；條碼上傳前先在裝置打碼。</p>
+        <p class="hero__author">— Built so I'd stop forgetting tickets at home.</p>
+        <div class="hero__ctas">
+          <a class="cta-button cta-button--primary" href="#pricing" aria-label="瀏覽 Pro 方案">看看 Pro 有什麼</a>
+          <a class="cta-button cta-button--ghost" aria-disabled="true" href="#"><span aria-hidden="true">📱</span> App Store · 即將上架</a>
+        </div>
+      </div>
+      <div class="hero__visual">
+        <div class="card-stack" aria-hidden="true">
+          <div class="stack-card stack-card--shop">
+            <div class="stack-card__chip"></div>
+            <div class="stack-card__meta">10/15 到期</div>
+            <div class="stack-card__title">全聯滿 $500 折 $50</div>
+          </div>
+          <div class="stack-card stack-card--food">
+            <div class="stack-card__chip"></div>
+            <div class="stack-card__meta">明天</div>
+            <div class="stack-card__title">星巴克買一送一</div>
+          </div>
+          <div class="stack-card stack-card--travel">
+            <div class="stack-card__chip"></div>
+            <div class="stack-card__meta">eSIM · 8 天</div>
+            <div class="stack-card__title">日本 5GB/日</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Personas — 你是哪一種 -->
+    <section class="section" id="personas" data-reveal>
+      <span class="section__eyebrow">真實場景</span>
+      <h2 class="section__title">問題不在於拿到票券，<br>在壓力下找不到它。</h2>
+      <p class="section__lede">把你的散落收進一個堆疊。看看你像哪一種。</p>
+
+      <div class="personas">
+        <article class="persona-row persona-row--show">
+          <div class="persona-row__icon" aria-hidden="true">🎫</div>
+          <div>
+            <h3>三鐵族</h3>
+            <p>演唱會在 KKTIX、球賽在 tixCraft、電影在 Vieshow ⸺ 到了現場開錯 App 排隊，後面一直推。</p>
+            <span class="persona-row__after">四張條碼放在同一個 wallet，左滑釘選，掃描時自動拉到最亮。</span>
+          </div>
+        </article>
+
+        <article class="persona-row persona-row--shop">
+          <div class="persona-row__icon" aria-hidden="true">🛍️</div>
+          <div>
+            <h3>團購控</h3>
+            <p>冰箱貼半過期紙券、相簿 240 張優惠截圖。結帳前找不到的那張，三天後才發現過期。</p>
+            <span class="persona-row__after">拍一張，AI 抓出商家、條碼、到期日。到期前兩天手機自動提醒。</span>
+          </div>
+        </article>
+
+        <article class="persona-row persona-row--travel">
+          <div class="persona-row__icon" aria-hidden="true">✈️</div>
+          <div>
+            <h3>飛常出國</h3>
+            <p>過去 8 張 eSIM QR Code 散在相簿，落地後翻 47 張截圖找對的，40 分鐘才裝好網路。</p>
+            <span class="persona-row__after">eSIM 一鍵安裝（iOS 17+ / Android 13+），過期的會 greyed out 不會選錯。</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 3. Wallet stack — story -->
+    <section class="section" data-reveal>
+      <div class="story">
+        <div class="story__copy">
+          <span class="section__eyebrow">核心 UX</span>
+          <h2>所有票券，<br>一個堆疊。</h2>
+          <p>票券、優惠券、eSIM 集中在同一個 Apple Wallet 風格的卡片堆疊。長按拖曳排序、左滑釘選 / 標記已使用 / 分享 / 刪除 ⸺ 一氣呵成。</p>
+          <ul>
+            <li>13 種條碼格式（QR / Code 128 / PDF417 / Aztec / EAN / UPC / ITF…）</li>
+            <li>自訂分類：icon + 顏色都你選</li>
+            <li>到期日近了卡片漸白，搭配通知不會錯過</li>
+          </ul>
+        </div>
+        <div class="story__visual">
+          <div class="card-stack card-stack--small" aria-hidden="true">
+            <div class="stack-card stack-card--shop">
+              <div class="stack-card__chip"></div>
+              <div class="stack-card__title">📍 釘選</div>
+            </div>
+            <div class="stack-card stack-card--food">
+              <div class="stack-card__chip"></div>
+              <div class="stack-card__title">✓ 標記已使用</div>
+            </div>
+            <div class="stack-card stack-card--travel">
+              <div class="stack-card__chip"></div>
+              <div class="stack-card__title">↗ 分享</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. AI moment — story --reverse -->
+    <section class="section" id="ai" data-reveal>
+      <div class="story story--reverse">
+        <div class="story__copy">
+          <span class="section__eyebrow">AI 一拍即填</span>
+          <h2>拍一張，<br>AI 幫你填好。</h2>
+          <p>不用打字、不用手動選分類。AI 看完截圖會建議現有分類、抓出商家、條碼、到期日，並標上信心度。</p>
+          <ul>
+            <li>三秒填完表單，你只要審核</li>
+            <li>分不出來會明確說「無法辨識」，不會亂編</li>
+            <li>條碼上傳前先在裝置打碼 ⸺ 即使供應商保留圖片也不能盜用</li>
+          </ul>
+        </div>
+        <div class="story__visual">
+          <div class="ai-strip">
+            <div class="ai-frame ai-frame--photo">
+              <div class="ai-frame__label">1. 拍 / 選</div>
+              <div class="ai-frame__body">LINE 截圖<br>原圖</div>
+            </div>
+            <div class="ai-frame ai-frame--mask">
+              <div class="ai-frame__label">2. 裝置遮罩</div>
+              <div class="ai-frame__body">
+                <div class="barcode-block" aria-hidden="true"></div>
+              </div>
+            </div>
+            <div class="ai-frame ai-frame--form">
+              <div class="ai-frame__label">3. AI 填好</div>
+              <div class="ai-frame__body">
+                <div class="form-row"><span>商家</span><strong>全聯</strong></div>
+                <div class="form-row"><span>類型</span><strong>優惠券</strong></div>
+                <div class="form-row"><span>到期</span><strong>10/15</strong></div>
+              </div>
+              <div class="ai-frame__confidence">信心度 92%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. eSIM — story -->
+    <section class="section" id="esim" data-reveal>
+      <div class="story">
+        <div class="story__copy">
+          <span class="section__eyebrow">唯一差異化點</span>
+          <h2>海外 eSIM<br>一鍵安裝。</h2>
+          <p>29 國旅遊 eSIM 直接從 App 觸發系統安裝 sheet ⸺ 不用切到電信商 App、不用手動掃 QR。落地拿出手機就能上網。</p>
+          <ul>
+            <li>支援 iOS 17+ / Android 13+ 原生 eSIM 安裝</li>
+            <li>方案類型（吃到飽 / 每日 / 總量）、流量、有效天數一目了然</li>
+            <li>過期的 eSIM 卡片淡出，不會選錯</li>
+          </ul>
+        </div>
+        <div class="story__visual">
+          <div class="country-grid" aria-label="29 個支援國家">
+            <div class="country-cell">🇹🇼</div>
+            <div class="country-cell country-cell--active">🇯🇵</div>
+            <div class="country-cell">🇰🇷</div>
+            <div class="country-cell">🇭🇰</div>
+            <div class="country-cell">🇲🇴</div>
+            <div class="country-cell">🇸🇬</div>
+            <div class="country-cell">🇲🇾</div>
+            <div class="country-cell">🇹🇭</div>
+            <div class="country-cell">🇻🇳</div>
+            <div class="country-cell">🇵🇭</div>
+            <div class="country-cell">🇮🇩</div>
+            <div class="country-cell">🇨🇳</div>
+            <div class="country-cell">🇺🇸</div>
+            <div class="country-cell">🇨🇦</div>
+            <div class="country-cell">🇬🇧</div>
+            <div class="country-cell">🇫🇷</div>
+            <div class="country-cell">🇩🇪</div>
+            <div class="country-cell">🇮🇹</div>
+            <div class="country-cell">🇪🇸</div>
+            <div class="country-cell">🇨🇭</div>
+            <div class="country-cell">🇳🇱</div>
+            <div class="country-cell">🇦🇺</div>
+            <div class="country-cell">🇳🇿</div>
+            <div class="country-cell">🇦🇪</div>
+            <div class="country-cell">🇹🇷</div>
+            <div class="country-cell">🇮🇳</div>
+            <div class="country-cell">🇲🇽</div>
+            <div class="country-cell">🇧🇷</div>
+            <div class="country-cell">🌐</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Privacy — story --reverse with 3-step flow -->
+    <section class="section" id="privacy" data-reveal>
+      <span class="section__eyebrow">隱私是機制，不是 slogan</span>
+      <h2 class="section__title">圖片送出去之前，<br>條碼先在你的裝置打碼。</h2>
+      <p class="section__lede">三句話講完整個機制，沒有星號小字。</p>
+
+      <div class="privacy-flow">
+        <div class="privacy-step">
+          <div class="privacy-step__num">1</div>
+          <h3>在裝置先打碼</h3>
+          <p>本機 ML 模型偵測並用黑塊覆蓋所有條碼 / QR 區域。失敗就中止上傳，不會降級送原圖。</p>
+        </div>
+        <div class="privacy-step">
+          <div class="privacy-step__num">2</div>
+          <h3>只上傳遮罩過的圖</h3>
+          <p>送到 OpenAI 的圖已經沒有條碼。即使供應商保留圖片也無法兌換你的票券（OpenAI 預設 30 天保留、不訓練）。</p>
+        </div>
+        <div class="privacy-step">
+          <div class="privacy-step__num">3</div>
+          <h3>本機 Hive + AES 加密</h3>
+          <p>票券資料 AES-256 加密存在你手機上。沒有帳號、沒有雲端、沒有 analytics。截圖在 App 私有目錄，OS 已經隔離。</p>
+        </div>
+      </div>
+      <p style="margin-top: var(--s-6); color: var(--color-text-muted);">
+        想完整知道我們把什麼送出去、不送什麼？看 <a href="/privacy/">完整隱私權政策</a>。
       </p>
-      <p class="tagline tagline-en">
-        AI-powered wallet for tickets, coupons, and eSIMs. Local-first.
+    </section>
+
+    <!-- 7. Free vs Pro -->
+    <section class="section" id="pricing" data-reveal>
+      <span class="section__eyebrow">收費點</span>
+      <h2 class="section__title">免費就能用，<br>Pro 是給用很重的人。</h2>
+      <p class="section__lede">所有核心功能（票券堆疊、條碼掃描、自訂分類、eSIM 安裝、通知）Free 跟 Pro 都一樣。Pro 解鎖的只有兩件事。</p>
+
+      <div class="pricing">
+        <div class="plan plan--free">
+          <p class="plan__name">Free</p>
+          <p class="plan__price">$0 <small>永久免費</small></p>
+          <ul class="plan__features">
+            <li>每月 5 次 AI 拍照辨識（gpt-5.4-mini）</li>
+            <li>無限新增票券 / 優惠券 / eSIM</li>
+            <li>13 種條碼格式掃描</li>
+            <li>自訂分類 + 到期通知</li>
+            <li>eSIM 一鍵安裝（29 國）</li>
+            <li>加密備份 / 還原</li>
+          </ul>
+          <p class="plan__fine-print">沒有廣告、沒有 analytics、沒有催升級彈窗。</p>
+        </div>
+
+        <div class="plan plan--pro">
+          <p class="plan__name">Pro</p>
+          <p class="plan__price">$1.66 <small>/ 月（年訂 $19.99）</small></p>
+          <span class="plan__savings">年訂省 44% · 7 天免費試用</span>
+          <ul class="plan__features">
+            <li>每月 300 次 AI 拍照辨識</li>
+            <li>進階模型 gpt-5.4 + mini fallback（更準）</li>
+            <li>四款卡片質感：寶石、玉、雲石、珍珠</li>
+            <li>所有 Free 功能</li>
+          </ul>
+          <p class="plan__fine-print">月訂 $2.99 / 月。隨時可在 App Store / Play Store 取消。</p>
+        </div>
+      </div>
+
+      <h3 style="margin-top: var(--s-12); font-size: var(--fs-20);">四款 Pro 卡片質感 ⸺ 讓票夾長得像你</h3>
+      <div class="finishes" aria-label="Pro 卡片質感預覽">
+        <div class="finish-swatch finish-swatch--gem"><span class="finish-swatch__label">寶石</span></div>
+        <div class="finish-swatch finish-swatch--jade"><span class="finish-swatch__label">玉</span></div>
+        <div class="finish-swatch finish-swatch--marble"><span class="finish-swatch__label">雲石</span></div>
+        <div class="finish-swatch finish-swatch--pearl"><span class="finish-swatch__label">珍珠</span></div>
+      </div>
+    </section>
+
+    <!-- 8. Trust + final CTA -->
+    <section class="section" data-reveal>
+      <div class="trust-strip">
+        <p class="trust-strip__line">
+          <strong>Built with Flutter · Powered by OpenAI · Made in Taiwan</strong>
+        </p>
+        <h2>準備把散落收乾淨。</h2>
+        <a class="cta-button cta-button--primary" aria-disabled="true" href="#"><span aria-hidden="true">📱</span> App Store · 即將上架</a>
+        <a class="cta-button cta-button--ghost" aria-disabled="true" href="#"><span aria-hidden="true">🤖</span> Google Play · 即將上架</a>
+      </div>
+    </section>
+
+  </section>
+  <!-- /ZH-TW BLOCK -->
+
+  <!-- ============================================================
+       EN BLOCK
+       ============================================================ -->
+  <section class="lang-section" id="en" lang="en">
+
+    <!-- 1. Hero -->
+    <section class="hero" data-reveal>
+      <div class="hero__copy">
+        <h1>Tickets · barcodes · eSIM,<br>all in one place.</h1>
+        <p class="hero__tagline">An Apple Wallet–style stack for the stuff Apple Wallet won't hold. Snap a photo — AI fills it in. Barcodes get masked on-device before any upload.</p>
+        <p class="hero__author">— Built so I'd stop forgetting tickets at home.</p>
+        <div class="hero__ctas">
+          <a class="cta-button cta-button--primary" href="#pricing-en">See what Pro adds</a>
+          <a class="cta-button cta-button--ghost" aria-disabled="true" href="#"><span aria-hidden="true">📱</span> App Store · Coming soon</a>
+        </div>
+      </div>
+      <div class="hero__visual">
+        <div class="card-stack" aria-hidden="true">
+          <div class="stack-card stack-card--shop">
+            <div class="stack-card__chip"></div>
+            <div class="stack-card__meta">Oct 15</div>
+            <div class="stack-card__title">$5 off $50 grocery</div>
+          </div>
+          <div class="stack-card stack-card--food">
+            <div class="stack-card__chip"></div>
+            <div class="stack-card__meta">Tomorrow</div>
+            <div class="stack-card__title">Starbucks BOGO</div>
+          </div>
+          <div class="stack-card stack-card--travel">
+            <div class="stack-card__chip"></div>
+            <div class="stack-card__meta">eSIM · 8 days</div>
+            <div class="stack-card__title">Japan 5GB/day</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Personas -->
+    <section class="section" id="personas-en" data-reveal>
+      <span class="section__eyebrow">Real scenarios</span>
+      <h2 class="section__title">The problem isn't getting the ticket.<br>It's finding it again under pressure.</h2>
+      <p class="section__lede">Pick the one that sounds like you.</p>
+
+      <div class="personas">
+        <article class="persona-row persona-row--show">
+          <div class="persona-row__icon" aria-hidden="true">🎫</div>
+          <div>
+            <h3>Events person</h3>
+            <p>Concerts in one app, sports in another, movies in a third. Arrive at the venue, open the wrong app, hold up the line.</p>
+            <span class="persona-row__after">Four barcodes in one stack — swipe to pin, screen brightness ramps up automatically for the scanner.</span>
+          </div>
+        </article>
+
+        <article class="persona-row persona-row--shop">
+          <div class="persona-row__icon" aria-hidden="true">🛍️</div>
+          <div>
+            <h3>Coupon hoarder</h3>
+            <p>Paper coupons stuck to the fridge, half expired. 240 screenshots in Photos. The one you needed expired yesterday.</p>
+            <span class="persona-row__after">Snap once — AI extracts merchant, barcode, expiry. Two days before it expires, your phone reminds you.</span>
+          </div>
+        </article>
+
+        <article class="persona-row persona-row--travel">
+          <div class="persona-row__icon" aria-hidden="true">✈️</div>
+          <div>
+            <h3>Frequent flier</h3>
+            <p>Eight old eSIM QRs buried in your camera roll. You land, then spend 40 minutes finding the right one and typing in the code.</p>
+            <span class="persona-row__after">One-tap eSIM install (iOS 17+ / Android 13+). Old plans grey out so you don't pick the wrong one.</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 3. Wallet stack -->
+    <section class="section" data-reveal>
+      <div class="story">
+        <div class="story__copy">
+          <span class="section__eyebrow">The core UX</span>
+          <h2>Every ticket,<br>one stack.</h2>
+          <p>Tickets, coupons, and eSIMs all live in the same Apple Wallet–style stack. Long-press to reorder, swipe for pin / mark-used / share / delete.</p>
+          <ul>
+            <li>13 barcode formats (QR, Code 128, PDF417, Aztec, EAN, UPC, ITF…)</li>
+            <li>Custom categories — pick your icon and colour</li>
+            <li>Cards fade as expiry approaches, paired with smart reminders</li>
+          </ul>
+        </div>
+        <div class="story__visual">
+          <div class="card-stack card-stack--small" aria-hidden="true">
+            <div class="stack-card stack-card--shop">
+              <div class="stack-card__chip"></div>
+              <div class="stack-card__title">📍 Pin</div>
+            </div>
+            <div class="stack-card stack-card--food">
+              <div class="stack-card__chip"></div>
+              <div class="stack-card__title">✓ Mark used</div>
+            </div>
+            <div class="stack-card stack-card--travel">
+              <div class="stack-card__chip"></div>
+              <div class="stack-card__title">↗ Share</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. AI moment -->
+    <section class="section" id="ai-en" data-reveal>
+      <div class="story story--reverse">
+        <div class="story__copy">
+          <span class="section__eyebrow">Photo to ticket in seconds</span>
+          <h2>Snap a photo —<br>AI fills in the rest.</h2>
+          <p>No typing, no manual category picking. AI proposes one of your existing categories, extracts merchant / barcode / expiry, and labels its own confidence.</p>
+          <ul>
+            <li>Three seconds of review, not three minutes of typing</li>
+            <li>If it can't tell, it says so — it won't fabricate</li>
+            <li>Barcodes are masked on-device before upload — even if the provider keeps the image, no one can redeem your ticket</li>
+          </ul>
+        </div>
+        <div class="story__visual">
+          <div class="ai-strip">
+            <div class="ai-frame ai-frame--photo">
+              <div class="ai-frame__label">1. Capture</div>
+              <div class="ai-frame__body">Original<br>screenshot</div>
+            </div>
+            <div class="ai-frame ai-frame--mask">
+              <div class="ai-frame__label">2. On-device mask</div>
+              <div class="ai-frame__body">
+                <div class="barcode-block" aria-hidden="true"></div>
+              </div>
+            </div>
+            <div class="ai-frame ai-frame--form">
+              <div class="ai-frame__label">3. Filled form</div>
+              <div class="ai-frame__body">
+                <div class="form-row"><span>Merchant</span><strong>Starbucks</strong></div>
+                <div class="form-row"><span>Kind</span><strong>Coupon</strong></div>
+                <div class="form-row"><span>Expires</span><strong>Oct 15</strong></div>
+              </div>
+              <div class="ai-frame__confidence">Confidence 92%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. eSIM -->
+    <section class="section" id="esim-en" data-reveal>
+      <div class="story">
+        <div class="story__copy">
+          <span class="section__eyebrow">The one thing wallet apps can't do</span>
+          <h2>eSIM, installed<br>with one tap.</h2>
+          <p>29 supported countries — open the eSIM card, hit Install, your OS handles the rest. No carrier-app jumping, no manual QR scanning. Land, unlock, online.</p>
+          <ul>
+            <li>Native eSIM install on iOS 17+ / Android 13+</li>
+            <li>See plan type (unlimited / daily / total), data cap, and validity at a glance</li>
+            <li>Expired eSIMs fade out so you never pick the wrong one</li>
+          </ul>
+        </div>
+        <div class="story__visual">
+          <div class="country-grid" aria-label="29 supported countries">
+            <div class="country-cell">🇹🇼</div>
+            <div class="country-cell country-cell--active">🇯🇵</div>
+            <div class="country-cell">🇰🇷</div>
+            <div class="country-cell">🇭🇰</div>
+            <div class="country-cell">🇲🇴</div>
+            <div class="country-cell">🇸🇬</div>
+            <div class="country-cell">🇲🇾</div>
+            <div class="country-cell">🇹🇭</div>
+            <div class="country-cell">🇻🇳</div>
+            <div class="country-cell">🇵🇭</div>
+            <div class="country-cell">🇮🇩</div>
+            <div class="country-cell">🇨🇳</div>
+            <div class="country-cell">🇺🇸</div>
+            <div class="country-cell">🇨🇦</div>
+            <div class="country-cell">🇬🇧</div>
+            <div class="country-cell">🇫🇷</div>
+            <div class="country-cell">🇩🇪</div>
+            <div class="country-cell">🇮🇹</div>
+            <div class="country-cell">🇪🇸</div>
+            <div class="country-cell">🇨🇭</div>
+            <div class="country-cell">🇳🇱</div>
+            <div class="country-cell">🇦🇺</div>
+            <div class="country-cell">🇳🇿</div>
+            <div class="country-cell">🇦🇪</div>
+            <div class="country-cell">🇹🇷</div>
+            <div class="country-cell">🇮🇳</div>
+            <div class="country-cell">🇲🇽</div>
+            <div class="country-cell">🇧🇷</div>
+            <div class="country-cell">🌐</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Privacy -->
+    <section class="section" id="privacy-en" data-reveal>
+      <span class="section__eyebrow">Privacy as mechanism, not slogan</span>
+      <h2 class="section__title">Before any image leaves your device,<br>the barcode goes black.</h2>
+      <p class="section__lede">Three sentences describe the whole flow. No footnotes.</p>
+
+      <div class="privacy-flow">
+        <div class="privacy-step">
+          <div class="privacy-step__num">1</div>
+          <h3>On-device masking</h3>
+          <p>A local ML model detects and blacks out every barcode / QR region. If detection fails, the upload aborts — there's no fallback to the unmasked original.</p>
+        </div>
+        <div class="privacy-step">
+          <div class="privacy-step__num">2</div>
+          <h3>Only the masked image uploads</h3>
+          <p>OpenAI receives an image with no barcodes. Default API retention is 30 days, not used for training, and our policy doesn't expand that.</p>
+        </div>
+        <div class="privacy-step">
+          <div class="privacy-step__num">3</div>
+          <h3>Local Hive + AES-256</h3>
+          <p>Tickets are AES-256 encrypted on your device. No account, no cloud sync, no analytics. Screenshots live in the app-private directory.</p>
+        </div>
+      </div>
+      <p style="margin-top: var(--s-6); color: var(--color-text-muted);">
+        Read the full mechanism — what gets sent, what doesn't — in our <a href="/privacy/">Privacy Policy</a>.
       </p>
     </section>
 
-    <section class="features" aria-label="主要功能">
-      <div class="feature">
-        <span class="icon" aria-hidden="true">📷</span>
-        <h3>AI 影像辨識</h3>
-        <p>拍下票券或截圖，AI 自動填好標題、到期日、條碼。三家 VLM 自動 fallback，免費。</p>
+    <!-- 7. Free vs Pro -->
+    <section class="section" id="pricing-en" data-reveal>
+      <span class="section__eyebrow">What you pay for</span>
+      <h2 class="section__title">Free does the job.<br>Pro is for heavy users.</h2>
+      <p class="section__lede">Every core feature (wallet stack, barcode scanning, custom categories, eSIM install, reminders) works on Free. Pro unlocks only two things.</p>
+
+      <div class="pricing">
+        <div class="plan plan--free">
+          <p class="plan__name">Free</p>
+          <p class="plan__price">$0 <small>forever</small></p>
+          <ul class="plan__features">
+            <li>5 AI scans / month (gpt-5.4-mini)</li>
+            <li>Unlimited tickets, coupons, eSIMs</li>
+            <li>13 barcode formats</li>
+            <li>Custom categories + expiry reminders</li>
+            <li>One-tap eSIM install (29 countries)</li>
+            <li>Encrypted backup / restore</li>
+          </ul>
+          <p class="plan__fine-print">No ads, no analytics, no upgrade pop-ups.</p>
+        </div>
+
+        <div class="plan plan--pro">
+          <p class="plan__name">Pro</p>
+          <p class="plan__price">$1.66 <small>/ mo (annual $19.99)</small></p>
+          <span class="plan__savings">Save 44% · 7-day free trial</span>
+          <ul class="plan__features">
+            <li>300 AI scans / month</li>
+            <li>Premium gpt-5.4 + mini fallback (more accurate)</li>
+            <li>Four card finishes: Gem, Jade, Marble, Pearl</li>
+            <li>Everything in Free</li>
+          </ul>
+          <p class="plan__fine-print">Monthly $2.99 / mo. Cancel anytime via App Store / Play Store.</p>
+        </div>
       </div>
-      <div class="feature">
-        <span class="icon" aria-hidden="true">🎟️</span>
-        <h3>條碼掃描</h3>
-        <p>支援 13 種條碼格式（EAN-13、QR Code、Code 128…），結帳時直接秀大圖。</p>
-      </div>
-      <div class="feature">
-        <span class="icon" aria-hidden="true">📱</span>
-        <h3>eSIM 一鍵安裝</h3>
-        <p>掃 LPA QR 或 AI 辨識安裝資訊，點下去直接跳轉系統設定完成 eSIM 安裝。</p>
-      </div>
-      <div class="feature">
-        <span class="icon" aria-hidden="true">🔒</span>
-        <h3>隱私至上</h3>
-        <p>沒有帳號、沒有 analytics、不上傳雲端。所有票券、條碼、截圖都留在你的裝置。</p>
+
+      <h3 style="margin-top: var(--s-12); font-size: var(--fs-20);">Four Pro finishes — make your wallet yours</h3>
+      <div class="finishes" aria-label="Pro card finish preview">
+        <div class="finish-swatch finish-swatch--gem"><span class="finish-swatch__label">Gem</span></div>
+        <div class="finish-swatch finish-swatch--jade"><span class="finish-swatch__label">Jade</span></div>
+        <div class="finish-swatch finish-swatch--marble"><span class="finish-swatch__label">Marble</span></div>
+        <div class="finish-swatch finish-swatch--pearl"><span class="finish-swatch__label">Pearl</span></div>
       </div>
     </section>
 
-    <section class="link-cards" aria-label="法律與支援">
-      <a class="link-card" href="/privacy/">
-        <span class="label">Legal</span>
-        <span class="title">隱私權政策<br><small style="font-weight: 500; color: var(--color-text-muted);">Privacy Policy</small></span>
-      </a>
-      <a class="link-card" href="/support/">
-        <span class="label">Help</span>
-        <span class="title">使用支援<br><small style="font-weight: 500; color: var(--color-text-muted);">Support</small></span>
-      </a>
+    <!-- 8. Trust + CTA -->
+    <section class="section" data-reveal>
+      <div class="trust-strip">
+        <p class="trust-strip__line">
+          <strong>Built with Flutter · Powered by OpenAI · Made in Taiwan</strong>
+        </p>
+        <h2>Ready to gather the scattered.</h2>
+        <a class="cta-button cta-button--primary" aria-disabled="true" href="#"><span aria-hidden="true">📱</span> App Store · Coming soon</a>
+        <a class="cta-button cta-button--ghost" aria-disabled="true" href="#"><span aria-hidden="true">🤖</span> Google Play · Coming soon</a>
+      </div>
     </section>
 
-    <footer class="page-footer">
-      <p>© 2026 Squirrel Wallet · <a href="mailto:support@squirrelwallet.app">support@squirrelwallet.app</a></p>
-    </footer>
-  </main>
+  </section>
+  <!-- /EN BLOCK -->
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="landing-footer">
+  <nav aria-label="Footer">
+    <a href="/privacy/">Privacy 隱私</a>
+    <a href="/support/">Support 支援</a>
+    <a href="mailto:support@squirrelwallet.app">support@squirrelwallet.app</a>
+  </nav>
+  <div>© 2026 Squirrel Wallet · 松鼠票夾</div>
+</footer>
+
+<script src="/assets/reveal.js" defer></script>
 </body>
 </html>
