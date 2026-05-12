@@ -3,115 +3,423 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>隱私權政策 / Privacy Policy — Squirrel Wallet</title>
+  <title>隱私權政策 — Squirrel Wallet</title>
+  <meta name="description" content="Squirrel Wallet 隱私權政策。本機優先儲存，AI 辨識前自動遮罩條碼，無帳號註冊。">
   <link rel="stylesheet" href="/styles.css">
+  <style>
+    /* Page-scoped extensions to /styles.css — tables, blockquote, code.
+       Uses the existing CSS variables so dark mode still works. */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+    th, td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--color-border);
+      vertical-align: top;
+    }
+    th {
+      background: var(--color-primary-soft);
+      font-weight: 700;
+      color: var(--color-text);
+    }
+    code {
+      background: var(--color-primary-soft);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-family: "SF Mono", Menlo, Consolas, monospace;
+      font-size: 0.9em;
+    }
+    blockquote {
+      border-left: 3px solid var(--color-primary);
+      padding: 4px 16px;
+      margin: 16px 0;
+      color: var(--color-text-muted);
+      background: var(--color-primary-soft);
+      border-radius: 0 6px 6px 0;
+    }
+    h4 {
+      font-size: 16px;
+      font-weight: 700;
+      margin: 20px 0 8px;
+      color: var(--color-text-muted);
+    }
+  </style>
 </head>
 <body>
-  <main class="prose">
-    <header class="page-header">
-      <a href="/" class="back-link">← Squirrel Wallet</a>
-      <nav class="lang-toggle">
-        <a href="#zh">中文</a> · <a href="#en">English</a>
-      </nav>
-    </header>
+<main class="prose">
 
-    <!-- ════════════════════════════════════════ Chinese ════════════════════════════════════════ -->
-    <article id="zh" lang="zh-Hant">
-      <h1>隱私權政策</h1>
-      <p class="meta">最後更新：2026 年 5 月 4 日</p>
+  <header class="page-header">
+    <a href="/" class="back-link">← Squirrel Wallet</a>
+    <nav class="lang-toggle">
+      <a href="#zh">繁體中文</a>
+      <span class="lang-divider-inline" aria-hidden="true">·</span>
+      <a href="#en">English</a>
+    </nav>
+  </header>
 
-      <p>感謝您使用 Squirrel Wallet（以下簡稱「本 App」）。我們重視您的隱私權，本政策說明本 App 如何處理您的資料。</p>
+  <h1>Squirrel Wallet 隱私權政策</h1>
+  <p class="meta">最後更新 / Last updated: 2026-05-12 · App 版本 / version: 1.0.0+</p>
 
-      <h2>1. 我們不收集您的個人資料</h2>
-      <p>本 App 沒有帳號系統，不要求您註冊、登入或提供姓名、電話、電子郵件、生日、地理位置等個人識別資料。我們也<strong>不使用任何第三方 analytics（如 Google Analytics、Firebase Analytics）</strong>，因此沒有任何使用者行為追蹤。</p>
+  <p>
+    本文件以繁體中文為主，English follows below。兩個版本內容等價，若有衝突
+    以英文版為準（App Store / Play Store 審查依據）。
+  </p>
 
-      <h2>2. 您的資料儲存在您的裝置上</h2>
-      <p>您透過本 App 新增的所有票券、優惠券、條碼、截圖、eSIM 安裝資訊，皆儲存於您裝置的本地資料庫（Hive）與系統偏好（SharedPreferences），<strong>不會上傳到任何雲端伺服器</strong>。當您刪除 App，這些資料就會一併移除。</p>
+  <h2 id="zh">繁體中文版</h2>
 
-      <h2>3. AI 影像辨識使用第三方服務</h2>
-      <p>當您使用「AI 辨識」功能時，本 App 會將您拍攝或選取的圖片傳送至以下第三方視覺語言模型 API 進行辨識：</p>
-      <ul>
-        <li><a href="https://openrouter.ai/privacy" target="_blank" rel="noopener">OpenRouter</a></li>
-        <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Gemini API</a></li>
-        <li><a href="https://groq.com/privacy-policy/" target="_blank" rel="noopener">Groq</a></li>
-      </ul>
-      <p>傳送內容<strong>僅包含您主動選擇辨識的圖片</strong>，不附帶任何使用者識別資訊（無 device ID、無使用者帳號、無位置資料）。請參考各服務商的隱私權政策了解其資料處理方式。如果您不希望使用此功能，請改用手動輸入或條碼掃描。</p>
+  <h3>1. 我們是誰</h3>
+  <p>
+    「Squirrel Wallet（松鼠票夾）」是一款獨立開發的票券管理 App。我們
+    <strong>不經營後端帳戶系統</strong>，您的所有票券、優惠券、設定預設
+    <strong>只儲存在您的裝置上</strong>。
+  </p>
 
-      <h2>4. 系統權限的用途</h2>
-      <ul>
-        <li><strong>相機（Camera）</strong>：用於掃描票券條碼以及拍攝票券圖片進行 AI 辨識。</li>
-        <li><strong>相簿（Photo Library）</strong>：用於選擇現有圖片進行 AI 辨識。本 App 僅讀取您主動選取的單張圖片，不會掃描您整個相簿。</li>
-        <li><strong>通知（Notifications）</strong>：用於票券到期前的本地提醒。所有通知都由您的裝置在本機產生，不會發送任何使用者資料到伺服器。</li>
-      </ul>
+  <h3>2. 我們收集哪些資料</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>類別</th>
+        <th>內容</th>
+        <th>儲存位置</th>
+        <th>是否離開您的裝置</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>票券 / 優惠券資料</td>
+        <td>標題、條碼、到期日、備註、自訂分類</td>
+        <td>本機 Hive 資料庫（AES-256 加密）</td>
+        <td>否</td>
+      </tr>
+      <tr>
+        <td>票券截圖</td>
+        <td>您拍照或從相簿匯入的票券圖片</td>
+        <td>本機檔案系統（App 私有目錄）</td>
+        <td><strong>僅在使用 AI 辨識時上傳；上傳前會自動遮罩條碼</strong>（見第 3 節）</td>
+      </tr>
+      <tr>
+        <td>eSIM LPA 字串</td>
+        <td>電信商提供的 eSIM 啟用字串</td>
+        <td>本機 Hive（AES-256 加密）</td>
+        <td>否（安裝時透過 OS 系統 URL 啟動）</td>
+      </tr>
+      <tr>
+        <td>訂閱憑證（IAP）</td>
+        <td>Apple / Google 發出的購買收據</td>
+        <td>本機（OS 鑰匙圈）</td>
+        <td>提交給 Apple / Google 驗證（不經過我們的後端）</td>
+      </tr>
+      <tr>
+        <td>App 使用記錄</td>
+        <td>預設<strong>不收集</strong>。若您啟用「分享匿名使用數據」，會收集匿名事件（無個資、無內容）</td>
+        <td>第三方分析服務</td>
+        <td>是（去識別化）</td>
+      </tr>
+      <tr>
+        <td>崩潰報告</td>
+        <td>預設<strong>不收集</strong>。若您啟用「分享匿名使用數據」，會收集崩潰堆疊（不含您的個人資料）</td>
+        <td>第三方崩潰報告服務</td>
+        <td>是（不含個資）</td>
+      </tr>
+      <tr>
+        <td>帳號識別</td>
+        <td><strong>我們不要求註冊帳號</strong>，不會收集 email、電話、姓名</td>
+        <td>—</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>廣告 ID / 裝置 ID</td>
+        <td><strong>不收集</strong></td>
+        <td>—</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>位置資訊</td>
+        <td><strong>不收集</strong></td>
+        <td>—</td>
+        <td>—</td>
+      </tr>
+    </tbody>
+  </table>
 
-      <h2>5. 資料分享</h2>
-      <p>除前述 AI 辨識服務的圖片傳送之外，本 App <strong>不會將您的任何資料分享給任何第三方</strong>。</p>
-      <p>未來版本（v2）可能加入「使用者主動分享優惠券資訊」之社群功能，屆時將為 opt-in 設計，使用者必須明確開啟才會啟用，相關隱私變動將更新本政策並另行通知。</p>
+  <h3>3. 圖片辨識（AI VLM）— 關鍵說明</h3>
+  <p>
+    當您使用「拍照新增票券」或「AI 辨識」功能時，App 會將圖片送到第三方
+    AI 模型供應商以辨識票券資訊（標題、到期日、商家名稱等）。
+  </p>
 
-      <h2>6. 兒童隱私</h2>
-      <p>本 App 適用於 13 歲以上使用者。若您未滿 13 歲，請由監護人協助使用。我們不會刻意收集 13 歲以下兒童的資料（事實上我們不收集任何使用者資料）。</p>
+  <h4>3.1 條碼遮罩</h4>
+  <p>
+    <strong>我們在上傳前會用本機程式自動偵測並用黑色方塊覆蓋圖片中的所有
+    條碼 / QR Code 區域</strong>。這個動作完全在您的裝置上發生，不需要您
+    手動操作。
+  </p>
+  <p>
+    實作位置：<a href="https://github.com/zhenyuwang/Squirrel-Wallet/blob/main/squirrel_wallet_flutter/lib/application/services/barcode_masking_service.dart"><code>barcode_masking_service.dart</code></a>（程式碼公開）。
+  </p>
+  <p>
+    目的：條碼是您的票券價值載體（兌換碼、eSIM LPA、會員號碼、付款 QR），
+    遮罩後即使 AI 供應商保留圖片，也無法用來盜用您的票券。
+  </p>
 
-      <h2>7. 資料安全</h2>
-      <p>本 App 對外連線（AI 辨識、後續 v2 同步功能）皆使用 HTTPS 加密。本機儲存的資料受 iOS / Android 系統沙盒機制保護；如您將備份檔案匯出，該檔案以您指定的位置儲存，請您自行妥善保管。</p>
+  <h4>3.2 我們會把圖片送到哪裡</h4>
+  <p>
+    依您 App 版本（Free / Pro）與後端可用性，圖片<strong>可能</strong>會被
+    送到下列其中一個或多個供應商：
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>供應商</th>
+        <th>模型類別</th>
+        <th>隱私政策</th>
+        <th>資料保留</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>OpenRouter</td>
+        <td>Free tier 多顆 VLM</td>
+        <td><a href="https://openrouter.ai/privacy">openrouter.ai/privacy</a></td>
+        <td>Free tier 可能用於模型訓練，<strong>請自行評估</strong></td>
+      </tr>
+      <tr>
+        <td>Google AI Studio (Gemini)</td>
+        <td>Free tier Gemini Flash</td>
+        <td><a href="https://ai.google.dev/gemini-api/terms">Gemini API terms</a></td>
+        <td>Free tier 可能用於模型訓練</td>
+      </tr>
+      <tr>
+        <td>Groq</td>
+        <td>Free tier Llama-3.2 Vision</td>
+        <td><a href="https://groq.com/privacy-policy/">groq.com/privacy-policy</a></td>
+        <td>Free tier 不訓練（依其當下政策）</td>
+      </tr>
+      <tr>
+        <td>OpenAI (Pro 訂閱)</td>
+        <td>gpt-4o-mini 分類器</td>
+        <td><a href="https://openai.com/policies/privacy-policy">openai.com policy</a></td>
+        <td>API 預設 30 天保留、不訓練</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    <strong>我們無法控制這些第三方供應商的資料保留 / 訓練政策</strong>。
+    Squirrel Wallet 提供的條碼遮罩是一道防線，但您仍應評估自身敏感資料的
+    風險。如果您不希望任何圖片離開裝置，請<strong>不要使用 AI 辨識功能</strong>，
+    改用手動輸入或條碼掃描（這兩個功能完全在本機運作）。
+  </p>
 
-      <h2>8. 政策變更</h2>
-      <p>若本政策有實質變更，我們會於本頁更新「最後更新」日期，並於 App 內顯示通知。重大變更（如新增資料收集行為）將於變更生效前 30 天告知。</p>
+  <h4>3.3 隨同圖片傳輸的內容</h4>
+  <p>
+    為了讓 AI 模型給出更準確的分類結果，圖片之外
+    <strong>我們會在 prompt 中夾帶</strong>：
+  </p>
+  <ul>
+    <li>您在「設定 → 自訂分類」建立的<strong>分類名稱列表</strong>（不含
+      icon / 顏色），讓模型可以建議現有的分類而非生造一個。
+      <strong>如果您把公司名 / 個人標籤當分類名（例如「公司福委會」「老婆生日」），這些字串會出現在
+      prompt 中</strong>。如果不希望這類資訊離開裝置，請避免用敏感字串作為
+      分類名稱。</li>
+    <li>您在「設定 → 國家偏好」的 active 國家清單（用於 eSIM 國別判定）</li>
+    <li>當下使用者選擇的 kind（ticket / coupon），讓模型解 ambiguous 案例</li>
+  </ul>
+  <p>我們<strong>不會傳輸</strong>：</p>
+  <ul>
+    <li>票券標題、備註、條碼內容、QR 內容（這些不需要 AI 來辨識，圖片本身就有）</li>
+    <li>您裝置上的其他票券 / 優惠券（每次 prompt 只看當下這張圖）</li>
+    <li>您的裝置 ID、Apple ID、Google 帳號</li>
+    <li>您圖片庫其他照片，<strong>僅限您主動選擇的當張票券圖片</strong></li>
+  </ul>
 
-      <h2>9. 聯絡我們</h2>
-      <p>如有任何隱私權相關問題或要求，請來信：<a href="mailto:support@squirrelwallet.app">support@squirrelwallet.app</a></p>
-    </article>
+  <h3>4. 本機資料安全</h3>
+  <ul>
+    <li>所有票券 / 優惠券資料以 <strong>AES-256</strong> 加密儲存於 Hive 本機資料庫</li>
+    <li>加密金鑰存於系統安全儲存（iOS Keychain / Android Keystore），即使裝置 root / jailbreak 也無法直接讀取</li>
+    <li>截圖檔案存於 App 私有目錄，OS 層級已隔離其他 App 存取</li>
+  </ul>
 
-    <hr class="lang-divider">
+  <h3>5. 您的權利（GDPR / 台灣個資法）</h3>
 
-    <!-- ════════════════════════════════════════ English ════════════════════════════════════════ -->
-    <article id="en" lang="en">
-      <h1>Privacy Policy</h1>
-      <p class="meta">Last updated: May 4, 2026</p>
+  <h4>5.1 存取 / 匯出</h4>
+  <p>您隨時可以透過「設定 → 備份」匯出所有資料（加密 ZIP 檔）。</p>
 
-      <p>Thank you for using Squirrel Wallet (the "App"). We respect your privacy. This policy describes how the App handles your data.</p>
+  <h4>5.2 修改</h4>
+  <p>所有資料皆可在 App 內直接編輯。</p>
 
-      <h2>1. We do not collect your personal data</h2>
-      <p>The App has no account system. We do not ask you to register, sign in, or provide your name, phone number, email, date of birth, or location. We also <strong>do not use any third-party analytics</strong> (no Google Analytics, no Firebase Analytics, no anything else), so no user behavior is tracked.</p>
+  <h4>5.3 刪除</h4>
+  <p>
+    「設定 → 清除所有資料」會永久刪除所有本機票券、優惠券、截圖、設定，
+    並 cancel 所有通知排程。
+  </p>
+  <p>操作流程：</p>
+  <ol>
+    <li>點擊「設定 → 清除所有資料」紅色按鈕</li>
+    <li>在彈出對話框中<strong>輸入「刪除」二字</strong>啟用確認鈕</li>
+    <li>點擊「清除所有資料」立即執行</li>
+  </ol>
+  <p>明確會清除：本機 Hive boxes、所有截圖目錄、多數 SharedPreferences 設定、所有已排程的通知。</p>
+  <p>明確<strong>保留</strong>（白名單機制）：</p>
+  <ul>
+    <li><code>subscription_status</code> / <code>subscription_expiry_date</code> / <code>subscription_product_id</code> — IAP 訂閱狀態</li>
+    <li><code>onboarding_completed_v1</code> — 首次教學旗標</li>
+    <li>Hive AES key — 保留以確保未來匯入過去匯出的加密備份還能解密</li>
+  </ul>
+  <blockquote>
+    <p><strong>注意 1</strong>：刪除本機資料<strong>不會</strong>回溯刪除過去送給 AI 供應商的圖片副本。如需向各供應商請求刪除，請參考其隱私政策。</p>
+    <p><strong>注意 2</strong>：Apple App Store / Google Play 政策要求所有 App 提供帳號 / 資料刪除入口。本 App 在「設定 → 清除所有資料」即為該入口，無需另外申請或聯絡開發者。</p>
+  </blockquote>
 
-      <h2>2. Your data lives on your device</h2>
-      <p>All tickets, coupons, barcodes, screenshots, and eSIM info you add to the App are stored locally on your device using Hive and SharedPreferences. <strong>Nothing is uploaded to any cloud server.</strong> When you uninstall the App, this data is removed with it.</p>
+  <h4>5.4 IAP 訂閱</h4>
+  <p>訂閱由 Apple / Google 管理，請至「設定 → Apple ID → 訂閱項目」或 Google Play 訂閱頁面管理。</p>
 
-      <h2>3. AI image recognition uses third-party services</h2>
-      <p>When you use the "AI recognition" feature, the App sends the image you've photographed or selected to one of the following third-party Vision Language Model APIs:</p>
-      <ul>
-        <li><a href="https://openrouter.ai/privacy" target="_blank" rel="noopener">OpenRouter</a></li>
-        <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Gemini API</a></li>
-        <li><a href="https://groq.com/privacy-policy/" target="_blank" rel="noopener">Groq</a></li>
-      </ul>
-      <p>The transmission <strong>contains only the image you explicitly chose to recognize</strong>, with no user-identifying metadata attached (no device ID, no user account, no location). Please consult each provider's privacy policy for how they handle data. If you'd rather not use this feature, you can enter ticket details manually or scan the barcode instead.</p>
+  <h3>6. 兒童隱私</h3>
+  <p>本 App 不刻意收集 13 歲以下兒童的資料。若我們發現意外收集，將立即刪除。</p>
 
-      <h2>4. System permissions</h2>
-      <ul>
-        <li><strong>Camera</strong>: used to scan ticket barcodes and to photograph tickets for AI recognition.</li>
-        <li><strong>Photo Library</strong>: used to pick an existing image for AI recognition. The App only reads the single image you explicitly select; it does not scan your full library.</li>
-        <li><strong>Notifications</strong>: used to remind you before a ticket expires. All notifications are generated locally on your device — no user data is sent to any server for them.</li>
-      </ul>
+  <h3>7. 政策變更</h3>
+  <p>本政策若有重大變更，會在 App 內顯示提示，並更新本頁的 "Last updated" 日期。</p>
 
-      <h2>5. Data sharing</h2>
-      <p>Beyond the AI recognition image transmission described above, the App <strong>does not share any of your data with any third party</strong>.</p>
-      <p>A future version (v2) may add an opt-in feature for users to share coupon information socially. That feature will require explicit user activation; this policy will be updated and you will be notified before any related data behavior changes.</p>
+  <h3>8. 聯絡我們</h3>
+  <ul>
+    <li>Email: <a href="mailto:support@squirrelwallet.app">support@squirrelwallet.app</a></li>
+    <li>GitHub Issues: <a href="https://github.com/zhenyuwang/Squirrel-Wallet/issues">github.com/zhenyuwang/Squirrel-Wallet/issues</a></li>
+  </ul>
 
-      <h2>6. Children's privacy</h2>
-      <p>The App is intended for users aged 13 and older. If you are under 13, please use the App with a parent or guardian. We do not knowingly collect data from children under 13 (in fact, we do not collect data from any user).</p>
+  <hr class="lang-divider">
 
-      <h2>7. Security</h2>
-      <p>All outbound connections (AI recognition, future v2 sync features) use HTTPS encryption. Local data is protected by the iOS / Android system sandbox. If you export a backup file, you are responsible for keeping that file safe at the location you chose.</p>
+  <h2 id="en">English</h2>
 
-      <h2>8. Changes to this policy</h2>
-      <p>If we make material changes to this policy, we will update the "Last updated" date at the top and show a notice inside the App. Significant changes (e.g., new data collection) will be announced at least 30 days before they take effect.</p>
+  <h3>1. Who we are</h3>
+  <p>
+    Squirrel Wallet is an indie ticket / coupon management app. <strong>We do
+    not operate any account backend</strong> — all your data is stored on
+    your device by default.
+  </p>
 
-      <h2>9. Contact</h2>
-      <p>For any privacy-related questions or requests, please email <a href="mailto:support@squirrelwallet.app">support@squirrelwallet.app</a>.</p>
-    </article>
+  <h3>2. What data we touch</h3>
+  <table>
+    <thead>
+      <tr><th>Category</th><th>Content</th><th>Storage</th><th>Leaves device?</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Tickets / Coupons</td><td>Titles, barcodes, expiry, notes, custom categories</td><td>Local Hive DB (AES-256 encrypted)</td><td>No</td></tr>
+      <tr><td>Ticket screenshots</td><td>Photos you take or import</td><td>Local app-private dir</td><td><strong>Only when AI recognition is invoked; barcodes are masked first</strong> (§3)</td></tr>
+      <tr><td>eSIM LPA</td><td>Carrier-provided activation string</td><td>Local Hive (AES-256 encrypted)</td><td>No (OS handles installation)</td></tr>
+      <tr><td>IAP receipts</td><td>Apple / Google purchase receipts</td><td>Local OS keychain</td><td>Sent to Apple / Google for verification (no backend of ours)</td></tr>
+      <tr><td>Usage analytics</td><td><strong>Off by default</strong>. Opt-in toggles anonymous event tracking</td><td>Third-party service</td><td>Yes (de-identified)</td></tr>
+      <tr><td>Crash reports</td><td><strong>Off by default</strong>. Opt-in sends stack traces (no PII)</td><td>Third-party service</td><td>Yes (no PII)</td></tr>
+      <tr><td>Account IDs</td><td><strong>We do not require sign-up</strong></td><td>—</td><td>—</td></tr>
+      <tr><td>Ad IDs / Device IDs</td><td><strong>Not collected</strong></td><td>—</td><td>—</td></tr>
+      <tr><td>Location</td><td><strong>Not collected</strong></td><td>—</td><td>—</td></tr>
+    </tbody>
+  </table>
 
-    <footer class="page-footer">
-      <p>© 2026 Squirrel Wallet · <a href="/">squirrelwallet.app</a></p>
-    </footer>
-  </main>
+  <h3>3. AI Recognition (VLM) — Important Disclosure</h3>
+  <p>
+    When you use the "scan ticket via AI" feature, the app sends an image to
+    a third-party Vision-Language-Model provider to extract ticket metadata
+    (title, expiry, merchant).
+  </p>
+
+  <h4>3.1 Barcode masking</h4>
+  <p>
+    <strong>Before any upload, the app automatically detects and blacks out
+    every barcode / QR code in the image on-device.</strong> This happens
+    entirely on your device — no manual action required. Source:
+    <a href="https://github.com/zhenyuwang/Squirrel-Wallet/blob/main/squirrel_wallet_flutter/lib/application/services/barcode_masking_service.dart"><code>barcode_masking_service.dart</code></a>.
+  </p>
+  <p>
+    Rationale: barcodes carry the value of the ticket (redemption codes,
+    eSIM LPA, membership numbers, payment QRs). Masking ensures that even
+    if a provider retains the image, it cannot be used to redeem your tickets.
+  </p>
+
+  <h4>3.2 Where the masked image goes</h4>
+  <table>
+    <thead>
+      <tr><th>Provider</th><th>Models</th><th>Privacy policy</th><th>Retention</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>OpenRouter</td><td>Free-tier VLMs</td><td><a href="https://openrouter.ai/privacy">openrouter.ai/privacy</a></td><td>Free tier may be used for training — <strong>review their policy</strong></td></tr>
+      <tr><td>Google AI Studio (Gemini)</td><td>Free-tier Gemini Flash</td><td><a href="https://ai.google.dev/gemini-api/terms">Gemini API terms</a></td><td>Free tier may be used for training</td></tr>
+      <tr><td>Groq</td><td>Free-tier Llama-3.2 Vision</td><td><a href="https://groq.com/privacy-policy/">groq.com/privacy-policy</a></td><td>Free tier does not train (per current policy)</td></tr>
+      <tr><td>OpenAI (Pro only)</td><td>gpt-4o-mini classifier</td><td><a href="https://openai.com/policies/privacy-policy">openai.com policy</a></td><td>API default 30-day retention, no training</td></tr>
+    </tbody>
+  </table>
+  <p>
+    <strong>We do not control these third parties' retention / training
+    policies.</strong> Barcode masking is one line of defence — you should
+    still assess the sensitivity of your data. If you prefer no image ever
+    leaves your device, <strong>do not use AI recognition</strong>; use
+    manual entry or barcode scanning instead (both run entirely on-device).
+  </p>
+
+  <h4>3.3 What travels with the image (and what doesn't)</h4>
+  <p>
+    To help the model classify accurately, the prompt <strong>does
+    include</strong>:
+  </p>
+  <ul>
+    <li>The <strong>names of your custom categories</strong> (from
+      Settings → Custom categories), so the model recommends an existing
+      category rather than inventing one. <strong>If you used a personal
+      tag (company name, partner's name) as a category name, that string
+      travels with the prompt.</strong> If you don't want such strings
+      to leave the device, avoid using sensitive text as category names.</li>
+    <li>Your active country list from Settings (for eSIM region inference)</li>
+    <li>The currently-selected kind (ticket / coupon), to break ambiguous ties</li>
+  </ul>
+  <p>The prompt <strong>does NOT send</strong>:</p>
+  <ul>
+    <li>Ticket title / note / barcode payload / QR content (the image
+      itself carries those; no need to duplicate over the wire)</li>
+    <li>Other tickets / coupons on your device (each prompt sees the
+      current image only)</li>
+    <li>Device ID, Apple ID, Google account</li>
+    <li>Other photos from your library — <strong>only the one image you select</strong></li>
+  </ul>
+
+  <h3>4. Local data security</h3>
+  <ul>
+    <li>All ticket / coupon data is <strong>AES-256 encrypted</strong> in the local Hive database</li>
+    <li>The encryption key lives in the OS secure store (iOS Keychain / Android Keystore) and is unreadable even on rooted / jailbroken devices</li>
+    <li>Screenshots live in the app-private directory, OS-isolated from other apps</li>
+  </ul>
+
+  <h3>5. Your rights (GDPR / TW PDPA)</h3>
+  <ul>
+    <li><strong>Access / Export</strong>: Settings → Backup exports all data as an encrypted ZIP</li>
+    <li><strong>Modify</strong>: Edit in-app</li>
+    <li><strong>Delete</strong>: Settings → Reset all data permanently removes all local data and cancels notifications. Tap the red button → type "刪除" to enable confirm → tap "Reset all data". Wipes: all Hive boxes, all screenshots, most SharedPreferences settings, all scheduled notifications. Preserves: IAP subscription status keys, onboarding completion flag, and the Hive AES key (kept so a future encrypted-backup import still decrypts).</li>
+    <li><strong>Subscriptions</strong>: Managed by Apple / Google — use the platform's subscription management UI</li>
+  </ul>
+  <blockquote>
+    This does not retroactively delete image copies that AI providers may
+    retain per their own policies. Contact each provider for their
+    deletion process. App Store and Google Play require an in-app deletion
+    entry point — Settings → Reset all data IS that entry point.
+  </blockquote>
+
+  <h3>6. Children's privacy</h3>
+  <p>This app does not knowingly collect data from children under 13. If we discover such collection, we will delete it.</p>
+
+  <h3>7. Changes to this policy</h3>
+  <p>Material changes will be announced in-app and the "Last updated" date above will be revised.</p>
+
+  <h3>8. Contact</h3>
+  <ul>
+    <li>Email: <a href="mailto:support@squirrelwallet.app">support@squirrelwallet.app</a></li>
+    <li>GitHub Issues: <a href="https://github.com/zhenyuwang/Squirrel-Wallet/issues">github.com/zhenyuwang/Squirrel-Wallet/issues</a></li>
+  </ul>
+
+  <footer class="page-footer">
+    <p>© 2026 Squirrel Wallet · <a href="/">← 回首頁 / Home</a> · <a href="mailto:support@squirrelwallet.app">support@squirrelwallet.app</a></p>
+  </footer>
+
+</main>
 </body>
 </html>
