@@ -3,173 +3,327 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>使用支援 / Support — Squirrel Wallet</title>
+  <title>使用支援 — Squirrel Wallet</title>
+  <meta name="description" content="Squirrel Wallet 使用支援與常見問題：AI 辨識、條碼掃描、eSIM 安裝、備份還原、Pro 訂閱。">
   <link rel="stylesheet" href="/styles.css">
+  <style>
+    /* Page-scoped — reuses /styles.css but adds a contact-box variant
+       for the email card at the bottom of the page. */
+    .contact-list {
+      margin: 16px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    .contact-list li {
+      padding: 12px 0;
+      border-top: 1px solid var(--color-border);
+    }
+    .contact-list li:last-child {
+      border-bottom: 1px solid var(--color-border);
+    }
+    .contact-list .label {
+      display: block;
+      font-size: 13px;
+      color: var(--color-text-muted);
+      margin-bottom: 4px;
+    }
+  </style>
 </head>
 <body>
-  <main class="prose">
-    <header class="page-header">
-      <a href="/" class="back-link">← Squirrel Wallet</a>
-      <nav class="lang-toggle">
-        <a href="#zh">中文</a> · <a href="#en">English</a>
-      </nav>
-    </header>
+<main class="prose">
 
-    <!-- ════════════════════════════════════════ Chinese ════════════════════════════════════════ -->
-    <article id="zh" lang="zh-Hant">
-      <h1>使用支援</h1>
-      <p class="meta">如果你在使用 Squirrel Wallet 時遇到任何問題，下面是常見問題與聯絡方式。</p>
+  <header class="page-header">
+    <a href="/" class="back-link">← Squirrel Wallet</a>
+    <nav class="lang-toggle">
+      <a href="#zh">繁體中文</a>
+      <span aria-hidden="true">·</span>
+      <a href="#en">English</a>
+    </nav>
+  </header>
 
-      <div class="contact-box">
-        <p style="margin: 0 0 8px;">直接寫信給我們：</p>
-        <a class="email" href="mailto:support@squirrelwallet.app">support@squirrelwallet.app</a>
-        <p style="margin: 12px 0 0; font-size: 14px; color: var(--color-text-muted);">
-          通常 1–2 個工作天內回覆。
-        </p>
-      </div>
+  <h1>使用支援 / Support</h1>
+  <p class="meta">最後更新 / Last updated: 2026-05-12 · App 版本 / version: 1.0.0+</p>
 
-      <h2>常見問題</h2>
-      <div class="faq">
-        <details>
-          <summary>AI 辨識失敗怎麼辦？</summary>
-          <p>App 內建三家視覺語言模型（OpenRouter / Gemini / Groq）會自動 fallback，但若三家都暫時無法回應，可能是當天網路或 API 服務問題。建議：</p>
-          <ul>
-            <li>稍後重試（5–10 分鐘後通常恢復）</li>
-            <li>確認手機網路正常</li>
-            <li>實在不行可以手動輸入票券資訊或改掃條碼</li>
-          </ul>
-        </details>
+  <h2 id="zh">繁體中文</h2>
 
-        <details>
-          <summary>票券資料會上傳到雲端嗎？</summary>
-          <p>不會。所有票券、優惠券、條碼、截圖都儲存在你裝置的本地資料庫（Hive）中，不會上傳到任何伺服器。詳情請看 <a href="/privacy/">隱私權政策</a>。</p>
-          <p>唯一會「離開裝置」的資料是 AI 辨識時主動傳送的圖片 — 而且不附帶任何使用者識別資訊。</p>
-        </details>
+  <p>
+    Squirrel Wallet 是獨立開發的小工具，目前由一位工程師維護。
+    我們盡量在 48 小時內回覆問題。
+  </p>
 
-        <details>
-          <summary>換新手機後，票券資料會跟著過去嗎？</summary>
-          <p>目前需要手動操作：在舊手機進入「設定 → 備份與還原」匯出備份檔案（`.zip`），轉到新手機後再從同一個入口匯入即可。</p>
-          <p>未來版本會加入 iCloud 自動同步功能，使用 Apple ID 跨裝置自動同步。</p>
-        </details>
+  <h3>常見問題</h3>
 
-        <details>
-          <summary>eSIM 為什麼點下去沒反應？</summary>
-          <p>eSIM 安裝需要：</p>
-          <ul>
-            <li>iOS 12.1+ 或 Android 9+ 且裝置支援 eSIM（iPhone XS 之後的機型大多支援）</li>
-            <li>正確的 LPA 啟用碼（格式為 <code>LPA:1$smdp.address$activationcode</code>）</li>
-          </ul>
-          <p>若點下去 iOS 沒跳出系統設定，請確認：(1) 裝置有支援 eSIM、(2) LPA 字串格式正確（可在票券詳情頁手動編輯）。</p>
-        </details>
+  <section class="faq" aria-label="常見問題">
+    <details>
+      <summary>AI 辨識失敗 / 結果不準怎麼辦？</summary>
+      <p>
+        我們同時對接 OpenRouter、Google Gemini、Groq 三家免費 VLM，會自動
+        fallback。如果三家都失敗，可能是：
+      </p>
+      <ul>
+        <li><strong>網路問題</strong> — 切換到行動網路 / Wi-Fi 再試一次。</li>
+        <li><strong>圖片內容不是票券</strong> — AI 找不到票券特徵會回傳「無法辨識」，請用「手動新增」。</li>
+        <li><strong>當日免費額度用完</strong> — Free tier 每月 5 次，Pro 每月 300 次（軟上限）。</li>
+      </ul>
+      <p>辨識結果不滿意時，可以在 Step 3 預覽畫面直接編輯任一欄位再儲存。</p>
+    </details>
 
-        <details>
-          <summary>條碼掃描掃不到？</summary>
-          <p>請確認：</p>
-          <ul>
-            <li>已授權相機權限（設定 → Squirrel Wallet → 相機 開啟）</li>
-            <li>光線充足、條碼平整無皺摺</li>
-            <li>手機與條碼距離約 10–20 公分</li>
-          </ul>
-          <p>實在掃不到可以截圖票券條碼，從相簿選取後用 AI 辨識備援。</p>
-        </details>
+    <details>
+      <summary>條碼掃描掃不到 / 太小看不清楚？</summary>
+      <p>
+        支援 13 種條碼格式（含 EAN-13、Code 128、QR Code 等）。掃描畫面點擊
+        手電筒可開閃光輔助。如果票券條碼太小，可以改用「拍照新增」走 AI
+        路徑，AI 會自動把條碼放到票券卡上。
+      </p>
+      <p>
+        結帳時顯示條碼太小？打開該票券詳情頁，點條碼會跳出全螢幕亮屏模式，
+        手機螢幕會自動調到最亮以利掃描槍讀取。
+      </p>
+    </details>
 
-        <details>
-          <summary>怎麼回報 bug 或建議新功能？</summary>
-          <p>請寫信到 <a href="mailto:support@squirrelwallet.app">support@squirrelwallet.app</a>，附上：</p>
-          <ul>
-            <li>你用的裝置型號 + iOS 版本</li>
-            <li>App 版本（在「設定 → 關於」看得到）</li>
-            <li>問題重現步驟（如果方便的話附上截圖）</li>
-          </ul>
-        </details>
+    <details>
+      <summary>eSIM 安裝沒反應？</summary>
+      <p>
+        eSIM 安裝是透過系統 URL 喚起 iOS / Android 內建的 eSIM 設定流程。
+        若沒反應請確認：
+      </p>
+      <ul>
+        <li><strong>裝置支援 eSIM</strong> — iPhone XS / SE 第 2 代以後、Pixel 4
+          以後的多數 Android。</li>
+        <li><strong>LPA 字串完整</strong> — 拍照辨識可能漏字，請對照電信商
+          email 確認 LPA URL 完整。</li>
+        <li><strong>該電信商支援自動安裝</strong> — 部分電信商需要 QR Code
+          手動掃，不支援 LPA URL 自動安裝。</li>
+      </ul>
+    </details>
 
-        <details>
-          <summary>App 是免費的嗎？</summary>
-          <p>是的，目前完全免費，沒有廣告、沒有訂閱、沒有 in-app purchase。AI 辨識使用免費 VLM 模型額度。</p>
-        </details>
-      </div>
-    </article>
+    <details>
+      <summary>備份 / 還原怎麼做？資料會傳到雲端嗎？</summary>
+      <p>
+        「設定 → 備份」會在裝置本機產生一個 <code>.squirrel</code> 加密 ZIP，
+        然後跳出系統分享面板由您決定送到哪裡（iCloud、Google Drive、
+        AirDrop、Email、訊息 …）。<strong>我們沒有自己的雲端伺服器</strong>，
+        備份檔不會經過我們的後端。
+      </p>
+      <p>
+        還原時兩個模式：「覆寫」會清空本機資料用備份內容取代；「附加」會
+        合併到現有資料上，分類名稱衝突時讓您選怎麼對映。
+      </p>
+    </details>
 
-    <hr class="lang-divider">
+    <details>
+      <summary>Pro 訂閱怎麼取消 / 退款？</summary>
+      <p>
+        訂閱由 Apple App Store / Google Play 管理，不經過我們：
+      </p>
+      <ul>
+        <li><strong>iOS</strong>：設定 → Apple ID → 訂閱項目 → Squirrel Wallet
+          → 取消訂閱</li>
+        <li><strong>Android</strong>：Google Play → 個人資料 → 付款與訂閱 →
+          訂閱 → Squirrel Wallet → 取消</li>
+      </ul>
+      <p>
+        取消後仍可使用 Pro 到目前計費週期結束。退款請走平台流程
+        (<a href="https://reportaproblem.apple.com">Apple Report a Problem</a> /
+        Google Play Help)。
+      </p>
+    </details>
 
-    <!-- ════════════════════════════════════════ English ════════════════════════════════════════ -->
-    <article id="en" lang="en">
-      <h1>Support</h1>
-      <p class="meta">If you run into any issues using Squirrel Wallet, here are the common questions and how to reach us.</p>
+    <details>
+      <summary>換手機 / 重灌 App，資料會不見嗎？</summary>
+      <p>
+        會。因為我們不收集帳號 / 不上雲端，所有資料只存在裝置本機。
+        建議定期透過「設定 → 備份」匯出，把 <code>.squirrel</code> 檔案
+        存在 iCloud Drive / Google Drive。換機時開 App → 設定 → 還原 →
+        選備份檔即可。
+      </p>
+    </details>
 
-      <div class="contact-box">
-        <p style="margin: 0 0 8px;">Email us directly:</p>
-        <a class="email" href="mailto:support@squirrelwallet.app">support@squirrelwallet.app</a>
-        <p style="margin: 12px 0 0; font-size: 14px; color: var(--color-text-muted);">
-          We usually respond within 1–2 business days.
-        </p>
-      </div>
+    <details>
+      <summary>怎麼刪除所有資料？</summary>
+      <p>
+        「設定 → 清除所有資料」紅色按鈕。為避免誤觸，需要您手動輸入
+        「刪除」二字才會啟用確認鈕。詳細清除 / 保留項目見
+        <a href="/privacy/#zh">隱私權政策第 5.3 節</a>。
+      </p>
+    </details>
 
-      <h2>FAQ</h2>
-      <div class="faq">
-        <details>
-          <summary>AI recognition failed — what should I do?</summary>
-          <p>The App has three Vision Language Model providers (OpenRouter / Gemini / Groq) and falls back across them automatically. If all three are temporarily down, you can:</p>
-          <ul>
-            <li>Try again in 5–10 minutes</li>
-            <li>Check that your network connection is OK</li>
-            <li>Or just enter the ticket details manually / scan the barcode</li>
-          </ul>
-        </details>
+    <details>
+      <summary>我可以匯入其他票券 App 的資料嗎？</summary>
+      <p>
+        目前不行 —— 因為其他 App 多半沒提供標準匯出格式。如果你的舊資料
+        有 JSON / CSV 結構，可以開 GitHub Issue 提需求，看能不能加 importer。
+      </p>
+    </details>
+  </section>
 
-        <details>
-          <summary>Is my ticket data uploaded to the cloud?</summary>
-          <p>No. All tickets, coupons, barcodes, and screenshots are stored locally on your device using Hive. Nothing is uploaded to any server. See the <a href="/privacy/">Privacy Policy</a> for full details.</p>
-          <p>The only data that ever leaves your device is the image you explicitly send for AI recognition — and even then, no user-identifying metadata is attached.</p>
-        </details>
+  <h3 id="contact-zh">聯絡我們</h3>
 
-        <details>
-          <summary>Will my data move with me to a new phone?</summary>
-          <p>Right now this is a manual step: open <em>Settings → Backup & Restore</em> on the old phone, export the backup file (`.zip`), transfer it to the new phone, and import from the same screen.</p>
-          <p>A future version will add automatic iCloud sync (using your Apple ID) so this happens transparently.</p>
-        </details>
+  <ul class="contact-list">
+    <li>
+      <span class="label">Email</span>
+      <a href="mailto:support@squirrelwallet.app">support@squirrelwallet.app</a>
+    </li>
+    <li>
+      <span class="label">GitHub Issues（bug 回報 / 功能建議）</span>
+      <a href="https://github.com/zhenyuwang/Squirrel-Wallet/issues">github.com/zhenyuwang/Squirrel-Wallet/issues</a>
+    </li>
+    <li>
+      <span class="label">隱私 / 法律</span>
+      <a href="/privacy/">隱私權政策</a>
+    </li>
+  </ul>
 
-        <details>
-          <summary>The eSIM install button does nothing?</summary>
-          <p>eSIM installation requires:</p>
-          <ul>
-            <li>iOS 12.1+ or Android 9+, on hardware that supports eSIM (most iPhones since iPhone XS)</li>
-            <li>A valid LPA activation code in the form <code>LPA:1$smdp.address$activationcode</code></li>
-          </ul>
-          <p>If tapping the button doesn't bring up the system installer, check that (1) your device supports eSIM, (2) the LPA string is well-formed (you can edit it on the ticket detail screen).</p>
-        </details>
+  <hr class="lang-divider">
 
-        <details>
-          <summary>Barcode scanning isn't picking anything up?</summary>
-          <p>Please check:</p>
-          <ul>
-            <li>Camera permission is granted (<em>Settings → Squirrel Wallet → Camera</em>)</li>
-            <li>The barcode is well-lit and not too creased</li>
-            <li>You're holding the phone roughly 10–20 cm from the barcode</li>
-          </ul>
-          <p>If scanning still fails, you can screenshot the ticket and use the AI recognition path from your photo library as a fallback.</p>
-        </details>
+  <h2 id="en">English</h2>
 
-        <details>
-          <summary>How do I report a bug or request a feature?</summary>
-          <p>Email <a href="mailto:support@squirrelwallet.app">support@squirrelwallet.app</a> with:</p>
-          <ul>
-            <li>Your device model + iOS / Android version</li>
-            <li>The App version (visible in <em>Settings → About</em>)</li>
-            <li>Steps to reproduce, plus a screenshot if possible</li>
-          </ul>
-        </details>
+  <p>
+    Squirrel Wallet is an indie app maintained by one engineer. We aim
+    to reply within 48 hours.
+  </p>
 
-        <details>
-          <summary>Is the App free?</summary>
-          <p>Yes — completely free, no ads, no subscription, no in-app purchases. The AI recognition uses the free tier of each VLM provider.</p>
-        </details>
-      </div>
-    </article>
+  <h3>FAQ</h3>
 
-    <footer class="page-footer">
-      <p>© 2026 Squirrel Wallet · <a href="/">squirrelwallet.app</a></p>
-    </footer>
-  </main>
+  <section class="faq" aria-label="Frequently asked questions">
+    <details>
+      <summary>AI recognition failed / result inaccurate — what now?</summary>
+      <p>
+        We route through OpenRouter, Google Gemini, and Groq free-tier
+        VLMs with automatic fallback. If all three fail, the cause is
+        usually one of:
+      </p>
+      <ul>
+        <li><strong>Network</strong> — switch between Wi-Fi and cellular
+          and retry.</li>
+        <li><strong>Image isn't a ticket</strong> — AI returns "unrecognised"
+          when no ticket features are detected; use Manual Entry.</li>
+        <li><strong>Quota exhausted</strong> — Free tier is 5 scans / month,
+          Pro is 300 / month (soft cap).</li>
+      </ul>
+      <p>
+        If the AI got fields wrong, every field on the Step 3 preview is
+        editable before save.
+      </p>
+    </details>
+
+    <details>
+      <summary>Barcode scanner won't read / barcode too small at checkout?</summary>
+      <p>
+        13 barcode formats supported (EAN-13, Code 128, QR, etc.). Tap
+        the torch button in the scanner for low-light help. If a ticket's
+        barcode is too small, use "Add via photo" — AI extracts the
+        barcode and renders it large on the ticket card.
+      </p>
+      <p>
+        At checkout, tap the barcode on a ticket's detail screen to enter
+        full-screen mode; the phone brightness ramps to max automatically
+        so checkout scanners read cleanly.
+      </p>
+    </details>
+
+    <details>
+      <summary>eSIM install does nothing when I tap?</summary>
+      <p>
+        eSIM install fires the system URL handler for iOS / Android's
+        built-in eSIM setup. Common causes when nothing happens:
+      </p>
+      <ul>
+        <li><strong>Device doesn't support eSIM</strong> — iPhone XS / SE
+          2nd gen or later; most Pixel 4+ and recent flagship Androids.</li>
+        <li><strong>LPA string truncated</strong> — photo recognition can
+          miss characters; verify the LPA URL against your carrier email.</li>
+        <li><strong>Carrier requires manual scan</strong> — some carriers
+          only accept QR-code scans, not LPA-URL auto-install.</li>
+      </ul>
+    </details>
+
+    <details>
+      <summary>Backup / restore — does my data go to your cloud?</summary>
+      <p>
+        Settings → Backup writes an encrypted <code>.squirrel</code> ZIP
+        on the device, then opens the OS share sheet so you choose where
+        to send it (iCloud, Google Drive, AirDrop, email, messages …).
+        <strong>We do not operate any cloud servers</strong> — backups
+        never touch our backend.
+      </p>
+      <p>
+        Restore offers two modes: "Overwrite" wipes local data and
+        replaces it; "Append" merges into existing data with a category-
+        mapping sheet when names collide.
+      </p>
+    </details>
+
+    <details>
+      <summary>How do I cancel / refund Pro?</summary>
+      <p>
+        Subscriptions are managed by Apple App Store / Google Play, not us:
+      </p>
+      <ul>
+        <li><strong>iOS</strong>: Settings → Apple ID → Subscriptions →
+          Squirrel Wallet → Cancel</li>
+        <li><strong>Android</strong>: Google Play → Profile → Payments &
+          subscriptions → Subscriptions → Squirrel Wallet → Cancel</li>
+      </ul>
+      <p>
+        You retain Pro until the current billing period ends. Refunds go
+        through the platform: <a href="https://reportaproblem.apple.com">Apple
+        Report a Problem</a> or Google Play Help.
+      </p>
+    </details>
+
+    <details>
+      <summary>Will my data survive a phone change or reinstall?</summary>
+      <p>
+        Not automatically — because we don't collect accounts or sync to
+        the cloud, all data lives on-device. Export regularly via
+        Settings → Backup and keep the <code>.squirrel</code> file in
+        iCloud Drive / Google Drive. On a new device, open the app →
+        Settings → Restore → pick the backup.
+      </p>
+    </details>
+
+    <details>
+      <summary>How do I delete everything?</summary>
+      <p>
+        Settings → Reset all data (red button). To prevent accidental
+        taps, you must type "刪除" / "DELETE" before the confirm button
+        activates. See <a href="/privacy/#en">Privacy §5</a> for the
+        exact wipe / preserve allowlist.
+      </p>
+    </details>
+
+    <details>
+      <summary>Can I import data from another ticket app?</summary>
+      <p>
+        Not yet — most ticket apps don't expose a standard export. If
+        your old data is in JSON / CSV, open a GitHub issue with the
+        format details and we'll see if an importer is feasible.
+      </p>
+    </details>
+  </section>
+
+  <h3 id="contact-en">Contact</h3>
+
+  <ul class="contact-list">
+    <li>
+      <span class="label">Email</span>
+      <a href="mailto:support@squirrelwallet.app">support@squirrelwallet.app</a>
+    </li>
+    <li>
+      <span class="label">GitHub Issues (bug reports / feature requests)</span>
+      <a href="https://github.com/zhenyuwang/Squirrel-Wallet/issues">github.com/zhenyuwang/Squirrel-Wallet/issues</a>
+    </li>
+    <li>
+      <span class="label">Privacy / legal</span>
+      <a href="/privacy/">Privacy Policy</a>
+    </li>
+  </ul>
+
+  <footer class="page-footer">
+    <p>© 2026 Squirrel Wallet · <a href="/">← Home</a> · <a href="mailto:support@squirrelwallet.app">support@squirrelwallet.app</a></p>
+  </footer>
+
+</main>
 </body>
 </html>
