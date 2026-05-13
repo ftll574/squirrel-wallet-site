@@ -3,652 +3,647 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Squirrel Wallet — 票券・條碼・eSIM 一手掌握</title>
-  <meta name="description" content="把演唱會票、團購優惠券、旅遊 eSIM 都收進一個 Apple Wallet 風格的卡片堆疊。AI 拍一張就幫你填好，條碼上傳前先在裝置打碼，資料只留在你手機上。">
-  <meta name="theme-color" content="#5B4BFF">
+  <title>松鼠錢包 Squirrel Wallet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  <link rel="stylesheet" href="/styles.css">
-  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-  <link rel="alternate icon" href="/assets/favicon.svg">
-  <link rel="apple-touch-icon" href="/assets/favicon.svg">
+    :root {
+      --background: #0F0F14;
+      --surface-container: #222226;
+      --surface-container-high: #2C2C30;
+      --primary: #9B85FF;
+      --primary-container: #3A2D7A;
+      --on-primary-container: #E5E0FF;
+      --secondary: #A6E07A;
+      --secondary-container: #2D4A1F;
+      --tertiary: #FFA8DA;
+      --outline: #8E8E97;
+      --on-surface: #E6E1E5;
+      --on-surface-variant: #CAC4D0;
 
-  <!-- Open Graph / social -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://squirrelwallet.app/">
-  <meta property="og:title" content="Squirrel Wallet — 票券・條碼・eSIM 一手掌握">
-  <meta property="og:description" content="把演唱會票、團購優惠券、旅遊 eSIM 都收進一個 Apple Wallet 風格的卡片堆疊。AI 拍一張就幫你填好，條碼上傳前先在裝置打碼。">
-  <meta property="og:image" content="https://squirrelwallet.app/assets/og.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:locale" content="zh_TW">
-  <meta property="og:locale:alternate" content="en_US">
-  <meta name="twitter:card" content="summary_large_image">
+      --ticket-food-bg: #5A161C;
+      --ticket-food-accent: #DA8188;
+      --ticket-esim-bg: #165A54;
+      --ticket-esim-accent: #81DAD3;
+      --ticket-shop-bg: #5A163E;
+      --ticket-shop-accent: #DA81B5;
+      --ticket-entertainment-bg: #3E165A;
+      --ticket-entertainment-accent: #B581DA;
 
-  <!-- Structured data — SoftwareApplication -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "MobileApplication",
-    "name": "Squirrel Wallet",
-    "alternateName": "松鼠票夾",
-    "operatingSystem": "iOS, Android",
-    "applicationCategory": "ProductivityApplication",
-    "offers": [
-      { "@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "USD" },
-      { "@type": "Offer", "name": "Pro Monthly", "price": "2.99", "priceCurrency": "USD" },
-      { "@type": "Offer", "name": "Pro Annual", "price": "19.99", "priceCurrency": "USD" }
-    ],
-    "publisher": { "@type": "Person", "name": "Squirrel Wallet" }
-  }
-  </script>
+      --font-zh: 'Noto Sans TC', sans-serif;
+      --font-latin: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      --display-medium: 700 45px/52px var(--font-zh);
+      --headline-medium: 600 28px/36px var(--font-zh);
+      --title-large: 600 22px/28px var(--font-zh);
+      --body-medium: 400 14px/20px var(--font-latin);
+      --body-large: 400 16px/24px var(--font-zh);
+      --label-large: 500 14px/20px var(--font-latin);
+
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 8px;
+
+      --elevation-l2: 0 2px 6px rgba(0,0,0,0.3), 0 6px 16px rgba(0,0,0,0.2);
+      --elevation-l3: 0 4px 12px rgba(0,0,0,0.4), 0 12px 28px rgba(0,0,0,0.3);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-zh); background: var(--background); color: var(--on-surface); overflow-x: hidden; }
+
+    /* Nav */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 16px 48px; display: flex; justify-content: space-between; align-items: center;
+      background: linear-gradient(to bottom, var(--background) 70%, transparent);
+    }
+    .nav-brand { display: flex; align-items: center; gap: 10px; font: 600 18px/1 var(--font-zh); color: var(--on-surface); text-decoration: none; }
+    .nav-brand svg { width: 32px; height: 32px; }
+    .nav-right { display: flex; align-items: center; gap: 32px; }
+    .nav-links { display: flex; gap: 24px; list-style: none; }
+    .nav-links a { font: 500 14px/1 var(--font-latin); color: var(--on-surface-variant); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--primary); }
+    .lang-toggle { display: flex; background: var(--surface-container); border-radius: 12px; padding: 4px; gap: 2px; }
+    .lang-toggle a { font: 500 13px/1 var(--font-latin); padding: 8px 12px; border-radius: 8px; background: transparent; color: var(--outline); text-decoration: none; transition: all 0.2s; }
+    .lang-toggle a.active { background: var(--surface-container-high); color: var(--on-surface); }
+
+    /* Layout */
+    section { max-width: 1280px; margin: 0 auto; padding: 0 48px; }
+    .section-spacing { padding-top: 100px; padding-bottom: 100px; }
+    .section-title { font: var(--headline-medium); color: var(--on-surface); margin-bottom: 48px; text-align: center; }
+    .section-title span { color: var(--primary); }
+
+    /* Hero */
+    .hero { min-height: 100vh; padding: 120px 48px 80px; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 48px; }
+    .hero-content { display: flex; flex-direction: column; gap: 24px; }
+    .hero h1 { font: var(--display-medium); letter-spacing: -0.02em; }
+    .hero h1 span { color: var(--primary); }
+    .hero-subline { font: 500 18px/28px var(--font-latin); color: var(--outline); }
+    .hero-ctas { display: flex; gap: 16px; margin-top: 16px; }
+    .btn-primary { font: 600 16px/1 var(--font-zh); padding: 16px 32px; background: var(--primary); color: var(--background); border: none; border-radius: var(--radius-lg); cursor: pointer; transition: all 0.2s; box-shadow: var(--elevation-l2); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--elevation-l3); }
+    .btn-secondary { font: 500 16px/1 var(--font-zh); padding: 16px 32px; background: transparent; color: var(--on-surface-variant); border: 1px solid var(--outline); border-radius: var(--radius-lg); cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
+    .btn-secondary:hover { border-color: var(--primary); color: var(--primary); }
+    .btn-secondary svg { width: 20px; height: 20px; }
+
+    .hero-visual { position: relative; display: flex; justify-content: center; align-items: center; height: 560px; }
+    .squirrel { position: absolute; width: 280px; height: 340px; z-index: 10; filter: drop-shadow(0 20px 40px rgba(155, 133, 255, 0.2)); animation: squirrelFloat 4s ease-in-out infinite; }
+    @keyframes squirrelFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+    .tickets { position: absolute; width: 100%; height: 100%; }
+    .ticket { position: absolute; width: 200px; padding: 16px; border-radius: var(--radius-xl); box-shadow: var(--elevation-l3); animation: ticketFloat 5s ease-in-out infinite; }
+    .ticket-food { background: var(--ticket-food-bg); bottom: 60px; left: 20px; transform: rotate(-8deg); }
+    .ticket-esim { background: var(--ticket-esim-bg); bottom: 120px; right: 40px; transform: rotate(6deg); animation-delay: -1.5s; }
+    .ticket-shop { background: var(--ticket-shop-bg); bottom: 20px; left: 50%; transform: translateX(-50%) rotate(3deg); animation-delay: -3s; }
+    @keyframes ticketFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    .ticket-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+    .ticket-brand { font: 600 14px/1 var(--font-zh); color: white; }
+    .ticket-type { font: 500 11px/1 var(--font-latin); padding: 4px 8px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .ticket-food .ticket-type { background: var(--ticket-food-accent); color: var(--ticket-food-bg); }
+    .ticket-esim .ticket-type { background: var(--ticket-esim-accent); color: var(--ticket-esim-bg); }
+    .ticket-shop .ticket-type { background: var(--ticket-shop-accent); color: var(--ticket-shop-bg); }
+    .ticket-detail { font: 500 12px/16px var(--font-zh); color: rgba(255,255,255,0.8); margin-bottom: 8px; }
+    .ticket-code { font: 500 11px/1 var(--font-mono); color: rgba(255,255,255,0.6); letter-spacing: 0.1em; }
+    .ticket-barcode { margin-top: 12px; height: 32px; background: repeating-linear-gradient(90deg, rgba(255,255,255,0.9) 0px, rgba(255,255,255,0.9) 2px, transparent 2px, transparent 4px, rgba(255,255,255,0.9) 4px, rgba(255,255,255,0.9) 5px, transparent 5px, transparent 8px, rgba(255,255,255,0.9) 8px, rgba(255,255,255,0.9) 10px, transparent 10px, transparent 11px, rgba(255,255,255,0.9) 11px, rgba(255,255,255,0.9) 14px, transparent 14px, transparent 17px, rgba(255,255,255,0.9) 17px, rgba(255,255,255,0.9) 19px, transparent 19px, transparent 20px); border-radius: 4px; }
+    .hero-visual::before { content: ''; position: absolute; width: 400px; height: 400px; background: radial-gradient(circle, rgba(155, 133, 255, 0.15) 0%, transparent 70%); border-radius: 50%; z-index: 0; }
+
+    /* Section 2: Personas */
+    .personas { display: flex; flex-direction: column; gap: 24px; }
+    .persona-row { display: flex; align-items: center; gap: 24px; padding: 28px; border-radius: var(--radius-xl); box-shadow: var(--elevation-l2); }
+    .persona-row.entertainment { background: var(--ticket-entertainment-bg); }
+    .persona-row.shopping { background: var(--ticket-shop-bg); }
+    .persona-row.esim { background: var(--ticket-esim-bg); }
+    .persona-icon { width: 80px; height: 80px; border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .persona-row.entertainment .persona-icon { background: var(--ticket-entertainment-accent); }
+    .persona-row.shopping .persona-icon { background: var(--ticket-shop-accent); }
+    .persona-row.esim .persona-icon { background: var(--ticket-esim-accent); }
+    .persona-icon svg { width: 40px; height: 40px; }
+    .persona-row.entertainment .persona-icon svg { color: var(--ticket-entertainment-bg); }
+    .persona-row.shopping .persona-icon svg { color: var(--ticket-shop-bg); }
+    .persona-row.esim .persona-icon svg { color: var(--ticket-esim-bg); }
+    .persona-content h3 { font: var(--title-large); color: white; margin-bottom: 8px; }
+    .persona-pain { font: var(--body-large); color: rgba(255,255,255,0.7); margin-bottom: 8px; }
+    .persona-solution { font: 500 15px/22px var(--font-zh); color: white; }
+
+    /* Section 3: Wallet Stack */
+    .wallet-section { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .wallet-visual { position: relative; height: 400px; display: flex; align-items: center; justify-content: center; }
+    .wallet-cards { position: relative; width: 220px; height: 300px; }
+    .wallet-card { position: absolute; width: 200px; padding: 16px; border-radius: var(--radius-xl); box-shadow: var(--elevation-l2); }
+    .wallet-card:nth-child(1) { background: var(--ticket-food-bg); top: 0; left: 0; z-index: 3; }
+    .wallet-card:nth-child(2) { background: var(--ticket-esim-bg); top: 30px; left: 20px; z-index: 2; }
+    .wallet-card:nth-child(3) { background: var(--ticket-shop-bg); top: 60px; left: 40px; z-index: 1; }
+    .swipe-actions { position: absolute; right: -80px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 12px; }
+    .swipe-action { width: 56px; height: 56px; border-radius: var(--radius-md); background: var(--secondary-container); display: flex; align-items: center; justify-content: center; box-shadow: var(--elevation-l2); }
+    .swipe-action svg { width: 24px; height: 24px; color: var(--secondary); }
+    .wallet-content h2 { font: var(--headline-medium); color: var(--on-surface); margin-bottom: 20px; }
+    .wallet-content h2 span { color: var(--primary); }
+    .wallet-content p { font: var(--body-large); color: var(--on-surface-variant); margin-bottom: 16px; }
+    .wallet-features { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .wallet-features li { font: var(--body-large); color: var(--on-surface); display: flex; align-items: center; gap: 12px; }
+    .wallet-features li::before { content: ''; width: 8px; height: 8px; background: var(--primary); border-radius: 50%; }
+
+    /* Section 4: AI Auto-fill */
+    .ai-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .ai-step { background: var(--surface-container); border-radius: var(--radius-xl); padding: 32px 24px; box-shadow: var(--elevation-l2); text-align: center; }
+    .ai-step-number { width: 40px; height: 40px; background: var(--primary-container); color: var(--on-primary-container); border-radius: 50%; display: flex; align-items: center; justify-content: center; font: 600 18px/1 var(--font-latin); margin: 0 auto 20px; }
+    .ai-frame { width: 100%; height: 200px; background: var(--surface-container-high); border-radius: var(--radius-lg); margin-bottom: 20px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .ai-frame svg { width: 80px; height: 80px; color: var(--outline); }
+    .ai-frame.mask-frame { position: relative; }
+    .ai-frame.mask-frame::after { content: ''; position: absolute; inset: 20px; border: 3px dashed var(--primary); border-radius: var(--radius-md); }
+    .ai-chip { display: inline-flex; align-items: center; gap: 6px; background: var(--secondary-container); color: var(--secondary); padding: 8px 16px; border-radius: 20px; font: 600 14px/1 var(--font-latin); }
+    .ai-step h3 { font: var(--title-large); color: var(--on-surface); margin-bottom: 8px; }
+    .ai-step p { font: var(--body-medium); color: var(--on-surface-variant); }
+
+    /* Section 5: eSIM */
+    .esim-section { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .flag-grid { background: var(--ticket-esim-bg); border-radius: var(--radius-xl); padding: 24px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; box-shadow: var(--elevation-l2); }
+    .flag-item { width: 48px; height: 36px; background: var(--surface-container); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 20px; transition: all 0.2s; }
+    .flag-item.active { outline: 2px solid var(--primary); outline-offset: 2px; background: var(--surface-container-high); }
+    .esim-sheet { background: var(--surface-container); border-radius: var(--radius-xl); padding: 32px; box-shadow: var(--elevation-l2); }
+    .esim-sheet-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--surface-container-high); }
+    .esim-sheet-flag { font-size: 40px; }
+    .esim-sheet-info h3 { font: var(--title-large); color: var(--on-surface); margin-bottom: 4px; }
+    .esim-sheet-info p { font: var(--body-medium); color: var(--on-surface-variant); }
+    .esim-sheet-details { display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
+    .esim-detail-row { display: flex; justify-content: space-between; font: var(--body-large); }
+    .esim-detail-row span:first-child { color: var(--on-surface-variant); }
+    .esim-detail-row span:last-child { color: var(--on-surface); font-weight: 500; }
+    .esim-install-btn { width: 100%; padding: 16px; background: var(--primary); color: var(--background); border: none; border-radius: var(--radius-lg); font: 600 16px/1 var(--font-zh); cursor: pointer; transition: all 0.2s; }
+    .esim-install-btn:hover { transform: translateY(-2px); box-shadow: var(--elevation-l2); }
+
+    /* Section 6: Privacy */
+    .privacy-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .privacy-step { background: var(--surface-container); border-radius: var(--radius-xl); padding: 32px 24px; box-shadow: var(--elevation-l2); text-align: center; }
+    .privacy-step-number { width: 48px; height: 48px; background: var(--primary-container); color: var(--on-primary-container); border-radius: 50%; display: flex; align-items: center; justify-content: center; font: 700 20px/1 var(--font-latin); margin: 0 auto 20px; }
+    .privacy-step svg { width: 64px; height: 64px; color: var(--primary); margin-bottom: 20px; }
+    .privacy-step h3 { font: var(--title-large); color: var(--on-surface); margin-bottom: 8px; }
+    .privacy-step p { font: var(--body-medium); color: var(--on-surface-variant); }
+
+    /* Section 7: Pricing */
+    .pricing-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; margin-bottom: 48px; }
+    .pricing-card { border-radius: var(--radius-xl); padding: 40px 32px; box-shadow: var(--elevation-l2); }
+    .pricing-card.free { background: var(--surface-container); }
+    .pricing-card.pro { background: var(--primary-container); position: relative; }
+    .pro-badge { position: absolute; top: 24px; right: 24px; background: var(--tertiary); color: var(--background); padding: 6px 14px; border-radius: 20px; font: 600 12px/1 var(--font-latin); text-transform: uppercase; letter-spacing: 0.05em; }
+    .pricing-card h3 { font: var(--headline-medium); margin-bottom: 8px; }
+    .pricing-card.free h3 { color: var(--on-surface); }
+    .pricing-card.pro h3 { color: var(--on-primary-container); }
+    .pricing-price { font: 700 40px/1 var(--font-latin); margin-bottom: 8px; }
+    .pricing-card.free .pricing-price { color: var(--on-surface); }
+    .pricing-card.pro .pricing-price { color: var(--on-primary-container); }
+    .pricing-period { font: var(--body-medium); margin-bottom: 24px; }
+    .pricing-card.free .pricing-period { color: var(--on-surface-variant); }
+    .pricing-card.pro .pricing-period { color: rgba(229, 224, 255, 0.7); }
+    .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .pricing-features li { font: var(--body-large); display: flex; align-items: center; gap: 12px; }
+    .pricing-card.free .pricing-features li { color: var(--on-surface-variant); }
+    .pricing-card.pro .pricing-features li { color: var(--on-primary-container); }
+    .pricing-features li svg { width: 20px; height: 20px; flex-shrink: 0; }
+    .pricing-card.free .pricing-features li svg { color: var(--secondary); }
+    .pricing-card.pro .pricing-features li svg { color: var(--tertiary); }
+    .gradient-swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .swatch { height: 80px; border-radius: var(--radius-lg); box-shadow: var(--elevation-l2); display: flex; align-items: flex-end; padding: 12px; }
+    .swatch span { font: 500 12px/1 var(--font-zh); color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.3); }
+    .swatch.gem { background: linear-gradient(135deg, #9B85FF 0%, #FFA8DA 50%, #A6E07A 100%); }
+    .swatch.jade { background: linear-gradient(135deg, #165A54 0%, #81DAD3 50%, #A6E07A 100%); }
+    .swatch.marble { background: linear-gradient(135deg, #2C2C30 0%, #8E8E97 50%, #E6E1E5 100%); }
+    .swatch.pearl { background: linear-gradient(135deg, #FFA8DA 0%, #E5E0FF 50%, #FFFFFF 100%); }
+
+    /* Section 8: Trust + CTA */
+    .trust-section { text-align: center; }
+    .trust-line { font: var(--body-large); color: var(--outline); margin-bottom: 48px; display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap; }
+    .trust-line span { display: flex; align-items: center; gap: 8px; }
+    .trust-line svg { width: 20px; height: 20px; }
+    .final-ctas { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
+    .store-btn { display: inline-flex; align-items: center; gap: 16px; padding: 20px 32px; background: var(--surface-container); border-radius: var(--radius-xl); box-shadow: var(--elevation-l2); text-decoration: none; transition: all 0.2s; }
+    .store-btn:hover { transform: translateY(-2px); box-shadow: var(--elevation-l3); background: var(--surface-container-high); }
+    .store-btn svg { width: 32px; height: 32px; color: var(--on-surface); }
+    .store-btn-text { text-align: left; }
+    .store-btn-label { font: 500 12px/1 var(--font-latin); color: var(--on-surface-variant); margin-bottom: 4px; }
+    .store-btn-name { font: 600 18px/1 var(--font-latin); color: var(--on-surface); }
+
+    /* Footer */
+    footer { background: var(--surface-container); padding: 48px; margin-top: 100px; }
+    .footer-content { max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
+    .footer-links { display: flex; gap: 32px; }
+    .footer-links a { font: var(--label-large); color: var(--on-surface-variant); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--primary); }
+    .footer-copyright { font: var(--body-medium); color: var(--outline); }
+
+    /* Language visibility */
+    #en { display: none; }
+  </style>
 </head>
 <body>
-
-<!-- ============================================================
-     STICKY NAV
-     ============================================================ -->
-<nav class="site-nav" aria-label="Site navigation">
-  <a href="#zh" class="brand">
-    <!-- Inline glyph — same path as /assets/brand/logo.svg, kept inline for zero-roundtrip render -->
-    <svg viewBox="0 0 64 64" aria-hidden="true" style="color: var(--color-primary);">
-      <path d="M20 52 Q4 42 8 22 Q14 6 32 8 Q44 10 44 22 Q44 30 36 30 Q30 30 30 24 Q30 20 34 20" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-      <ellipse cx="36" cy="44" rx="12" ry="14" fill="currentColor"/>
-      <circle cx="46" cy="28" r="10" fill="currentColor"/>
-      <path d="M42 19 L44 11 L50 17 Z" fill="currentColor"/>
-      <circle cx="49" cy="27" r="1.9" fill="#FFFFFF"/>
-    </svg>
-    <span>Squirrel Wallet</span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#personas">場景</a></li>
-    <li><a href="#ai">AI</a></li>
-    <li><a href="#esim">eSIM</a></li>
-    <li><a href="#privacy">隱私</a></li>
-    <li><a href="#pricing">Pro</a></li>
-  </ul>
-  <div class="lang-toggle">
-    <a href="#zh" class="is-active">繁中</a>
-    <span class="lang-divider-inline" aria-hidden="true">·</span>
-    <a href="#en">EN</a>
-  </div>
-</nav>
-
-<main class="landing">
-
-  <!-- ============================================================
-       ZH-TW BLOCK
-       ============================================================ -->
-  <section class="lang-section" id="zh" lang="zh-Hant">
-
-    <!-- 1. Hero -->
-    <section class="hero" data-reveal>
-      <div class="hero__copy">
-        <h1>票券・條碼・eSIM<br>一手掌握</h1>
-        <p class="hero__tagline">演唱會、團購、旅遊 eSIM 都收進一個 Apple Wallet 風格的卡片堆疊。拍一張，AI 幫你填好；條碼上傳前先在裝置打碼。</p>
-        <p class="hero__author">— Built so I'd stop forgetting tickets at home.</p>
-        <div class="hero__ctas">
-          <a class="cta-button cta-button--primary" href="#pricing" aria-label="瀏覽 Pro 方案">看看 Pro 有什麼</a>
-          <a class="cta-button cta-button--ghost" aria-disabled="true" href="#"><span aria-hidden="true">📱</span> App Store · 即將上架</a>
-        </div>
+  <nav class="nav">
+    <a href="#" class="nav-brand">
+      <svg viewBox="0 0 32 32" fill="none">
+        <defs><linearGradient id="brandGrad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#67E8F9"/><stop offset="50%" stop-color="#818CF8"/><stop offset="100%" stop-color="#A855F7"/></linearGradient></defs>
+        <circle cx="16" cy="16" r="14" fill="url(#brandGrad)"/>
+        <ellipse cx="12" cy="14" rx="3" ry="3.5" fill="#0F0F14"/><ellipse cx="20" cy="14" rx="3" ry="3.5" fill="#0F0F14"/>
+        <circle cx="11" cy="13" r="1" fill="white"/><circle cx="19" cy="13" r="1" fill="white"/>
+        <ellipse cx="10" cy="18" rx="3" ry="2" fill="#FFA8DA" opacity="0.6"/><ellipse cx="22" cy="18" rx="3" ry="2" fill="#FFA8DA" opacity="0.6"/>
+      </svg>
+      <span class="brand-zh">松鼠錢包</span><span class="brand-en" style="display:none;">Squirrel Wallet</span>
+    </a>
+    <div class="nav-right">
+      <ul class="nav-links nav-links-zh"><li><a href="#features">功能</a></li><li><a href="#pricing">方案</a></li><li><a href="#faq">常見問題</a></li></ul>
+      <ul class="nav-links nav-links-en" style="display:none;"><li><a href="#features-en">Features</a></li><li><a href="#pricing-en">Pricing</a></li><li><a href="#faq-en">FAQ</a></li></ul>
+      <div class="lang-toggle">
+        <a href="#zh" class="active" onclick="switchLang('zh')">中</a>
+        <a href="#en" onclick="switchLang('en')">EN</a>
       </div>
-      <div class="hero__visual">
-        <div class="card-stack" aria-hidden="true">
-          <div class="stack-card stack-card--shop">
-            <div class="stack-card__chip"></div>
-            <div class="stack-card__meta">10/15 到期</div>
-            <div class="stack-card__title">全聯滿 $500 折 $50</div>
-          </div>
-          <div class="stack-card stack-card--food">
-            <div class="stack-card__chip"></div>
-            <div class="stack-card__meta">明天</div>
-            <div class="stack-card__title">星巴克買一送一</div>
-          </div>
-          <div class="stack-card stack-card--travel">
-            <div class="stack-card__chip"></div>
-            <div class="stack-card__meta">eSIM · 8 天</div>
-            <div class="stack-card__title">日本 5GB/日</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 2. Personas — 你是哪一種 -->
-    <section class="section" id="personas" data-reveal>
-      <span class="section__eyebrow">真實場景</span>
-      <h2 class="section__title">問題不在於拿到票券，<br>在壓力下找不到它。</h2>
-      <p class="section__lede">把你的散落收進一個堆疊。看看你像哪一種。</p>
-
-      <div class="personas">
-        <article class="persona-row persona-row--show">
-          <div class="persona-row__icon" aria-hidden="true">🎫</div>
-          <div>
-            <h3>三鐵族</h3>
-            <p>演唱會在 KKTIX、球賽在 tixCraft、電影在 Vieshow ⸺ 到了現場開錯 App 排隊，後面一直推。</p>
-            <span class="persona-row__after">四張條碼放在同一個 wallet，左滑釘選，掃描時自動拉到最亮。</span>
-          </div>
-        </article>
-
-        <article class="persona-row persona-row--shop">
-          <div class="persona-row__icon" aria-hidden="true">🛍️</div>
-          <div>
-            <h3>團購控</h3>
-            <p>冰箱貼半過期紙券、相簿 240 張優惠截圖。結帳前找不到的那張，三天後才發現過期。</p>
-            <span class="persona-row__after">拍一張，AI 抓出商家、條碼、到期日。到期前兩天手機自動提醒。</span>
-          </div>
-        </article>
-
-        <article class="persona-row persona-row--travel">
-          <div class="persona-row__icon" aria-hidden="true">✈️</div>
-          <div>
-            <h3>飛常出國</h3>
-            <p>過去 8 張 eSIM QR Code 散在相簿，落地後翻 47 張截圖找對的，40 分鐘才裝好網路。</p>
-            <span class="persona-row__after">eSIM 一鍵安裝（iOS 17+ / Android 13+），過期的會 greyed out 不會選錯。</span>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- 3. Wallet stack — story -->
-    <section class="section" data-reveal>
-      <div class="story">
-        <div class="story__copy">
-          <span class="section__eyebrow">核心 UX</span>
-          <h2>所有票券，<br>一個堆疊。</h2>
-          <p>票券、優惠券、eSIM 集中在同一個 Apple Wallet 風格的卡片堆疊。長按拖曳排序、左滑釘選 / 標記已使用 / 分享 / 刪除 ⸺ 一氣呵成。</p>
-          <ul>
-            <li>13 種條碼格式（QR / Code 128 / PDF417 / Aztec / EAN / UPC / ITF…）</li>
-            <li>自訂分類：icon + 顏色都你選</li>
-            <li>到期日近了卡片漸白，搭配通知不會錯過</li>
-          </ul>
-        </div>
-        <div class="story__visual">
-          <div class="card-stack card-stack--small" aria-hidden="true">
-            <div class="stack-card stack-card--shop">
-              <div class="stack-card__chip"></div>
-              <div class="stack-card__title">📍 釘選</div>
-            </div>
-            <div class="stack-card stack-card--food">
-              <div class="stack-card__chip"></div>
-              <div class="stack-card__title">✓ 標記已使用</div>
-            </div>
-            <div class="stack-card stack-card--travel">
-              <div class="stack-card__chip"></div>
-              <div class="stack-card__title">↗ 分享</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4. AI moment — story --reverse -->
-    <section class="section" id="ai" data-reveal>
-      <div class="story story--reverse">
-        <div class="story__copy">
-          <span class="section__eyebrow">AI 一拍即填</span>
-          <h2>拍一張，<br>AI 幫你填好。</h2>
-          <p>不用打字、不用手動選分類。AI 看完截圖會建議現有分類、抓出商家、條碼、到期日，並標上信心度。</p>
-          <ul>
-            <li>三秒填完表單，你只要審核</li>
-            <li>分不出來會明確說「無法辨識」，不會亂編</li>
-            <li>條碼上傳前先在裝置打碼 ⸺ 即使供應商保留圖片也不能盜用</li>
-          </ul>
-        </div>
-        <div class="story__visual">
-          <div class="ai-strip">
-            <div class="ai-frame ai-frame--photo">
-              <div class="ai-frame__label">1. 拍 / 選</div>
-              <div class="ai-frame__body">LINE 截圖<br>原圖</div>
-            </div>
-            <div class="ai-frame ai-frame--mask">
-              <div class="ai-frame__label">2. 裝置遮罩</div>
-              <div class="ai-frame__body">
-                <div class="barcode-block" aria-hidden="true"></div>
-              </div>
-            </div>
-            <div class="ai-frame ai-frame--form">
-              <div class="ai-frame__label">3. AI 填好</div>
-              <div class="ai-frame__body">
-                <div class="form-row"><span>商家</span><strong>全聯</strong></div>
-                <div class="form-row"><span>類型</span><strong>優惠券</strong></div>
-                <div class="form-row"><span>到期</span><strong>10/15</strong></div>
-              </div>
-              <div class="ai-frame__confidence">信心度 92%</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 5. eSIM — story -->
-    <section class="section" id="esim" data-reveal>
-      <div class="story">
-        <div class="story__copy">
-          <span class="section__eyebrow">唯一差異化點</span>
-          <h2>海外 eSIM<br>一鍵安裝。</h2>
-          <p>29 國旅遊 eSIM 直接從 App 觸發系統安裝 sheet ⸺ 不用切到電信商 App、不用手動掃 QR。落地拿出手機就能上網。</p>
-          <ul>
-            <li>支援 iOS 17+ / Android 13+ 原生 eSIM 安裝</li>
-            <li>方案類型（吃到飽 / 每日 / 總量）、流量、有效天數一目了然</li>
-            <li>過期的 eSIM 卡片淡出，不會選錯</li>
-          </ul>
-        </div>
-        <div class="story__visual">
-          <div class="country-grid" aria-label="29 個支援國家">
-            <div class="country-cell">🇹🇼</div>
-            <div class="country-cell country-cell--active">🇯🇵</div>
-            <div class="country-cell">🇰🇷</div>
-            <div class="country-cell">🇭🇰</div>
-            <div class="country-cell">🇲🇴</div>
-            <div class="country-cell">🇸🇬</div>
-            <div class="country-cell">🇲🇾</div>
-            <div class="country-cell">🇹🇭</div>
-            <div class="country-cell">🇻🇳</div>
-            <div class="country-cell">🇵🇭</div>
-            <div class="country-cell">🇮🇩</div>
-            <div class="country-cell">🇨🇳</div>
-            <div class="country-cell">🇺🇸</div>
-            <div class="country-cell">🇨🇦</div>
-            <div class="country-cell">🇬🇧</div>
-            <div class="country-cell">🇫🇷</div>
-            <div class="country-cell">🇩🇪</div>
-            <div class="country-cell">🇮🇹</div>
-            <div class="country-cell">🇪🇸</div>
-            <div class="country-cell">🇨🇭</div>
-            <div class="country-cell">🇳🇱</div>
-            <div class="country-cell">🇦🇺</div>
-            <div class="country-cell">🇳🇿</div>
-            <div class="country-cell">🇦🇪</div>
-            <div class="country-cell">🇹🇷</div>
-            <div class="country-cell">🇮🇳</div>
-            <div class="country-cell">🇲🇽</div>
-            <div class="country-cell">🇧🇷</div>
-            <div class="country-cell">🌐</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 6. Privacy — story --reverse with 3-step flow -->
-    <section class="section" id="privacy" data-reveal>
-      <span class="section__eyebrow">隱私是機制，不是 slogan</span>
-      <h2 class="section__title">圖片送出去之前，<br>條碼先在你的裝置打碼。</h2>
-      <p class="section__lede">三句話講完整個機制，沒有星號小字。</p>
-
-      <div class="privacy-flow">
-        <div class="privacy-step">
-          <div class="privacy-step__num">1</div>
-          <h3>在裝置先打碼</h3>
-          <p>本機 ML 模型偵測並用黑塊覆蓋所有條碼 / QR 區域。失敗就中止上傳，不會降級送原圖。</p>
-        </div>
-        <div class="privacy-step">
-          <div class="privacy-step__num">2</div>
-          <h3>只上傳遮罩過的圖</h3>
-          <p>送到 OpenAI 的圖已經沒有條碼。即使供應商保留圖片也無法兌換你的票券（OpenAI 預設 30 天保留、不訓練）。</p>
-        </div>
-        <div class="privacy-step">
-          <div class="privacy-step__num">3</div>
-          <h3>本機 Hive + AES 加密</h3>
-          <p>票券資料 AES-256 加密存在你手機上。沒有帳號、沒有雲端、沒有 analytics。截圖在 App 私有目錄，OS 已經隔離。</p>
-        </div>
-      </div>
-      <p style="margin-top: var(--s-6); color: var(--color-text-muted);">
-        想完整知道我們把什麼送出去、不送什麼？看 <a href="/privacy/">完整隱私權政策</a>。
-      </p>
-    </section>
-
-    <!-- 7. Free vs Pro -->
-    <section class="section" id="pricing" data-reveal>
-      <span class="section__eyebrow">收費點</span>
-      <h2 class="section__title">免費就能用，<br>Pro 是給用很重的人。</h2>
-      <p class="section__lede">所有核心功能（票券堆疊、條碼掃描、自訂分類、eSIM 安裝、通知）Free 跟 Pro 都一樣。Pro 解鎖的只有兩件事。</p>
-
-      <div class="pricing">
-        <div class="plan plan--free">
-          <p class="plan__name">Free</p>
-          <p class="plan__price">$0 <small>永久免費</small></p>
-          <ul class="plan__features">
-            <li>每月 5 次 AI 拍照辨識（gpt-5.4-mini）</li>
-            <li>無限新增票券 / 優惠券 / eSIM</li>
-            <li>13 種條碼格式掃描</li>
-            <li>自訂分類 + 到期通知</li>
-            <li>eSIM 一鍵安裝（29 國）</li>
-            <li>加密備份 / 還原</li>
-          </ul>
-          <p class="plan__fine-print">沒有廣告、沒有 analytics、沒有催升級彈窗。</p>
-        </div>
-
-        <div class="plan plan--pro">
-          <p class="plan__name">Pro</p>
-          <p class="plan__price">$1.66 <small>/ 月（年訂 $19.99）</small></p>
-          <span class="plan__savings">年訂省 44% · 7 天免費試用</span>
-          <ul class="plan__features">
-            <li>每月 300 次 AI 拍照辨識</li>
-            <li>進階模型 gpt-5.4 + mini fallback（更準）</li>
-            <li>四款卡片質感：寶石、玉、雲石、珍珠</li>
-            <li>所有 Free 功能</li>
-          </ul>
-          <p class="plan__fine-print">月訂 $2.99 / 月。隨時可在 App Store / Play Store 取消。</p>
-        </div>
-      </div>
-
-      <h3 style="margin-top: var(--s-12); font-size: var(--fs-20);">四款 Pro 卡片質感 ⸺ 讓票夾長得像你</h3>
-      <div class="finishes" aria-label="Pro 卡片質感預覽">
-        <div class="finish-swatch finish-swatch--gem"><span class="finish-swatch__label">寶石</span></div>
-        <div class="finish-swatch finish-swatch--jade"><span class="finish-swatch__label">玉</span></div>
-        <div class="finish-swatch finish-swatch--marble"><span class="finish-swatch__label">雲石</span></div>
-        <div class="finish-swatch finish-swatch--pearl"><span class="finish-swatch__label">珍珠</span></div>
-      </div>
-    </section>
-
-    <!-- 8. Trust + final CTA -->
-    <section class="section" data-reveal>
-      <div class="trust-strip">
-        <p class="trust-strip__line">
-          <strong>Built with Flutter · Powered by OpenAI · Made in Taiwan</strong>
-        </p>
-        <h2>準備把散落收乾淨。</h2>
-        <a class="cta-button cta-button--primary" aria-disabled="true" href="#"><span aria-hidden="true">📱</span> App Store · 即將上架</a>
-        <a class="cta-button cta-button--ghost" aria-disabled="true" href="#"><span aria-hidden="true">🤖</span> Google Play · 即將上架</a>
-      </div>
-    </section>
-
-  </section>
-  <!-- /ZH-TW BLOCK -->
-
-  <!-- ============================================================
-       EN BLOCK
-       ============================================================ -->
-  <section class="lang-section" id="en" lang="en">
-
-    <!-- 1. Hero -->
-    <section class="hero" data-reveal>
-      <div class="hero__copy">
-        <h1>Tickets · barcodes · eSIM,<br>all in one place.</h1>
-        <p class="hero__tagline">An Apple Wallet–style stack for the stuff Apple Wallet won't hold. Snap a photo — AI fills it in. Barcodes get masked on-device before any upload.</p>
-        <p class="hero__author">— Built so I'd stop forgetting tickets at home.</p>
-        <div class="hero__ctas">
-          <a class="cta-button cta-button--primary" href="#pricing-en">See what Pro adds</a>
-          <a class="cta-button cta-button--ghost" aria-disabled="true" href="#"><span aria-hidden="true">📱</span> App Store · Coming soon</a>
-        </div>
-      </div>
-      <div class="hero__visual">
-        <div class="card-stack" aria-hidden="true">
-          <div class="stack-card stack-card--shop">
-            <div class="stack-card__chip"></div>
-            <div class="stack-card__meta">Oct 15</div>
-            <div class="stack-card__title">$5 off $50 grocery</div>
-          </div>
-          <div class="stack-card stack-card--food">
-            <div class="stack-card__chip"></div>
-            <div class="stack-card__meta">Tomorrow</div>
-            <div class="stack-card__title">Starbucks BOGO</div>
-          </div>
-          <div class="stack-card stack-card--travel">
-            <div class="stack-card__chip"></div>
-            <div class="stack-card__meta">eSIM · 8 days</div>
-            <div class="stack-card__title">Japan 5GB/day</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 2. Personas -->
-    <section class="section" id="personas-en" data-reveal>
-      <span class="section__eyebrow">Real scenarios</span>
-      <h2 class="section__title">The problem isn't getting the ticket.<br>It's finding it again under pressure.</h2>
-      <p class="section__lede">Pick the one that sounds like you.</p>
-
-      <div class="personas">
-        <article class="persona-row persona-row--show">
-          <div class="persona-row__icon" aria-hidden="true">🎫</div>
-          <div>
-            <h3>Events person</h3>
-            <p>Concerts in one app, sports in another, movies in a third. Arrive at the venue, open the wrong app, hold up the line.</p>
-            <span class="persona-row__after">Four barcodes in one stack — swipe to pin, screen brightness ramps up automatically for the scanner.</span>
-          </div>
-        </article>
-
-        <article class="persona-row persona-row--shop">
-          <div class="persona-row__icon" aria-hidden="true">🛍️</div>
-          <div>
-            <h3>Coupon hoarder</h3>
-            <p>Paper coupons stuck to the fridge, half expired. 240 screenshots in Photos. The one you needed expired yesterday.</p>
-            <span class="persona-row__after">Snap once — AI extracts merchant, barcode, expiry. Two days before it expires, your phone reminds you.</span>
-          </div>
-        </article>
-
-        <article class="persona-row persona-row--travel">
-          <div class="persona-row__icon" aria-hidden="true">✈️</div>
-          <div>
-            <h3>Frequent flier</h3>
-            <p>Eight old eSIM QRs buried in your camera roll. You land, then spend 40 minutes finding the right one and typing in the code.</p>
-            <span class="persona-row__after">One-tap eSIM install (iOS 17+ / Android 13+). Old plans grey out so you don't pick the wrong one.</span>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- 3. Wallet stack -->
-    <section class="section" data-reveal>
-      <div class="story">
-        <div class="story__copy">
-          <span class="section__eyebrow">The core UX</span>
-          <h2>Every ticket,<br>one stack.</h2>
-          <p>Tickets, coupons, and eSIMs all live in the same Apple Wallet–style stack. Long-press to reorder, swipe for pin / mark-used / share / delete.</p>
-          <ul>
-            <li>13 barcode formats (QR, Code 128, PDF417, Aztec, EAN, UPC, ITF…)</li>
-            <li>Custom categories — pick your icon and colour</li>
-            <li>Cards fade as expiry approaches, paired with smart reminders</li>
-          </ul>
-        </div>
-        <div class="story__visual">
-          <div class="card-stack card-stack--small" aria-hidden="true">
-            <div class="stack-card stack-card--shop">
-              <div class="stack-card__chip"></div>
-              <div class="stack-card__title">📍 Pin</div>
-            </div>
-            <div class="stack-card stack-card--food">
-              <div class="stack-card__chip"></div>
-              <div class="stack-card__title">✓ Mark used</div>
-            </div>
-            <div class="stack-card stack-card--travel">
-              <div class="stack-card__chip"></div>
-              <div class="stack-card__title">↗ Share</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4. AI moment -->
-    <section class="section" id="ai-en" data-reveal>
-      <div class="story story--reverse">
-        <div class="story__copy">
-          <span class="section__eyebrow">Photo to ticket in seconds</span>
-          <h2>Snap a photo —<br>AI fills in the rest.</h2>
-          <p>No typing, no manual category picking. AI proposes one of your existing categories, extracts merchant / barcode / expiry, and labels its own confidence.</p>
-          <ul>
-            <li>Three seconds of review, not three minutes of typing</li>
-            <li>If it can't tell, it says so — it won't fabricate</li>
-            <li>Barcodes are masked on-device before upload — even if the provider keeps the image, no one can redeem your ticket</li>
-          </ul>
-        </div>
-        <div class="story__visual">
-          <div class="ai-strip">
-            <div class="ai-frame ai-frame--photo">
-              <div class="ai-frame__label">1. Capture</div>
-              <div class="ai-frame__body">Original<br>screenshot</div>
-            </div>
-            <div class="ai-frame ai-frame--mask">
-              <div class="ai-frame__label">2. On-device mask</div>
-              <div class="ai-frame__body">
-                <div class="barcode-block" aria-hidden="true"></div>
-              </div>
-            </div>
-            <div class="ai-frame ai-frame--form">
-              <div class="ai-frame__label">3. Filled form</div>
-              <div class="ai-frame__body">
-                <div class="form-row"><span>Merchant</span><strong>Starbucks</strong></div>
-                <div class="form-row"><span>Kind</span><strong>Coupon</strong></div>
-                <div class="form-row"><span>Expires</span><strong>Oct 15</strong></div>
-              </div>
-              <div class="ai-frame__confidence">Confidence 92%</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 5. eSIM -->
-    <section class="section" id="esim-en" data-reveal>
-      <div class="story">
-        <div class="story__copy">
-          <span class="section__eyebrow">The one thing wallet apps can't do</span>
-          <h2>eSIM, installed<br>with one tap.</h2>
-          <p>29 supported countries — open the eSIM card, hit Install, your OS handles the rest. No carrier-app jumping, no manual QR scanning. Land, unlock, online.</p>
-          <ul>
-            <li>Native eSIM install on iOS 17+ / Android 13+</li>
-            <li>See plan type (unlimited / daily / total), data cap, and validity at a glance</li>
-            <li>Expired eSIMs fade out so you never pick the wrong one</li>
-          </ul>
-        </div>
-        <div class="story__visual">
-          <div class="country-grid" aria-label="29 supported countries">
-            <div class="country-cell">🇹🇼</div>
-            <div class="country-cell country-cell--active">🇯🇵</div>
-            <div class="country-cell">🇰🇷</div>
-            <div class="country-cell">🇭🇰</div>
-            <div class="country-cell">🇲🇴</div>
-            <div class="country-cell">🇸🇬</div>
-            <div class="country-cell">🇲🇾</div>
-            <div class="country-cell">🇹🇭</div>
-            <div class="country-cell">🇻🇳</div>
-            <div class="country-cell">🇵🇭</div>
-            <div class="country-cell">🇮🇩</div>
-            <div class="country-cell">🇨🇳</div>
-            <div class="country-cell">🇺🇸</div>
-            <div class="country-cell">🇨🇦</div>
-            <div class="country-cell">🇬🇧</div>
-            <div class="country-cell">🇫🇷</div>
-            <div class="country-cell">🇩🇪</div>
-            <div class="country-cell">🇮🇹</div>
-            <div class="country-cell">🇪🇸</div>
-            <div class="country-cell">🇨🇭</div>
-            <div class="country-cell">🇳🇱</div>
-            <div class="country-cell">🇦🇺</div>
-            <div class="country-cell">🇳🇿</div>
-            <div class="country-cell">🇦🇪</div>
-            <div class="country-cell">🇹🇷</div>
-            <div class="country-cell">🇮🇳</div>
-            <div class="country-cell">🇲🇽</div>
-            <div class="country-cell">🇧🇷</div>
-            <div class="country-cell">🌐</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 6. Privacy -->
-    <section class="section" id="privacy-en" data-reveal>
-      <span class="section__eyebrow">Privacy as mechanism, not slogan</span>
-      <h2 class="section__title">Before any image leaves your device,<br>the barcode goes black.</h2>
-      <p class="section__lede">Three sentences describe the whole flow. No footnotes.</p>
-
-      <div class="privacy-flow">
-        <div class="privacy-step">
-          <div class="privacy-step__num">1</div>
-          <h3>On-device masking</h3>
-          <p>A local ML model detects and blacks out every barcode / QR region. If detection fails, the upload aborts — there's no fallback to the unmasked original.</p>
-        </div>
-        <div class="privacy-step">
-          <div class="privacy-step__num">2</div>
-          <h3>Only the masked image uploads</h3>
-          <p>OpenAI receives an image with no barcodes. Default API retention is 30 days, not used for training, and our policy doesn't expand that.</p>
-        </div>
-        <div class="privacy-step">
-          <div class="privacy-step__num">3</div>
-          <h3>Local Hive + AES-256</h3>
-          <p>Tickets are AES-256 encrypted on your device. No account, no cloud sync, no analytics. Screenshots live in the app-private directory.</p>
-        </div>
-      </div>
-      <p style="margin-top: var(--s-6); color: var(--color-text-muted);">
-        Read the full mechanism — what gets sent, what doesn't — in our <a href="/privacy/">Privacy Policy</a>.
-      </p>
-    </section>
-
-    <!-- 7. Free vs Pro -->
-    <section class="section" id="pricing-en" data-reveal>
-      <span class="section__eyebrow">What you pay for</span>
-      <h2 class="section__title">Free does the job.<br>Pro is for heavy users.</h2>
-      <p class="section__lede">Every core feature (wallet stack, barcode scanning, custom categories, eSIM install, reminders) works on Free. Pro unlocks only two things.</p>
-
-      <div class="pricing">
-        <div class="plan plan--free">
-          <p class="plan__name">Free</p>
-          <p class="plan__price">$0 <small>forever</small></p>
-          <ul class="plan__features">
-            <li>5 AI scans / month (gpt-5.4-mini)</li>
-            <li>Unlimited tickets, coupons, eSIMs</li>
-            <li>13 barcode formats</li>
-            <li>Custom categories + expiry reminders</li>
-            <li>One-tap eSIM install (29 countries)</li>
-            <li>Encrypted backup / restore</li>
-          </ul>
-          <p class="plan__fine-print">No ads, no analytics, no upgrade pop-ups.</p>
-        </div>
-
-        <div class="plan plan--pro">
-          <p class="plan__name">Pro</p>
-          <p class="plan__price">$1.66 <small>/ mo (annual $19.99)</small></p>
-          <span class="plan__savings">Save 44% · 7-day free trial</span>
-          <ul class="plan__features">
-            <li>300 AI scans / month</li>
-            <li>Premium gpt-5.4 + mini fallback (more accurate)</li>
-            <li>Four card finishes: Gem, Jade, Marble, Pearl</li>
-            <li>Everything in Free</li>
-          </ul>
-          <p class="plan__fine-print">Monthly $2.99 / mo. Cancel anytime via App Store / Play Store.</p>
-        </div>
-      </div>
-
-      <h3 style="margin-top: var(--s-12); font-size: var(--fs-20);">Four Pro finishes — make your wallet yours</h3>
-      <div class="finishes" aria-label="Pro card finish preview">
-        <div class="finish-swatch finish-swatch--gem"><span class="finish-swatch__label">Gem</span></div>
-        <div class="finish-swatch finish-swatch--jade"><span class="finish-swatch__label">Jade</span></div>
-        <div class="finish-swatch finish-swatch--marble"><span class="finish-swatch__label">Marble</span></div>
-        <div class="finish-swatch finish-swatch--pearl"><span class="finish-swatch__label">Pearl</span></div>
-      </div>
-    </section>
-
-    <!-- 8. Trust + CTA -->
-    <section class="section" data-reveal>
-      <div class="trust-strip">
-        <p class="trust-strip__line">
-          <strong>Built with Flutter · Powered by OpenAI · Made in Taiwan</strong>
-        </p>
-        <h2>Ready to gather the scattered.</h2>
-        <a class="cta-button cta-button--primary" aria-disabled="true" href="#"><span aria-hidden="true">📱</span> App Store · Coming soon</a>
-        <a class="cta-button cta-button--ghost" aria-disabled="true" href="#"><span aria-hidden="true">🤖</span> Google Play · Coming soon</a>
-      </div>
-    </section>
-
-  </section>
-  <!-- /EN BLOCK -->
-
-</main>
-
-<!-- ============================================================
-     FOOTER
-     ============================================================ -->
-<footer class="landing-footer">
-  <nav aria-label="Footer">
-    <a href="/privacy/">Privacy 隱私</a>
-    <a href="/support/">Support 支援</a>
-    <a href="mailto:support@squirrelwallet.app">support@squirrelwallet.app</a>
+    </div>
   </nav>
-  <div>© 2026 Squirrel Wallet · 松鼠票夾</div>
-</footer>
 
-<script src="/assets/reveal.js" defer></script>
+  <!-- 中文版 -->
+  <div id="zh">
+    <section class="hero">
+      <div class="hero-content">
+        <h1>票券<span>・</span>條碼<span>・</span>eSIM<br>一手掌握</h1>
+        <p class="hero-subline">Built so I'd stop forgetting tickets at home.</p>
+        <div class="hero-ctas">
+          <a href="#pricing" class="btn-primary">看看 Pro 有什麼</a>
+          <a href="#" class="btn-secondary"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm0 14.5a6.5 6.5 0 110-13 6.5 6.5 0 010 13z"/><path d="M10 5a1 1 0 011 1v3.586l2.207 2.207a1 1 0 01-1.414 1.414l-2.5-2.5A1 1 0 019 10V6a1 1 0 011-1z"/></svg>App Store · 即將上架</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <svg class="squirrel" viewBox="0 0 200 260" fill="none">
+          <defs><linearGradient id="bodyGrad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#67E8F9"/><stop offset="50%" stop-color="#818CF8"/><stop offset="100%" stop-color="#A855F7"/></linearGradient><linearGradient id="tailGrad" x1="100%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stop-color="#67E8F9"/><stop offset="50%" stop-color="#818CF8"/><stop offset="100%" stop-color="#A855F7"/></linearGradient></defs>
+          <path d="M140 180 C180 160, 200 100, 170 60 C150 30, 120 40, 110 70 C100 100, 120 140, 130 160" fill="url(#tailGrad)" opacity="0.9"/>
+          <path d="M145 175 C175 155, 190 105, 165 70 C150 45, 125 55, 118 80 C110 105, 125 140, 135 160" fill="url(#bodyGrad)"/>
+          <ellipse cx="100" cy="180" rx="55" ry="65" fill="url(#bodyGrad)"/><ellipse cx="100" cy="190" rx="35" ry="45" fill="white" opacity="0.2"/>
+          <ellipse cx="100" cy="95" rx="50" ry="48" fill="url(#bodyGrad)"/>
+          <ellipse cx="60" cy="55" rx="15" ry="22" fill="url(#bodyGrad)"/><ellipse cx="60" cy="55" rx="8" ry="14" fill="#FFA8DA" opacity="0.5"/>
+          <ellipse cx="140" cy="55" rx="15" ry="22" fill="url(#bodyGrad)"/><ellipse cx="140" cy="55" rx="8" ry="14" fill="#FFA8DA" opacity="0.5"/>
+          <ellipse cx="60" cy="38" rx="6" ry="10" fill="url(#bodyGrad)"/><ellipse cx="140" cy="38" rx="6" ry="10" fill="url(#bodyGrad)"/>
+          <ellipse cx="100" cy="100" rx="35" ry="30" fill="white" opacity="0.15"/>
+          <ellipse cx="80" cy="90" rx="14" ry="16" fill="#0F0F14"/><ellipse cx="120" cy="90" rx="14" ry="16" fill="#0F0F14"/>
+          <circle cx="75" cy="85" r="5" fill="white"/><circle cx="115" cy="85" r="5" fill="white"/>
+          <circle cx="82" cy="92" r="2.5" fill="white"/><circle cx="122" cy="92" r="2.5" fill="white"/>
+          <ellipse cx="100" cy="108" rx="6" ry="5" fill="#0F0F14"/><ellipse cx="100" cy="107" rx="2" ry="1.5" fill="white" opacity="0.5"/>
+          <ellipse cx="60" cy="105" rx="14" ry="10" fill="#FFA8DA" opacity="0.6"/><ellipse cx="140" cy="105" rx="14" ry="10" fill="#FFA8DA" opacity="0.6"/>
+          <path d="M92 118 Q100 125, 108 118" stroke="#0F0F14" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <ellipse cx="55" cy="170" rx="18" ry="25" fill="url(#bodyGrad)"/><ellipse cx="145" cy="170" rx="18" ry="25" fill="url(#bodyGrad)"/>
+          <ellipse cx="50" cy="195" rx="12" ry="8" fill="url(#bodyGrad)"/><ellipse cx="150" cy="195" rx="12" ry="8" fill="url(#bodyGrad)"/>
+          <ellipse cx="75" cy="240" rx="18" ry="12" fill="url(#bodyGrad)"/><ellipse cx="125" cy="240" rx="18" ry="12" fill="url(#bodyGrad)"/>
+        </svg>
+        <div class="tickets">
+          <div class="ticket ticket-food"><div class="ticket-header"><span class="ticket-brand">星巴克</span><span class="ticket-type">餐飲</span></div><div class="ticket-detail">大杯那堤 兌換券</div><div class="ticket-code">TK-8847-LATTE</div><div class="ticket-barcode"></div></div>
+          <div class="ticket ticket-esim"><div class="ticket-header"><span class="ticket-brand">日本 eSIM</span><span class="ticket-type">eSIM</span></div><div class="ticket-detail">5GB / 日 · 7 天</div><div class="ticket-code">JP-5G7D-X9K2</div><div class="ticket-barcode"></div></div>
+          <div class="ticket ticket-shop"><div class="ticket-header"><span class="ticket-brand">全聯</span><span class="ticket-type">購物</span></div><div class="ticket-detail">$100 折價券</div><div class="ticket-code">PX-2024-M7F3</div><div class="ticket-barcode"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Personas -->
+    <section id="features" class="section-spacing">
+      <h2 class="section-title">你是哪一種<span>囤票族</span>？</h2>
+      <div class="personas">
+        <div class="persona-row entertainment">
+          <div class="persona-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 3v2h-2V3H8v2H6V3H4v18h2v-2h2v2h8v-2h2v2h2V3h-2zM8 17H6v-2h2v2zm0-4H6v-2h2v2zm0-4H6V7h2v2zm10 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z"/></svg></div>
+          <div class="persona-content">
+            <h3>三鐵族</h3>
+            <p class="persona-pain">電影票、高鐵票、演唱會票散落在五個不同 App，每次進場都在翻半天。</p>
+            <p class="persona-solution">→ 松鼠錢包把所有票券收進同一個錢包，一滑就到、一掃就過。</p>
+          </div>
+        </div>
+        <div class="persona-row shopping">
+          <div class="persona-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg></div>
+          <div class="persona-content">
+            <h3>團購控</h3>
+            <p class="persona-pain">LINE 群組買的折價券截圖埋在相簿深處，結帳時找不到，優惠就這樣過期。</p>
+            <p class="persona-solution">→ 拍一張、AI 自動辨識，到期前三天 push 提醒，不再錯過任何一張。</p>
+          </div>
+        </div>
+        <div class="persona-row esim">
+          <div class="persona-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></div>
+          <div class="persona-content">
+            <h3>飛常出國</h3>
+            <p class="persona-pain">每次出國前都在 Email 裡翻 eSIM QR code，到了機場才發現連結失效。</p>
+            <p class="persona-solution">→ eSIM 資訊存在裝置，離線也能安裝，一鍵啟用、29 國通用。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Wallet Stack -->
+    <section class="section-spacing">
+      <div class="wallet-section">
+        <div class="wallet-visual">
+          <div class="wallet-cards">
+            <div class="wallet-card"><div class="ticket-header"><span class="ticket-brand">威秀影城</span><span class="ticket-type" style="background:var(--ticket-food-accent);color:var(--ticket-food-bg);">電影</span></div><div class="ticket-detail">《沙丘 3》19:30</div><div class="ticket-code">VIE-D3-A12</div></div>
+            <div class="wallet-card"><div class="ticket-header"><span class="ticket-brand">韓國 eSIM</span><span class="ticket-type" style="background:var(--ticket-esim-accent);color:var(--ticket-esim-bg);">eSIM</span></div><div class="ticket-detail">3GB / 日 · 5 天</div><div class="ticket-code">KR-3G5D-P4X7</div></div>
+            <div class="wallet-card"><div class="ticket-header"><span class="ticket-brand">家樂福</span><span class="ticket-type" style="background:var(--ticket-shop-accent);color:var(--ticket-shop-bg);">購物</span></div><div class="ticket-detail">滿 $500 折 $50</div><div class="ticket-code">CF-50OFF-R2D2</div></div>
+          </div>
+          <div class="swipe-actions">
+            <div class="swipe-action"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm6-9h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6h1.9c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm0 12H6V10h12v10z"/></svg></div>
+            <div class="swipe-action"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+            <div class="swipe-action"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg></div>
+            <div class="swipe-action"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg></div>
+          </div>
+        </div>
+        <div class="wallet-content">
+          <h2>所有票券<span>，</span>一個錢包</h2>
+          <p>不管是 Email 收到的 QR code、LINE 群組傳來的截圖、還是 App 裡的電子票，通通丟進松鼠錢包，用同一個介面管理。</p>
+          <ul class="wallet-features"><li>左滑釘選、右滑標記已用</li><li>長按分享或刪除</li><li>依類別、日期、品牌自動分類</li><li>到期前 3 天自動提醒</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: AI Auto-fill -->
+    <section class="section-spacing">
+      <h2 class="section-title">AI <span>一拍即填</span></h2>
+      <div class="ai-grid">
+        <div class="ai-step"><div class="ai-step-number">1</div><div class="ai-frame"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="3.2"/><path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg></div><h3>拍照</h3><p>對準票券或截圖按下快門</p></div>
+        <div class="ai-step"><div class="ai-step-number">2</div><div class="ai-frame mask-frame"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5.04-6.71l-2.75 3.54-1.96-2.36L6.5 17h11l-3.54-4.71z"/></svg></div><h3>裝置遮罩</h3><p>敏感資訊在本機先被遮蔽</p></div>
+        <div class="ai-step"><div class="ai-step-number">3</div><div class="ai-frame"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div><h3>AI 表單填寫</h3><div class="ai-chip">92% 準確率</div></div>
+      </div>
+    </section>
+
+    <!-- Section 5: eSIM -->
+    <section class="section-spacing">
+      <h2 class="section-title"><span>29 國</span> eSIM，一鍵安裝</h2>
+      <div class="esim-section">
+        <div class="flag-grid">
+          <div class="flag-item">🇯🇵</div><div class="flag-item">🇰🇷</div><div class="flag-item active">🇹🇭</div><div class="flag-item">🇻🇳</div><div class="flag-item">🇸🇬</div><div class="flag-item">🇲🇾</div>
+          <div class="flag-item">🇵🇭</div><div class="flag-item">🇮🇩</div><div class="flag-item">🇭🇰</div><div class="flag-item">🇲🇴</div><div class="flag-item">🇨🇳</div><div class="flag-item">🇺🇸</div>
+          <div class="flag-item">🇬🇧</div><div class="flag-item">🇫🇷</div><div class="flag-item">🇩🇪</div><div class="flag-item">🇮🇹</div><div class="flag-item">🇪🇸</div><div class="flag-item">🇵🇹</div>
+          <div class="flag-item">🇳🇱</div><div class="flag-item">🇧🇪</div><div class="flag-item">🇨🇭</div><div class="flag-item">🇦🇹</div><div class="flag-item">🇦🇺</div><div class="flag-item">🇳🇿</div>
+          <div class="flag-item">🇨🇦</div><div class="flag-item">🇹🇷</div><div class="flag-item">🇦🇪</div><div class="flag-item">🇮🇳</div><div class="flag-item">🇧🇷</div>
+        </div>
+        <div class="esim-sheet">
+          <div class="esim-sheet-header"><span class="esim-sheet-flag">🇹🇭</span><div class="esim-sheet-info"><h3>泰國 eSIM</h3><p>AIS · 4G/5G 網路</p></div></div>
+          <div class="esim-sheet-details">
+            <div class="esim-detail-row"><span>流量</span><span>無限量（首 3GB 高速）</span></div>
+            <div class="esim-detail-row"><span>有效期</span><span>7 天</span></div>
+            <div class="esim-detail-row"><span>價格</span><span style="color: var(--secondary); font-weight: 600;">NT$ 199</span></div>
+          </div>
+          <button class="esim-install-btn">安裝到此裝置</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: Privacy -->
+    <section class="section-spacing">
+      <h2 class="section-title">隱私<span>三重防護</span></h2>
+      <div class="privacy-steps">
+        <div class="privacy-step"><div class="privacy-step-number">1</div><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5.04-6.71l-2.75 3.54-1.96-2.36L6.5 17h11l-3.54-4.71z"/></svg><h3>裝置端遮罩</h3><p>敏感資訊（姓名、身分證、信用卡）在送出前已被遮蔽</p></div>
+        <div class="privacy-step"><div class="privacy-step-number">2</div><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg><h3>只上傳遮罩圖</h3><p>AI 只看得到經過處理的圖片，原圖永遠留在你的裝置</p></div>
+        <div class="privacy-step"><div class="privacy-step-number">3</div><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg><h3>本機 Hive + AES</h3><p>票券資料以 AES-256 加密，存在本機 Hive 資料庫</p></div>
+      </div>
+    </section>
+
+    <!-- Section 7: Pricing -->
+    <section id="pricing" class="section-spacing">
+      <h2 class="section-title">選擇你的<span>方案</span></h2>
+      <div class="pricing-grid">
+        <div class="pricing-card free">
+          <h3>Free</h3><div class="pricing-price">$0</div><div class="pricing-period">永久免費</div>
+          <ul class="pricing-features">
+            <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>無限票券儲存</li>
+            <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>手動輸入票券資訊</li>
+            <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>AI 辨識 5 次 / 月</li>
+            <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>到期提醒</li>
+            <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>基本主題</li>
+          </ul>
+        </div>
+        <div class="pricing-card pro">
+          <span class="pro-badge">Pro</span><h3>Pro</h3><div class="pricing-price">$1.66<span style="font-size: 18px; font-weight: 500;">/月</span></div><div class="pricing-period">年訂 $19.99 · 月訂 $2.99/月</div>
+          <ul class="pricing-features">
+            <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>所有 Free 功能</li>
+            <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>AI 辨識 300 次 / 月</li>
+            <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>eSIM 購買與管理</li>
+            <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Pro 專屬質感主題</li>
+            <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>iCloud 同步</li>
+          </ul>
+        </div>
+      </div>
+      <h3 style="font: var(--title-large); color: var(--on-surface); margin-bottom: 24px; text-align: center;">Pro 專屬質感主題</h3>
+      <div class="gradient-swatches">
+        <div class="swatch gem"><span>寶石</span></div>
+        <div class="swatch jade"><span>玉</span></div>
+        <div class="swatch marble"><span>雲石</span></div>
+        <div class="swatch pearl"><span>珍珠</span></div>
+      </div>
+    </section>
+
+    <!-- Section 8: Trust + CTA -->
+    <section class="section-spacing trust-section">
+      <div class="trust-line">
+        <span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>Built with Flutter</span>
+        <span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>Powered by OpenAI</span>
+        <span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>Made in Taiwan</span>
+      </div>
+      <div class="final-ctas">
+        <a href="#" class="store-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg><div class="store-btn-text"><div class="store-btn-label">Download on the</div><div class="store-btn-name">App Store · 即將上架</div></div></a>
+        <a href="#" class="store-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5v-17c0-.59.34-1.11.84-1.35L13.69 12l-9.85 9.85c-.5-.25-.84-.76-.84-1.35m13.81-5.38L6.05 21.34l8.49-8.49 2.27 2.27m3.35-4.31c.34.27.59.69.59 1.19s-.22.9-.57 1.18l-2.29 1.32-2.5-2.5 2.5-2.5 2.27 1.31M6.05 2.66l10.76 6.22-2.27 2.27-8.49-8.49z"/></svg><div class="store-btn-text"><div class="store-btn-label">Get it on</div><div class="store-btn-name">Google Play · 即將上架</div></div></a>
+      </div>
+    </section>
+  </div>
+
+  <!-- English Version -->
+  <div id="en">
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Tickets<span>.</span> Barcodes<span>.</span> eSIM<br>All in One</h1>
+        <p class="hero-subline">Built so I'd stop forgetting tickets at home.</p>
+        <div class="hero-ctas">
+          <a href="#pricing-en" class="btn-primary">See What's in Pro</a>
+          <a href="#" class="btn-secondary"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm0 14.5a6.5 6.5 0 110-13 6.5 6.5 0 010 13z"/><path d="M10 5a1 1 0 011 1v3.586l2.207 2.207a1 1 0 01-1.414 1.414l-2.5-2.5A1 1 0 019 10V6a1 1 0 011-1z"/></svg>App Store · Coming Soon</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <svg class="squirrel" viewBox="0 0 200 260" fill="none">
+          <defs><linearGradient id="bodyGrad2" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#67E8F9"/><stop offset="50%" stop-color="#818CF8"/><stop offset="100%" stop-color="#A855F7"/></linearGradient><linearGradient id="tailGrad2" x1="100%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stop-color="#67E8F9"/><stop offset="50%" stop-color="#818CF8"/><stop offset="100%" stop-color="#A855F7"/></linearGradient></defs>
+          <path d="M140 180 C180 160, 200 100, 170 60 C150 30, 120 40, 110 70 C100 100, 120 140, 130 160" fill="url(#tailGrad2)" opacity="0.9"/>
+          <path d="M145 175 C175 155, 190 105, 165 70 C150 45, 125 55, 118 80 C110 105, 125 140, 135 160" fill="url(#bodyGrad2)"/>
+          <ellipse cx="100" cy="180" rx="55" ry="65" fill="url(#bodyGrad2)"/><ellipse cx="100" cy="190" rx="35" ry="45" fill="white" opacity="0.2"/>
+          <ellipse cx="100" cy="95" rx="50" ry="48" fill="url(#bodyGrad2)"/>
+          <ellipse cx="60" cy="55" rx="15" ry="22" fill="url(#bodyGrad2)"/><ellipse cx="60" cy="55" rx="8" ry="14" fill="#FFA8DA" opacity="0.5"/>
+          <ellipse cx="140" cy="55" rx="15" ry="22" fill="url(#bodyGrad2)"/><ellipse cx="140" cy="55" rx="8" ry="14" fill="#FFA8DA" opacity="0.5"/>
+          <ellipse cx="60" cy="38" rx="6" ry="10" fill="url(#bodyGrad2)"/><ellipse cx="140" cy="38" rx="6" ry="10" fill="url(#bodyGrad2)"/>
+          <ellipse cx="100" cy="100" rx="35" ry="30" fill="white" opacity="0.15"/>
+          <ellipse cx="80" cy="90" rx="14" ry="16" fill="#0F0F14"/><ellipse cx="120" cy="90" rx="14" ry="16" fill="#0F0F14"/>
+          <circle cx="75" cy="85" r="5" fill="white"/><circle cx="115" cy="85" r="5" fill="white"/>
+          <circle cx="82" cy="92" r="2.5" fill="white"/><circle cx="122" cy="92" r="2.5" fill="white"/>
+          <ellipse cx="100" cy="108" rx="6" ry="5" fill="#0F0F14"/><ellipse cx="100" cy="107" rx="2" ry="1.5" fill="white" opacity="0.5"/>
+          <ellipse cx="60" cy="105" rx="14" ry="10" fill="#FFA8DA" opacity="0.6"/><ellipse cx="140" cy="105" rx="14" ry="10" fill="#FFA8DA" opacity="0.6"/>
+          <path d="M92 118 Q100 125, 108 118" stroke="#0F0F14" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <ellipse cx="55" cy="170" rx="18" ry="25" fill="url(#bodyGrad2)"/><ellipse cx="145" cy="170" rx="18" ry="25" fill="url(#bodyGrad2)"/>
+          <ellipse cx="50" cy="195" rx="12" ry="8" fill="url(#bodyGrad2)"/><ellipse cx="150" cy="195" rx="12" ry="8" fill="url(#bodyGrad2)"/>
+          <ellipse cx="75" cy="240" rx="18" ry="12" fill="url(#bodyGrad2)"/><ellipse cx="125" cy="240" rx="18" ry="12" fill="url(#bodyGrad2)"/>
+        </svg>
+        <div class="tickets">
+          <div class="ticket ticket-food"><div class="ticket-header"><span class="ticket-brand">Starbucks</span><span class="ticket-type">F&B</span></div><div class="ticket-detail">Grande Latte Voucher</div><div class="ticket-code">TK-8847-LATTE</div><div class="ticket-barcode"></div></div>
+          <div class="ticket ticket-esim"><div class="ticket-header"><span class="ticket-brand">Japan eSIM</span><span class="ticket-type">eSIM</span></div><div class="ticket-detail">5GB / Day · 7 Days</div><div class="ticket-code">JP-5G7D-X9K2</div><div class="ticket-barcode"></div></div>
+          <div class="ticket ticket-shop"><div class="ticket-header"><span class="ticket-brand">Costco</span><span class="ticket-type">Shopping</span></div><div class="ticket-detail">$10 Off Coupon</div><div class="ticket-code">PX-2024-M7F3</div><div class="ticket-barcode"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features-en" class="section-spacing">
+      <h2 class="section-title">Which <span>Ticket Hoarder</span> Are You?</h2>
+      <div class="personas">
+        <div class="persona-row entertainment"><div class="persona-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 3v2h-2V3H8v2H6V3H4v18h2v-2h2v2h8v-2h2v2h2V3h-2zM8 17H6v-2h2v2zm0-4H6v-2h2v2zm0-4H6V7h2v2zm10 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z"/></svg></div><div class="persona-content"><h3>The Event Hopper</h3><p class="persona-pain">Movie tickets, train passes, concert QRs scattered across five different apps. Every gate is a treasure hunt.</p><p class="persona-solution">→ Squirrel gathers all tickets into one wallet. Swipe, scan, done.</p></div></div>
+        <div class="persona-row shopping"><div class="persona-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg></div><div class="persona-content"><h3>The Deal Hunter</h3><p class="persona-pain">Group-buy coupons buried deep in your camera roll. By checkout time, the deal's already expired.</p><p class="persona-solution">→ Snap once, AI fills the rest. Push alerts 3 days before expiry — never miss a discount again.</p></div></div>
+        <div class="persona-row esim"><div class="persona-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></div><div class="persona-content"><h3>The Frequent Flyer</h3><p class="persona-pain">Digging through old emails for that eSIM QR code, only to find the link expired on arrival.</p><p class="persona-solution">→ eSIM data stored on-device, installs offline. One tap to activate, 29 countries covered.</p></div></div>
+      </div>
+    </section>
+
+    <section class="section-spacing">
+      <div class="wallet-section">
+        <div class="wallet-visual">
+          <div class="wallet-cards">
+            <div class="wallet-card"><div class="ticket-header"><span class="ticket-brand">AMC Theatres</span><span class="ticket-type" style="background:var(--ticket-food-accent);color:var(--ticket-food-bg);">Movie</span></div><div class="ticket-detail">Dune 3 · 7:30 PM</div><div class="ticket-code">AMC-D3-A12</div></div>
+            <div class="wallet-card"><div class="ticket-header"><span class="ticket-brand">Korea eSIM</span><span class="ticket-type" style="background:var(--ticket-esim-accent);color:var(--ticket-esim-bg);">eSIM</span></div><div class="ticket-detail">3GB / Day · 5 Days</div><div class="ticket-code">KR-3G5D-P4X7</div></div>
+            <div class="wallet-card"><div class="ticket-header"><span class="ticket-brand">Target</span><span class="ticket-type" style="background:var(--ticket-shop-accent);color:var(--ticket-shop-bg);">Shopping</span></div><div class="ticket-detail">$10 Off $50+</div><div class="ticket-code">TGT-10OFF-R2D2</div></div>
+          </div>
+          <div class="swipe-actions">
+            <div class="swipe-action"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm6-9h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6h1.9c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm0 12H6V10h12v10z"/></svg></div>
+            <div class="swipe-action"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+            <div class="swipe-action"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg></div>
+            <div class="swipe-action"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg></div>
+          </div>
+        </div>
+        <div class="wallet-content">
+          <h2>All Your Tickets<span>,</span> One Wallet</h2>
+          <p>Email QR codes, group chat screenshots, in-app tickets — toss them all into Squirrel and manage from a single interface.</p>
+          <ul class="wallet-features"><li>Swipe left to pin, right to mark as used</li><li>Long-press to share or delete</li><li>Auto-sorted by category, date, brand</li><li>Expiry alerts 3 days ahead</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-spacing">
+      <h2 class="section-title">AI <span>Auto-Fill</span></h2>
+      <div class="ai-grid">
+        <div class="ai-step"><div class="ai-step-number">1</div><div class="ai-frame"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="3.2"/><path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg></div><h3>Snap</h3><p>Point at any ticket or screenshot</p></div>
+        <div class="ai-step"><div class="ai-step-number">2</div><div class="ai-frame mask-frame"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5.04-6.71l-2.75 3.54-1.96-2.36L6.5 17h11l-3.54-4.71z"/></svg></div><h3>Mask On-Device</h3><p>Sensitive data redacted before upload</p></div>
+        <div class="ai-step"><div class="ai-step-number">3</div><div class="ai-frame"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div><h3>AI Fills the Form</h3><div class="ai-chip">92% Accuracy</div></div>
+      </div>
+    </section>
+
+    <section class="section-spacing">
+      <h2 class="section-title"><span>29 Countries</span>, One-Tap Install</h2>
+      <div class="esim-section">
+        <div class="flag-grid">
+          <div class="flag-item">🇯🇵</div><div class="flag-item active">🇰🇷</div><div class="flag-item">🇹🇭</div><div class="flag-item">🇻🇳</div><div class="flag-item">🇸🇬</div><div class="flag-item">🇲🇾</div>
+          <div class="flag-item">🇵🇭</div><div class="flag-item">🇮🇩</div><div class="flag-item">🇭🇰</div><div class="flag-item">🇲🇴</div><div class="flag-item">🇨🇳</div><div class="flag-item">🇺🇸</div>
+          <div class="flag-item">🇬🇧</div><div class="flag-item">🇫🇷</div><div class="flag-item">🇩🇪</div><div class="flag-item">🇮🇹</div><div class="flag-item">🇪🇸</div><div class="flag-item">🇵🇹</div>
+          <div class="flag-item">🇳🇱</div><div class="flag-item">🇧🇪</div><div class="flag-item">🇨🇭</div><div class="flag-item">🇦🇹</div><div class="flag-item">🇦🇺</div><div class="flag-item">🇳🇿</div>
+          <div class="flag-item">🇨🇦</div><div class="flag-item">🇹🇷</div><div class="flag-item">🇦🇪</div><div class="flag-item">🇮🇳</div><div class="flag-item">🇧🇷</div>
+        </div>
+        <div class="esim-sheet">
+          <div class="esim-sheet-header"><span class="esim-sheet-flag">🇰🇷</span><div class="esim-sheet-info"><h3>Korea eSIM</h3><p>SK Telecom · 4G/5G Network</p></div></div>
+          <div class="esim-sheet-details">
+            <div class="esim-detail-row"><span>Data</span><span>Unlimited (3GB High-Speed)</span></div>
+            <div class="esim-detail-row"><span>Validity</span><span>7 Days</span></div>
+            <div class="esim-detail-row"><span>Price</span><span style="color: var(--secondary); font-weight: 600;">$6.99</span></div>
+          </div>
+          <button class="esim-install-btn">Install to This Device</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-spacing">
+      <h2 class="section-title"><span>Triple-Layer</span> Privacy</h2>
+      <div class="privacy-steps">
+        <div class="privacy-step"><div class="privacy-step-number">1</div><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5.04-6.71l-2.75 3.54-1.96-2.36L6.5 17h11l-3.54-4.71z"/></svg><h3>On-Device Masking</h3><p>Names, IDs, card numbers redacted before leaving your phone</p></div>
+        <div class="privacy-step"><div class="privacy-step-number">2</div><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg><h3>Masked Image Only</h3><p>AI only sees the processed image — originals never leave your device</p></div>
+        <div class="privacy-step"><div class="privacy-step-number">3</div><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg><h3>Local Hive + AES</h3><p>Ticket data encrypted with AES-256, stored in local Hive database</p></div>
+      </div>
+    </section>
+
+    <section id="pricing-en" class="section-spacing">
+      <h2 class="section-title">Choose Your <span>Plan</span></h2>
+      <div class="pricing-grid">
+        <div class="pricing-card free">
+          <h3>Free</h3><div class="pricing-price">$0</div><div class="pricing-period">Forever free</div>
+          <ul class="pricing-features">
+            <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Unlimited ticket storage</li>
+            <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Manual ticket entry</li>
+            <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>5 AI scans / month</li>
+            <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Expiry reminders</li>
+            <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Basic theme</li>
+          </ul>
+        </div>
+        <div class="pricing-card pro">
+          <span class="pro-badge">Pro</span><h3>Pro</h3><div class="pricing-price">$1.66<span style="font-size: 18px; font-weight: 500;">/mo</span></div><div class="pricing-period">$19.99/year · or $2.99/month</div>
+          <ul class="pricing-features">
+            <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Everything in Free</li>
+            <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>300 AI scans / month</li>
+            <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>eSIM purchase & management</li>
+            <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Pro-exclusive premium themes</li>
+            <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>iCloud sync</li>
+          </ul>
+        </div>
+      </div>
+      <h3 style="font: var(--title-large); color: var(--on-surface); margin-bottom: 24px; text-align: center;">Pro-Exclusive Premium Themes</h3>
+      <div class="gradient-swatches">
+        <div class="swatch gem"><span>Gem</span></div>
+        <div class="swatch jade"><span>Jade</span></div>
+        <div class="swatch marble"><span>Marble</span></div>
+        <div class="swatch pearl"><span>Pearl</span></div>
+      </div>
+    </section>
+
+    <section class="section-spacing trust-section">
+      <div class="trust-line">
+        <span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>Built with Flutter</span>
+        <span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>Powered by OpenAI</span>
+        <span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>Made in Taiwan</span>
+      </div>
+      <div class="final-ctas">
+        <a href="#" class="store-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg><div class="store-btn-text"><div class="store-btn-label">Download on the</div><div class="store-btn-name">App Store · Coming Soon</div></div></a>
+        <a href="#" class="store-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5v-17c0-.59.34-1.11.84-1.35L13.69 12l-9.85 9.85c-.5-.25-.84-.76-.84-1.35m13.81-5.38L6.05 21.34l8.49-8.49 2.27 2.27m3.35-4.31c.34.27.59.69.59 1.19s-.22.9-.57 1.18l-2.29 1.32-2.5-2.5 2.5-2.5 2.27 1.31M6.05 2.66l10.76 6.22-2.27 2.27-8.49-8.49z"/></svg><div class="store-btn-text"><div class="store-btn-label">Get it on</div><div class="store-btn-name">Google Play · Coming Soon</div></div></a>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-links"><a href="#">Privacy</a><a href="#">Support</a><a href="mailto:hello@squirrelwallet.app">hello@squirrelwallet.app</a></div>
+      <div class="footer-copyright">© 2024 Squirrel Wallet. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    function switchLang(lang) {
+      const zh = document.getElementById('zh');
+      const en = document.getElementById('en');
+      const zhLinks = document.querySelector('.nav-links-zh');
+      const enLinks = document.querySelector('.nav-links-en');
+      const brandZh = document.querySelector('.brand-zh');
+      const brandEn = document.querySelector('.brand-en');
+      const toggleBtns = document.querySelectorAll('.lang-toggle a');
+
+      if (lang === 'en') {
+        zh.style.display = 'none';
+        en.style.display = 'block';
+        zhLinks.style.display = 'none';
+        enLinks.style.display = 'flex';
+        brandZh.style.display = 'none';
+        brandEn.style.display = 'inline';
+        toggleBtns[0].classList.remove('active');
+        toggleBtns[1].classList.add('active');
+      } else {
+        zh.style.display = 'block';
+        en.style.display = 'none';
+        zhLinks.style.display = 'flex';
+        enLinks.style.display = 'none';
+        brandZh.style.display = 'inline';
+        brandEn.style.display = 'none';
+        toggleBtns[0].classList.add('active');
+        toggleBtns[1].classList.remove('active');
+      }
+      window.scrollTo(0, 0);
+    }
+    if (window.location.hash === '#en') switchLang('en');
+  </script>
 </body>
 </html>
