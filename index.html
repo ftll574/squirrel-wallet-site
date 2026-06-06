@@ -12,6 +12,16 @@
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <script>
+    (function () {
+      try {
+        var theme = localStorage.getItem('sw-theme');
+        if (theme === 'light' || theme === 'dark') {
+          document.documentElement.dataset.theme = theme;
+        }
+      } catch (error) {}
+    })();
+  </script>
   <link rel="stylesheet" href="/styles.css?v=20260606">
 </head>
 <body class="home-page">
@@ -21,132 +31,119 @@
       <span>Squirrel Wallet</span>
     </a>
     <ul class="product-nav__links">
-      <li><a href="#wallet">Wallet</a></li>
-      <li><a href="#ai">Add</a></li>
-      <li><a href="#privacy">Privacy</a></li>
-      <li><a href="/support/">Support</a></li>
+      <li><a href="#wallet" data-i18n="nav.wallet">Wallet</a></li>
+      <li><a href="#ai" data-i18n="nav.add">Add</a></li>
+      <li><a href="#privacy" data-i18n="nav.privacy">Privacy</a></li>
+      <li><a href="/support/" data-i18n="nav.support">Support</a></li>
     </ul>
+    <div class="product-nav__controls" aria-label="Display controls">
+      <div class="segmented-control" role="group" aria-label="Language">
+        <button type="button" data-lang-option="zh" aria-pressed="true">中文</button>
+        <button type="button" data-lang-option="en" aria-pressed="false">EN</button>
+      </div>
+      <div class="segmented-control" role="group" aria-label="Theme">
+        <button type="button" data-theme-option="light" aria-pressed="false">Light</button>
+        <button type="button" data-theme-option="dark" aria-pressed="false">Dark</button>
+      </div>
+    </div>
   </nav>
 
   <main>
     <section class="product-hero" aria-labelledby="hero-title">
       <div class="product-hero__copy">
-        <p class="product-kicker">Ticket wallet for iPhone</p>
-        <h1 id="hero-title">票券不再躲在相簿裡。</h1>
-        <p class="product-hero__lede">
-          Squirrel Wallet 把截圖、條碼、優惠券和 eSIM 資訊整理成可搜尋、可提醒、可出示的卡片。
-          結帳、入場、出國前，不用再翻相簿。
-        </p>
+        <p class="product-kicker" data-i18n="hero.kicker">Ticket wallet for iPhone</p>
+        <h1 id="hero-title" data-i18n="hero.title">票券不再躲在相簿裡。</h1>
+        <p class="product-hero__lede" data-i18n="hero.lede">Squirrel Wallet 把截圖、條碼、優惠券和 eSIM 資訊整理成可搜尋、可提醒、可出示的卡片。結帳、入場、出國前，不用再翻相簿。</p>
         <div class="product-actions" aria-label="Primary actions">
-          <a class="product-button product-button--primary" href="/support/">查看支援</a>
-          <a class="product-button" href="/privacy/">隱私權政策</a>
-          <span class="product-button product-button--disabled">App Store 即將上架</span>
+          <a class="product-button product-button--primary" href="/support/" data-i18n="cta.support">查看支援</a>
+          <a class="product-button" href="/privacy/" data-i18n="cta.privacy">隱私權政策</a>
+          <span class="product-button product-button--disabled" data-i18n="cta.store">App Store 即將上架</span>
         </div>
       </div>
 
       <div class="screenshot-stage" aria-label="Squirrel Wallet app screenshots">
         <figure class="phone-shot phone-shot--main">
-          <picture>
-            <source srcset="/assets/app/wallet-pro-light.png" media="(prefers-color-scheme: light)">
-            <img src="/assets/app/wallet-pro-dark.png" width="450" height="980" alt="Squirrel Wallet Pro wallet screen showing gem-textured tickets">
-          </picture>
+          <img class="theme-image" src="/assets/app/wallet-pro-dark.png" data-light-src="/assets/app/wallet-pro-light.png" data-dark-src="/assets/app/wallet-pro-dark.png" width="450" height="980" alt="Squirrel Wallet Pro wallet screen showing gem-textured tickets">
         </figure>
         <figure class="phone-shot phone-shot--pulse">
-          <picture>
-            <source srcset="/assets/app/pulse-light.png" media="(prefers-color-scheme: light)">
-            <img src="/assets/app/pulse-dark.png" width="450" height="980" alt="Squirrel Wallet Pulse screen showing upcoming expiries">
-          </picture>
+          <img class="theme-image" src="/assets/app/pulse-dark.png" data-light-src="/assets/app/pulse-light.png" data-dark-src="/assets/app/pulse-dark.png" width="450" height="980" alt="Squirrel Wallet Pulse screen showing upcoming expiries">
         </figure>
         <figure class="phone-shot phone-shot--add">
-          <picture>
-            <source srcset="/assets/app/coupon-pro-empty-light.png" media="(prefers-color-scheme: light)">
-            <img src="/assets/app/coupon-pro-empty-dark.png" width="450" height="980" alt="Squirrel Wallet Pro coupon screen with Pro badge in the empty state">
-          </picture>
+          <img class="theme-image" src="/assets/app/coupon-pro-empty-dark.png" data-light-src="/assets/app/coupon-pro-empty-light.png" data-dark-src="/assets/app/coupon-pro-empty-dark.png" width="450" height="980" alt="Squirrel Wallet Pro coupon screen with Pro badge in the empty state">
         </figure>
       </div>
 
       <dl class="product-facts product-facts--hero" aria-label="Launch facts">
         <div>
-          <dt>Ready to show</dt>
-          <dd>結帳入場更快找到</dd>
+          <dt data-i18n="facts.ready.title">Ready to show</dt>
+          <dd data-i18n="facts.ready.body">結帳入場更快找到</dd>
         </div>
         <div>
-          <dt>Private by default</dt>
-          <dd>不需要帳號</dd>
+          <dt data-i18n="facts.private.title">Private by default</dt>
+          <dd data-i18n="facts.private.body">不需要帳號</dd>
         </div>
         <div>
-          <dt>Squirrel Pro</dt>
-          <dd>免等待整理與進階外觀</dd>
+          <dt data-i18n="facts.pro.title">Squirrel Pro</dt>
+          <dd data-i18n="facts.pro.body">免等待整理與進階外觀</dd>
         </div>
       </dl>
     </section>
 
     <section class="product-strip" aria-label="Product highlights">
-      <span>票券</span>
-      <span>優惠券</span>
-      <span>eSIM 資訊</span>
-      <span>條碼亮屏</span>
-      <span>到期提醒</span>
-      <span>本機備份</span>
+      <span data-i18n="strip.tickets">票券</span>
+      <span data-i18n="strip.coupons">優惠券</span>
+      <span data-i18n="strip.esim">eSIM 資訊</span>
+      <span data-i18n="strip.barcodes">條碼亮屏</span>
+      <span data-i18n="strip.reminders">到期提醒</span>
+      <span data-i18n="strip.backup">本機備份</span>
     </section>
 
     <section id="wallet" class="product-section product-section--split">
       <div class="section-copy">
-        <p class="product-kicker">Everyday wallet</p>
-        <h2>結帳前、入場前，打開就能出示。</h2>
-        <p>
-          把常用票券和優惠券集中在一個安靜的票夾裡。卡片保留到期日、分類、條碼與備註；
-          需要時搜尋或直接出示。
-        </p>
+        <p class="product-kicker" data-i18n="wallet.kicker">Everyday wallet</p>
+        <h2 data-i18n="wallet.title">結帳前、入場前，打開就能出示。</h2>
+        <p data-i18n="wallet.body">把常用票券和優惠券集中在一個安靜的票夾裡。卡片保留到期日、分類、條碼與備註；需要時搜尋或直接出示。</p>
         <ul class="feature-list">
-          <li>票券與優惠券分開整理，常用項目不再混在相簿裡</li>
-          <li>到期日與提醒集中管理，快過期的票券更早被看見</li>
-          <li>Pro 提供進階卡片外觀，讓票夾更像你真的會每天打開的 App</li>
+          <li data-i18n="wallet.bullet1">票券與優惠券分開整理，常用項目不再混在相簿裡</li>
+          <li data-i18n="wallet.bullet2">到期日與提醒集中管理，快過期的票券更早被看見</li>
+          <li data-i18n="wallet.bullet3">Pro 提供進階卡片外觀，讓票夾更像你真的會每天打開的 App</li>
         </ul>
       </div>
       <div class="screen-pair" aria-hidden="true">
-        <picture class="theme-shot">
-          <source srcset="/assets/app/wallet-pro-light.png" media="(prefers-color-scheme: light)">
-          <img src="/assets/app/wallet-pro-dark.png" width="450" height="980" alt="">
-        </picture>
-        <picture class="theme-shot">
-          <source srcset="/assets/app/pulse-light.png" media="(prefers-color-scheme: light)">
-          <img src="/assets/app/pulse-dark.png" width="450" height="980" alt="">
-        </picture>
+        <div class="theme-shot">
+          <img class="theme-image" src="/assets/app/wallet-pro-dark.png" data-light-src="/assets/app/wallet-pro-light.png" data-dark-src="/assets/app/wallet-pro-dark.png" width="450" height="980" alt="">
+        </div>
+        <div class="theme-shot">
+          <img class="theme-image" src="/assets/app/pulse-dark.png" data-light-src="/assets/app/pulse-light.png" data-dark-src="/assets/app/pulse-dark.png" width="450" height="980" alt="">
+        </div>
       </div>
     </section>
 
     <section id="ai" class="product-section product-section--cards">
       <div class="section-copy section-copy--center">
-        <p class="product-kicker">Add anything</p>
-        <h2>拍照、掃碼、貼連結；少打字，多確認。</h2>
-        <p>
-          從照片建立卡片時，Squirrel Wallet 會先幫你整理可辨識欄位。
-          你只要確認、修正，再存進票夾。
-        </p>
+        <p class="product-kicker" data-i18n="add.kicker">Add anything</p>
+        <h2 data-i18n="add.title">拍照、掃碼、貼連結；少打字，多確認。</h2>
+        <p data-i18n="add.body">從照片建立卡片時，Squirrel Wallet 會先幫你整理可辨識欄位。你只要確認、修正，再存進票夾。</p>
       </div>
       <div class="capture-layout">
         <figure class="feature-phone">
-          <picture>
-            <source srcset="/assets/app/add-flow-light.png" media="(prefers-color-scheme: light)">
-            <img src="/assets/app/add-flow-dark.png" width="450" height="980" alt="Add flow screen with scan barcode, use photo, manual entry, and paste coupon URL">
-          </picture>
+          <img class="theme-image" src="/assets/app/add-flow-dark.png" data-light-src="/assets/app/add-flow-light.png" data-dark-src="/assets/app/add-flow-dark.png" width="450" height="980" alt="Add flow screen with scan barcode, use photo, manual entry, and paste coupon URL">
         </figure>
         <div class="capture-steps">
           <article>
             <span>01</span>
-            <h3>從照片開始</h3>
-            <p>選一張截圖，先帶出標題、日期、商家與分類。</p>
+            <h3 data-i18n="add.step1.title">從照片開始</h3>
+            <p data-i18n="add.step1.body">選一張截圖，先帶出標題、日期、商家與分類。</p>
           </article>
           <article>
             <span>02</span>
-            <h3>確認欄位</h3>
-            <p>儲存前每個欄位都能手動調整，不需要相信一次辨識就完全正確。</p>
+            <h3 data-i18n="add.step2.title">確認欄位</h3>
+            <p data-i18n="add.step2.body">儲存前每個欄位都能手動調整，不需要相信一次辨識就完全正確。</p>
           </article>
           <article>
             <span>03</span>
-            <h3>安心出示</h3>
-            <p>條碼和 QR 用於出示；需要上傳辨識時，會先在裝置上遮罩。</p>
+            <h3 data-i18n="add.step3.title">安心出示</h3>
+            <p data-i18n="add.step3.body">條碼和 QR 用於出示；需要上傳辨識時，會先在裝置上遮罩。</p>
           </article>
         </div>
       </div>
@@ -154,29 +151,26 @@
 
     <section id="privacy" class="product-section product-section--privacy">
       <div class="section-copy">
-        <p class="product-kicker">Privacy</p>
-        <h2>你的票夾，不需要變成一個帳號。</h2>
-        <p>
-          Squirrel Wallet 不要求登入，也不經營一份自己的票券資料庫。
-          你主動選擇的照片才會進入辨識流程；不想上傳時，手動新增和條碼掃描仍可使用。
-        </p>
+        <p class="product-kicker" data-i18n="privacy.kicker">Privacy</p>
+        <h2 data-i18n="privacy.title">你的票夾，不需要變成一個帳號。</h2>
+        <p data-i18n="privacy.body">Squirrel Wallet 不要求登入，也不經營一份自己的票券資料庫。你主動選擇的照片才會進入辨識流程；不想上傳時，手動新增和條碼掃描仍可使用。</p>
       </div>
       <div class="privacy-grid">
         <article>
-          <strong>Local first</strong>
-          <span>票券、優惠券、eSIM 資訊預設保存在裝置上。</span>
+          <strong data-i18n="privacy.local.title">Local first</strong>
+          <span data-i18n="privacy.local.body">票券、優惠券、eSIM 資訊預設保存在裝置上。</span>
         </article>
         <article>
-          <strong>No account</strong>
-          <span>不需要 email、電話或會員登入才能建立票夾。</span>
+          <strong data-i18n="privacy.account.title">No account</strong>
+          <span data-i18n="privacy.account.body">不需要 email、電話或會員登入才能建立票夾。</span>
         </article>
         <article>
-          <strong>Barcode masking</strong>
-          <span>需要圖片辨識時，條碼與 QR 會先遮罩再送出。</span>
+          <strong data-i18n="privacy.mask.title">Barcode masking</strong>
+          <span data-i18n="privacy.mask.body">需要圖片辨識時，條碼與 QR 會先遮罩再送出。</span>
         </article>
         <article>
-          <strong>Ad boundary</strong>
-          <span>免費版的廣告只用來解鎖該次辨識，不取得你的票券內容。</span>
+          <strong data-i18n="privacy.ad.title">Ad boundary</strong>
+          <span data-i18n="privacy.ad.body">免費版的廣告只用來解鎖該次辨識，不取得你的票券內容。</span>
         </article>
       </div>
     </section>
@@ -185,18 +179,12 @@
       <div class="pro-panel">
         <div>
           <p class="product-kicker">Squirrel Pro</p>
-          <h2>更快整理，更漂亮的票夾。</h2>
-          <p>
-            免費版保留核心票夾功能。Squirrel Pro 移除辨識前的等待流程，並解鎖進階卡片外觀；
-            適合常整理票券、優惠券和出國資料的人。
-          </p>
-          <a class="product-button product-button--primary" href="/support/">了解 Pro 與訂閱</a>
+          <h2 data-i18n="pro.title">更快整理，更漂亮的票夾。</h2>
+          <p data-i18n="pro.body">免費版保留核心票夾功能。Squirrel Pro 移除辨識前的等待流程，並解鎖進階卡片外觀；適合常整理票券、優惠券和出國資料的人。</p>
+          <a class="product-button product-button--primary" href="/support/" data-i18n="pro.cta">了解 Pro 與訂閱</a>
         </div>
         <figure class="settings-shot">
-          <picture>
-            <source srcset="/assets/app/settings-pro-light.png" media="(prefers-color-scheme: light)">
-            <img src="/assets/app/settings-pro-dark.png" width="450" height="980" alt="Settings screen showing Squirrel Pro banner and app settings">
-          </picture>
+          <img class="theme-image" src="/assets/app/settings-pro-dark.png" data-light-src="/assets/app/settings-pro-light.png" data-dark-src="/assets/app/settings-pro-dark.png" width="450" height="980" alt="Settings screen showing Squirrel Pro banner and app settings">
         </figure>
       </div>
     </section>
@@ -205,10 +193,195 @@
   <footer class="product-footer">
     <p>© 2026 Squirrel Wallet</p>
     <nav aria-label="Footer">
-      <a href="/privacy/">Privacy</a>
-      <a href="/support/">Support</a>
+      <a href="/privacy/" data-i18n="footer.privacy">Privacy</a>
+      <a href="/support/" data-i18n="footer.support">Support</a>
       <a href="mailto:support@squirrelwallet.app">support@squirrelwallet.app</a>
     </nav>
   </footer>
+<script>
+  (function () {
+    var copy = {
+      zh: {
+        title: 'Squirrel Wallet — 票券、優惠券、eSIM，該用時就找得到',
+        description: '把截圖整理成私密的 iPhone 票夾，支援票券、優惠券、eSIM 資訊、搜尋、提醒、條碼出示與 Pro 升級。',
+        'nav.wallet': '票夾',
+        'nav.add': '新增',
+        'nav.privacy': '隱私',
+        'nav.support': '支援',
+        'hero.kicker': 'iPhone 票券錢包',
+        'hero.title': '票券不再躲在相簿裡。',
+        'hero.lede': 'Squirrel Wallet 把截圖、條碼、優惠券和 eSIM 資訊整理成可搜尋、可提醒、可出示的卡片。結帳、入場、出國前，不用再翻相簿。',
+        'cta.support': '查看支援',
+        'cta.privacy': '隱私權政策',
+        'cta.store': 'App Store 即將上架',
+        'facts.ready.title': 'Ready to show',
+        'facts.ready.body': '結帳入場更快找到',
+        'facts.private.title': 'Private by default',
+        'facts.private.body': '不需要帳號',
+        'facts.pro.title': 'Squirrel Pro',
+        'facts.pro.body': '免等待整理與進階外觀',
+        'strip.tickets': '票券',
+        'strip.coupons': '優惠券',
+        'strip.esim': 'eSIM 資訊',
+        'strip.barcodes': '條碼亮屏',
+        'strip.reminders': '到期提醒',
+        'strip.backup': '本機備份',
+        'wallet.kicker': '日常票夾',
+        'wallet.title': '結帳前、入場前，打開就能出示。',
+        'wallet.body': '把常用票券和優惠券集中在一個安靜的票夾裡。卡片保留到期日、分類、條碼與備註；需要時搜尋或直接出示。',
+        'wallet.bullet1': '票券與優惠券分開整理，常用項目不再混在相簿裡',
+        'wallet.bullet2': '到期日與提醒集中管理，快過期的票券更早被看見',
+        'wallet.bullet3': 'Pro 提供進階卡片外觀，讓票夾更像你真的會每天打開的 App',
+        'add.kicker': '新增任何票券',
+        'add.title': '拍照、掃碼、貼連結；少打字，多確認。',
+        'add.body': '從照片建立卡片時，Squirrel Wallet 會先幫你整理可辨識欄位。你只要確認、修正，再存進票夾。',
+        'add.step1.title': '從照片開始',
+        'add.step1.body': '選一張截圖，先帶出標題、日期、商家與分類。',
+        'add.step2.title': '確認欄位',
+        'add.step2.body': '儲存前每個欄位都能手動調整，不需要相信一次辨識就完全正確。',
+        'add.step3.title': '安心出示',
+        'add.step3.body': '條碼和 QR 用於出示；需要上傳辨識時，會先在裝置上遮罩。',
+        'privacy.kicker': '隱私',
+        'privacy.title': '你的票夾，不需要變成一個帳號。',
+        'privacy.body': 'Squirrel Wallet 不要求登入，也不經營一份自己的票券資料庫。你主動選擇的照片才會進入辨識流程；不想上傳時，手動新增和條碼掃描仍可使用。',
+        'privacy.local.title': 'Local first',
+        'privacy.local.body': '票券、優惠券、eSIM 資訊預設保存在裝置上。',
+        'privacy.account.title': 'No account',
+        'privacy.account.body': '不需要 email、電話或會員登入才能建立票夾。',
+        'privacy.mask.title': 'Barcode masking',
+        'privacy.mask.body': '需要圖片辨識時，條碼與 QR 會先遮罩再送出。',
+        'privacy.ad.title': 'Ad boundary',
+        'privacy.ad.body': '免費版的廣告只用來解鎖該次辨識，不取得你的票券內容。',
+        'pro.title': '更快整理，更漂亮的票夾。',
+        'pro.body': '免費版保留核心票夾功能。Squirrel Pro 移除辨識前的等待流程，並解鎖進階卡片外觀；適合常整理票券、優惠券和出國資料的人。',
+        'pro.cta': '了解 Pro 與訂閱',
+        'footer.privacy': '隱私權',
+        'footer.support': '支援'
+      },
+      en: {
+        title: 'Squirrel Wallet — Tickets, coupons, and eSIM details ready when you need them',
+        description: 'Turn screenshots into a private iPhone wallet for tickets, coupons, and eSIM activation details. Search, reminders, barcode display, and optional Pro upgrades.',
+        'nav.wallet': 'Wallet',
+        'nav.add': 'Add',
+        'nav.privacy': 'Privacy',
+        'nav.support': 'Support',
+        'hero.kicker': 'Ticket wallet for iPhone',
+        'hero.title': 'Tickets no longer hide in Photos.',
+        'hero.lede': 'Squirrel Wallet turns screenshots, barcodes, coupons, and eSIM details into cards you can search, track, and show. Checkout, entry, and travel prep stay one tap away.',
+        'cta.support': 'Support',
+        'cta.privacy': 'Privacy policy',
+        'cta.store': 'App Store coming soon',
+        'facts.ready.title': 'Ready to show',
+        'facts.ready.body': 'Find it faster at checkout or entry',
+        'facts.private.title': 'Private by default',
+        'facts.private.body': 'No account required',
+        'facts.pro.title': 'Squirrel Pro',
+        'facts.pro.body': 'No waiting step, richer card finishes',
+        'strip.tickets': 'Tickets',
+        'strip.coupons': 'Coupons',
+        'strip.esim': 'eSIM details',
+        'strip.barcodes': 'Barcode display',
+        'strip.reminders': 'Expiry reminders',
+        'strip.backup': 'Local backup',
+        'wallet.kicker': 'Everyday wallet',
+        'wallet.title': 'Open it before checkout, entry, or boarding.',
+        'wallet.body': 'Keep everyday tickets and coupons in a calm wallet. Each card keeps its expiry, category, barcode, and notes so you can search or show it when needed.',
+        'wallet.bullet1': 'Tickets and coupons stay organized instead of buried in Photos',
+        'wallet.bullet2': 'Expiry dates and reminders make soon-to-expire items easier to catch',
+        'wallet.bullet3': 'Pro unlocks richer card finishes for a wallet you will actually want to open',
+        'add.kicker': 'Add anything',
+        'add.title': 'Photo, scan, paste; type less and confirm more.',
+        'add.body': 'When you create a card from a photo, Squirrel Wallet prepares the fields it can recognize. You review, adjust, and save.',
+        'add.step1.title': 'Start from a photo',
+        'add.step1.body': 'Pick a screenshot to prefill title, date, merchant, and category.',
+        'add.step2.title': 'Review the fields',
+        'add.step2.body': 'Every field can be edited before saving, so recognition is helpful without being final.',
+        'add.step3.title': 'Show safely',
+        'add.step3.body': 'Barcodes and QR codes are for presentation; when recognition needs upload, they are masked on device first.',
+        'privacy.kicker': 'Privacy',
+        'privacy.title': 'Your wallet does not need to become an account.',
+        'privacy.body': 'Squirrel Wallet does not require login or maintain its own ticket database. Only photos you choose enter recognition; manual entry and barcode scanning still work without upload.',
+        'privacy.local.title': 'Local first',
+        'privacy.local.body': 'Tickets, coupons, and eSIM details are stored on your device by default.',
+        'privacy.account.title': 'No account',
+        'privacy.account.body': 'No email, phone number, or member login is required to build your wallet.',
+        'privacy.mask.title': 'Barcode masking',
+        'privacy.mask.body': 'When image recognition is needed, barcodes and QR codes are masked before upload.',
+        'privacy.ad.title': 'Ad boundary',
+        'privacy.ad.body': 'Free ads unlock that recognition request; they do not receive your ticket content.',
+        'pro.title': 'Faster setup, better-looking cards.',
+        'pro.body': 'The free version keeps the core wallet. Squirrel Pro removes the waiting step before recognition and unlocks richer card finishes for people who organize tickets, coupons, and travel details often.',
+        'pro.cta': 'Learn about Pro',
+        'footer.privacy': 'Privacy',
+        'footer.support': 'Support'
+      }
+    };
+
+    var prefersLight = window.matchMedia('(prefers-color-scheme: light)');
+    var savedLang = localStorage.getItem('sw-lang');
+    var currentLang = savedLang === 'zh' || savedLang === 'en'
+      ? savedLang
+      : ((navigator.language || '').toLowerCase().startsWith('zh') ? 'zh' : 'en');
+    var currentTheme = localStorage.getItem('sw-theme');
+
+    function effectiveTheme() {
+      return currentTheme === 'light' || currentTheme === 'dark'
+        ? currentTheme
+        : (prefersLight.matches ? 'light' : 'dark');
+    }
+
+    function applyTheme(theme, persist) {
+      if (persist) {
+        currentTheme = theme;
+        localStorage.setItem('sw-theme', theme);
+        document.documentElement.dataset.theme = theme;
+      }
+      var selected = persist ? theme : effectiveTheme();
+      document.querySelectorAll('.theme-image').forEach(function (img) {
+        img.src = selected === 'light' ? img.dataset.lightSrc : img.dataset.darkSrc;
+      });
+      document.querySelectorAll('[data-theme-option]').forEach(function (button) {
+        button.setAttribute('aria-pressed', String(button.dataset.themeOption === selected));
+      });
+    }
+
+    function applyLanguage(lang) {
+      currentLang = lang === 'en' ? 'en' : 'zh';
+      localStorage.setItem('sw-lang', currentLang);
+      document.documentElement.lang = currentLang === 'zh' ? 'zh-Hant' : 'en';
+      var dict = copy[currentLang];
+      document.title = dict.title;
+      document.querySelector('meta[name="description"]').setAttribute('content', dict.description);
+      document.querySelector('meta[property="og:description"]').setAttribute('content', dict.description);
+      document.querySelectorAll('[data-i18n]').forEach(function (node) {
+        node.textContent = dict[node.dataset.i18n];
+      });
+      document.querySelectorAll('[data-lang-option]').forEach(function (button) {
+        button.setAttribute('aria-pressed', String(button.dataset.langOption === currentLang));
+      });
+    }
+
+    document.querySelectorAll('[data-lang-option]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        applyLanguage(button.dataset.langOption);
+      });
+    });
+
+    document.querySelectorAll('[data-theme-option]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        applyTheme(button.dataset.themeOption, true);
+      });
+    });
+
+    prefersLight.addEventListener('change', function () {
+      if (currentTheme !== 'light' && currentTheme !== 'dark') {
+        applyTheme(effectiveTheme(), false);
+      }
+    });
+
+    applyLanguage(currentLang);
+    applyTheme(currentTheme === 'light' || currentTheme === 'dark' ? currentTheme : effectiveTheme(), currentTheme === 'light' || currentTheme === 'dark');
+  })();
+</script>
 </body>
 </html>
