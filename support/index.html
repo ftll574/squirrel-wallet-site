@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>使用支援 — Squirrel Wallet</title>
   <meta name="description" content="Squirrel Wallet 使用支援與常見問題：AI 辨識、條碼掃描、eSIM 安裝、備份還原、Pro 訂閱。">
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/styles.css?v=20260606">
   <style>
     /* Page-scoped — reuses /styles.css but adds a contact-box variant
        for the email card at the bottom of the page. */
@@ -42,7 +42,7 @@
   </header>
 
   <h1>使用支援 / Support</h1>
-  <p class="meta">最後更新 / Last updated: 2026-05-12 · App 版本 / version: 1.0.0+</p>
+  <p class="meta">最後更新: 2026-06-06<br>Last updated: 2026-06-06 · Version: 1.0.0+</p>
 
   <h2 id="zh">繁體中文</h2>
 
@@ -64,9 +64,32 @@
       <ul>
         <li><strong>網路問題</strong> — 切換到行動網路 / Wi-Fi 再試一次。</li>
         <li><strong>圖片內容不是票券</strong> — AI 找不到票券特徵會回傳「無法辨識」，請用「手動新增」。</li>
-        <li><strong>當日免費額度用完</strong> — Free tier 每月 5 次，Pro 每月 300 次（軟上限）。</li>
+        <li><strong>廣告解鎖未完成</strong> — Free 版使用 AI 辨識前可能需要完成一次獎勵式廣告；Pro 會跳過這個流程。</li>
       </ul>
       <p>辨識結果不滿意時，可以在 Step 3 預覽畫面直接編輯任一欄位再儲存。</p>
+    </details>
+
+    <details>
+      <summary>為什麼 AI 辨識前需要看廣告？</summary>
+      <p>
+        AI 圖片辨識每次都會產生推論成本。為了讓 Free 版仍然可以使用 AI，
+        Squirrel Wallet 會把廣告限制在「使用者主動啟動 AI 辨識」這個流程：
+        你完成獎勵式廣告後，App 才送出該次 AI 請求。
+      </p>
+      <p>
+        我們不在票夾列表、票券詳情頁或背景流程放被動廣告。升級 Squirrel Pro
+        後，AI 辨識會跳過廣告流程。
+      </p>
+    </details>
+
+    <details>
+      <summary>看廣告會把我的票券內容交給廣告商嗎？</summary>
+      <p>
+        不會。廣告供應商不會收到你的票券截圖、條碼 / QR 內容、自訂分類名稱、
+        eSIM LPA 或 AI 辨識結果。廣告 SDK 可能依平台政策處理廣告請求、曝光、
+        完成狀態或平台允許的廣告識別資訊；完整說明請見
+        <a href="/privacy/#zh">隱私權政策</a>。
+      </p>
     </details>
 
     <details>
@@ -198,12 +221,36 @@
           and retry.</li>
         <li><strong>Image isn't a ticket</strong> — AI returns "unrecognised"
           when no ticket features are detected; use Manual Entry.</li>
-        <li><strong>Quota exhausted</strong> — Free tier is 5 scans / month,
-          Pro is 300 / month (soft cap).</li>
+        <li><strong>Ad unlock incomplete</strong> — Free users may need to
+          complete a rewarded ad before AI recognition; Pro skips that flow.</li>
       </ul>
       <p>
         If the AI got fields wrong, every field on the Step 3 preview is
         editable before save.
+      </p>
+    </details>
+
+    <details>
+      <summary>Why do I need to watch an ad before AI recognition?</summary>
+      <p>
+        AI image recognition has a real inference cost. To keep the Free tier
+        useful, Squirrel Wallet limits ads to the user-initiated AI flow: once
+        you complete the rewarded ad, the app sends that recognition request.
+      </p>
+      <p>
+        We do not show passive ads in the wallet list, ticket detail screens, or
+        background flows. Squirrel Pro skips the ad flow for AI recognition.
+      </p>
+    </details>
+
+    <details>
+      <summary>Does watching an ad share my ticket content with ad providers?</summary>
+      <p>
+        No. Ad providers do not receive your ticket screenshots, barcode / QR
+        contents, custom category names, eSIM LPA strings, or AI recognition
+        results. The ad SDK may process ad requests, impressions, completion
+        status, or platform-allowed advertising identifiers under its platform
+        policy. See the <a href="/privacy/#en">Privacy Policy</a> for details.
       </p>
     </details>
 
