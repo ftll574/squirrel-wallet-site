@@ -21,6 +21,8 @@
     return;
   }
 
+  document.documentElement.classList.add('reveal-enabled');
+
   // 1) Generic reveal — fade & lift on first viewport entry.
   var revealObserver = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
