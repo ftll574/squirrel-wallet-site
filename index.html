@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Squirrel Wallet — Private ticket, coupon, and eSIM wallet</title>
-  <meta name="description" content="Squirrel Wallet turns ticket, coupon, and eSIM screenshots into a private on-device wallet. AI fills fields, barcodes are masked before upload, and Pro removes the AI ad gate.">
+  <title>Squirrel Wallet — Tickets, coupons, and eSIM details ready when you need them</title>
+  <meta name="description" content="Turn screenshots into a private iPhone wallet for tickets, coupons, and eSIM activation details. Search, reminders, barcode display, and optional Pro upgrades.">
   <link rel="canonical" href="https://squirrelwallet.app/">
   <meta property="og:title" content="Squirrel Wallet">
-  <meta property="og:description" content="A private iPhone wallet for tickets, coupons, and eSIM activation details. AI-assisted, barcode-masked, and local-first.">
+  <meta property="og:description" content="A private iPhone wallet for tickets, coupons, and eSIM activation details. Search, reminders, barcode display, and optional Pro upgrades.">
   <meta property="og:url" content="https://squirrelwallet.app/">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary">
@@ -22,7 +22,7 @@
     </a>
     <ul class="product-nav__links">
       <li><a href="#wallet">Wallet</a></li>
-      <li><a href="#ai">AI</a></li>
+      <li><a href="#ai">Add</a></li>
       <li><a href="#privacy">Privacy</a></li>
       <li><a href="/support/">Support</a></li>
     </ul>
@@ -31,11 +31,11 @@
   <main>
     <section class="product-hero" aria-labelledby="hero-title">
       <div class="product-hero__copy">
-        <p class="product-kicker">Squirrel Pro ticket wallet for iPhone</p>
-        <h1 id="hero-title">Pro 用戶的票券、優惠券、eSIM 錢包。</h1>
+        <p class="product-kicker">Ticket wallet for iPhone</p>
+        <h1 id="hero-title">票券不再躲在相簿裡。</h1>
         <p class="product-hero__lede">
-          Squirrel Wallet 把相簿裡的票券截圖變成可搜尋、可提醒、可出示的卡片。
-          Pro 免廣告自動整理，並解鎖更細緻的卡片紋理；免費用戶則以廣告支撐 AI 成本。
+          Squirrel Wallet 把截圖、條碼、優惠券和 eSIM 資訊整理成可搜尋、可提醒、可出示的卡片。
+          結帳、入場、出國前，不用再翻相簿。
         </p>
         <div class="product-actions" aria-label="Primary actions">
           <a class="product-button product-button--primary" href="/support/">查看支援</a>
@@ -46,89 +46,107 @@
 
       <div class="screenshot-stage" aria-label="Squirrel Wallet app screenshots">
         <figure class="phone-shot phone-shot--main">
-          <img src="/assets/app/wallet-pro.png" width="451" height="980" alt="Squirrel Wallet Pro wallet screen showing gem-textured tickets in a dark iPhone interface">
+          <picture>
+            <source srcset="/assets/app/wallet-pro-light.png" media="(prefers-color-scheme: light)">
+            <img src="/assets/app/wallet-pro-dark.png" width="450" height="980" alt="Squirrel Wallet Pro wallet screen showing gem-textured tickets">
+          </picture>
         </figure>
         <figure class="phone-shot phone-shot--pulse">
-          <img src="/assets/app/pulse.png" width="451" height="980" alt="Squirrel Wallet Pulse screen showing upcoming expiries">
+          <picture>
+            <source srcset="/assets/app/pulse-light.png" media="(prefers-color-scheme: light)">
+            <img src="/assets/app/pulse-dark.png" width="450" height="980" alt="Squirrel Wallet Pulse screen showing upcoming expiries">
+          </picture>
         </figure>
         <figure class="phone-shot phone-shot--add">
-          <img src="/assets/app/coupon-pro-empty.png" width="451" height="980" alt="Squirrel Wallet Pro coupon screen with Pro badge in the empty state">
+          <picture>
+            <source srcset="/assets/app/coupon-pro-empty-light.png" media="(prefers-color-scheme: light)">
+            <img src="/assets/app/coupon-pro-empty-dark.png" width="450" height="980" alt="Squirrel Wallet Pro coupon screen with Pro badge in the empty state">
+          </picture>
         </figure>
       </div>
 
       <dl class="product-facts product-facts--hero" aria-label="Launch facts">
         <div>
+          <dt>Ready to show</dt>
+          <dd>結帳入場更快找到</dd>
+        </div>
+        <div>
+          <dt>Private by default</dt>
+          <dd>不需要帳號</dd>
+        </div>
+        <div>
           <dt>Squirrel Pro</dt>
-          <dd>免廣告辨識</dd>
-        </div>
-        <div>
-          <dt>Pro textures</dt>
-          <dd>寶石卡片紋理</dd>
-        </div>
-        <div>
-          <dt>AI guarded</dt>
-          <dd>上傳前遮罩條碼</dd>
+          <dd>免等待整理與進階外觀</dd>
         </div>
       </dl>
     </section>
 
     <section class="product-strip" aria-label="Product highlights">
-      <span>Tickets</span>
-      <span>Coupons</span>
-      <span>eSIM LPA</span>
-      <span>Barcode presentation</span>
-      <span>Expiry reminders</span>
-      <span>Encrypted backup</span>
+      <span>票券</span>
+      <span>優惠券</span>
+      <span>eSIM 資訊</span>
+      <span>條碼亮屏</span>
+      <span>到期提醒</span>
+      <span>本機備份</span>
     </section>
 
     <section id="wallet" class="product-section product-section--split">
       <div class="section-copy">
-        <p class="product-kicker">Squirrel Pro</p>
-        <h2>主打 Pro 體驗，不是免費方案截圖。</h2>
+        <p class="product-kicker">Everyday wallet</p>
+        <h2>結帳前、入場前，打開就能出示。</h2>
         <p>
-          Pro 狀態會使用更完整的卡片紋理和免廣告 AI 自動整理。免費方案仍可使用核心錢包，
-          但 AI 辨識會透過獎勵廣告支撐成本。
+          把常用票券和優惠券集中在一個安靜的票夾裡。卡片保留到期日、分類、條碼與備註；
+          需要時搜尋或直接出示。
         </p>
         <ul class="feature-list">
-          <li>Pro 卡片紋理讓票券堆疊更像正式錢包產品</li>
-          <li>AI 自動整理對 Pro 使用者不需要廣告解鎖</li>
-          <li>條碼上傳前仍會遮罩，商業模式不犧牲隱私承諾</li>
+          <li>票券與優惠券分開整理，常用項目不再混在相簿裡</li>
+          <li>到期日與提醒集中管理，快過期的票券更早被看見</li>
+          <li>Pro 提供進階卡片外觀，讓票夾更像你真的會每天打開的 App</li>
         </ul>
       </div>
       <div class="screen-pair" aria-hidden="true">
-        <img src="/assets/app/wallet-pro.png" width="451" height="980" alt="">
-        <img src="/assets/app/pulse.png" width="451" height="980" alt="">
+        <picture class="theme-shot">
+          <source srcset="/assets/app/wallet-pro-light.png" media="(prefers-color-scheme: light)">
+          <img src="/assets/app/wallet-pro-dark.png" width="450" height="980" alt="">
+        </picture>
+        <picture class="theme-shot">
+          <source srcset="/assets/app/pulse-light.png" media="(prefers-color-scheme: light)">
+          <img src="/assets/app/pulse-dark.png" width="450" height="980" alt="">
+        </picture>
       </div>
     </section>
 
     <section id="ai" class="product-section product-section--cards">
       <div class="section-copy section-copy--center">
-        <p class="product-kicker">Capture flow</p>
-        <h2>拍照、掃碼、貼連結、手動輸入，都走同一套新增流程。</h2>
+        <p class="product-kicker">Add anything</p>
+        <h2>拍照、掃碼、貼連結；少打字，多確認。</h2>
         <p>
-          AI 是用來減少打字，不是用來接管你的資料。Free 使用 AI 時可能會先出現
-          rewarded-ad unlock；Pro 會跳過這個流程。
+          從照片建立卡片時，Squirrel Wallet 會先幫你整理可辨識欄位。
+          你只要確認、修正，再存進票夾。
         </p>
       </div>
       <div class="capture-layout">
         <figure class="feature-phone">
-          <img src="/assets/app/add-flow.png" width="451" height="980" alt="Add flow screen with scan barcode, use photo, manual entry, and paste coupon URL">
+          <picture>
+            <source srcset="/assets/app/add-flow-light.png" media="(prefers-color-scheme: light)">
+            <img src="/assets/app/add-flow-dark.png" width="450" height="980" alt="Add flow screen with scan barcode, use photo, manual entry, and paste coupon URL">
+          </picture>
         </figure>
         <div class="capture-steps">
           <article>
             <span>01</span>
-            <h3>Use photo</h3>
-            <p>選一張票券或優惠券截圖，AI 建議標題、日期、商家與分類。</p>
+            <h3>從照片開始</h3>
+            <p>選一張截圖，先帶出標題、日期、商家與分類。</p>
           </article>
           <article>
             <span>02</span>
-            <h3>Mask before upload</h3>
-            <p>偵測到 barcode / QR 時，先在裝置上遮黑，再送出辨識請求。</p>
+            <h3>確認欄位</h3>
+            <p>儲存前每個欄位都能手動調整，不需要相信一次辨識就完全正確。</p>
           </article>
           <article>
             <span>03</span>
-            <h3>Ad-supported Free AI</h3>
-            <p>Free 的 rewarded ad 只支撐 AI 成本，不會把票券內容交給廣告商。</p>
+            <h3>安心出示</h3>
+            <p>條碼和 QR 用於出示；需要上傳辨識時，會先在裝置上遮罩。</p>
           </article>
         </div>
       </div>
@@ -136,29 +154,29 @@
 
     <section id="privacy" class="product-section product-section--privacy">
       <div class="section-copy">
-        <p class="product-kicker">Privacy posture</p>
-        <h2>商業模式要清楚，資料邊界也要清楚。</h2>
+        <p class="product-kicker">Privacy</p>
+        <h2>你的票夾，不需要變成一個帳號。</h2>
         <p>
-          Squirrel Wallet 不做帳號、不做自有後端、不把票夾內容拿去投廣告。
-          AI 和 rewarded ad 都是使用者主動觸發的流程；不想上傳圖片時，手動輸入與條碼掃描仍可完全本機使用。
+          Squirrel Wallet 不要求登入，也不經營一份自己的票券資料庫。
+          你主動選擇的照片才會進入辨識流程；不想上傳時，手動新增和條碼掃描仍可使用。
         </p>
       </div>
       <div class="privacy-grid">
         <article>
           <strong>Local first</strong>
-          <span>票券、優惠券、eSIM LPA 預設只存在裝置本機。</span>
+          <span>票券、優惠券、eSIM 資訊預設保存在裝置上。</span>
         </article>
         <article>
           <strong>No account</strong>
-          <span>沒有 email、電話、姓名、登入或 Squirrel-owned backend。</span>
+          <span>不需要 email、電話或會員登入才能建立票夾。</span>
         </article>
         <article>
-          <strong>AI disclosure</strong>
-          <span>只有你選的圖片會送辨識，且條碼上傳前先遮罩。</span>
+          <strong>Barcode masking</strong>
+          <span>需要圖片辨識時，條碼與 QR 會先遮罩再送出。</span>
         </article>
         <article>
           <strong>Ad boundary</strong>
-          <span>廣告供應商不接收票券截圖、條碼、分類或 AI 結果做投放。</span>
+          <span>免費版的廣告只用來解鎖該次辨識，不取得你的票券內容。</span>
         </article>
       </div>
     </section>
@@ -167,15 +185,18 @@
       <div class="pro-panel">
         <div>
           <p class="product-kicker">Squirrel Pro</p>
-          <h2>Free 可以用，Pro 移除 AI 廣告流程。</h2>
+          <h2>更快整理，更漂亮的票夾。</h2>
           <p>
-            Free 保留核心票夾能力；AI 辨識成本透過使用者主動 rewarded ad 支撐。
-            Pro 則移除 AI ad gate，並使用 Pro AI model routing 與 premium card finishes。
+            免費版保留核心票夾功能。Squirrel Pro 移除辨識前的等待流程，並解鎖進階卡片外觀；
+            適合常整理票券、優惠券和出國資料的人。
           </p>
           <a class="product-button product-button--primary" href="/support/">了解 Pro 與訂閱</a>
         </div>
         <figure class="settings-shot">
-          <img src="/assets/app/settings-pro.png" width="451" height="980" alt="Settings screen showing Squirrel Pro banner and app settings">
+          <picture>
+            <source srcset="/assets/app/settings-pro-light.png" media="(prefers-color-scheme: light)">
+            <img src="/assets/app/settings-pro-dark.png" width="450" height="980" alt="Settings screen showing Squirrel Pro banner and app settings">
+          </picture>
         </figure>
       </div>
     </section>
