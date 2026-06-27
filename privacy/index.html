@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>隱私權政策 — Squirrel Stash</title>
   <meta name="description" content="Squirrel Stash 隱私權政策。本機優先儲存，AI 辨識前自動遮罩條碼，無帳號註冊。">
-  <link rel="stylesheet" href="/styles.css?v=20260606">
+  <link rel="stylesheet" href="/styles.css?v=20260628">
   <style>
     /* Page-scoped extensions to /styles.css — tables, blockquote, code.
        Uses the existing CSS variables so dark mode still works. */
@@ -107,7 +107,7 @@
   </header>
 
   <h1>Squirrel Stash 隱私權政策</h1>
-  <p class="meta">最後更新: 2026-06-10<br>Last updated: 2026-06-10 · Version: 1.0.0+</p>
+  <p class="meta">最後更新 / Last updated: 2026-06-28 · App 版本 / version: 1.0.0+</p>
 
   <p>
     本文件以繁體中文為主，English follows below。兩個版本內容等價，若有衝突
@@ -119,8 +119,13 @@
   <h3>1. 我們是誰</h3>
   <p>
     「Squirrel Stash（松鼠票夾）」是一款獨立開發的票券管理 App。我們
-    <strong>不經營後端帳戶系統</strong>，您的所有票券、優惠券、設定預設
-    <strong>只儲存在您的裝置上</strong>。
+    <strong>沒有帳號系統、不需登入</strong>，您的票券、優惠券、設定預設
+    <strong>只儲存在您的裝置上</strong>。為了控管免費版 AI 辨識額度、防止濫用，
+    我們有一個<strong>最小化的 Firebase 後端服務</strong>（Cloud Functions +
+    Firebase 匿名驗證 + Firestore）：Cloud Functions 代理 AI 請求與獎勵式廣告 /
+    預算檢查，並只記錄一個<strong>匿名 Firebase Auth UID</strong>與 AI 使用量／
+    廣告獎勵／預算計數——不含您的票券內容，
+    也不含姓名、email 等個人資料。詳見下方說明。
   </p>
 
   <h3>2. 我們收集哪些資料</h3>
@@ -154,9 +159,9 @@
       </tr>
       <tr>
         <td>付費 / 訂閱資料</td>
-        <td>Squirrel Pro 權益狀態：方案、到期日、產品 ID</td>
-        <td>本機 SharedPreferences</td>
-        <td>否；購買與還原由 Apple / Google IAP 處理</td>
+        <td>Squirrel Pro 權益狀態：方案、到期日、產品 ID；訂閱驗證所需的最小平台資料</td>
+        <td>本機 SharedPreferences；Apple / Google IAP；Firebase Functions / Firebase custom claims</td>
+        <td>購買由 Apple / Google IAP 處理；為驗證或還原 Pro 權益，App 可能將必要訂閱驗證資料送到 Squirrel 控制的 Firebase Function，並以匿名 Firebase Auth UID 更新 custom claim / 權益中繼資料</td>
       </tr>
       <tr>
         <td>App 使用記錄</td>
@@ -177,16 +182,16 @@
         <td>—</td>
       </tr>
       <tr>
-        <td>廣告相關識別</td>
-        <td>Free 使用者使用 AI 辨識時，可能需要主動觀看獎勵式廣告以支撐 AI 成本</td>
-        <td>第三方廣告供應商</td>
-        <td><strong>僅限您主動啟動 AI 辨識並選擇觀看廣告時</strong>；我們不把票券內容、圖片、分類名稱或條碼提供給廣告供應商做投放</td>
+        <td>匿名 Firebase UID</td>
+        <td>Firebase 匿名驗證建立的 UID，用於驗證 Cloud Function 呼叫、AI 使用量 / 廣告獎勵 / 預算計數與訂閱權益中繼資料</td>
+        <td>Firebase Auth / Firestore / Firebase custom claims</td>
+        <td>是；這是 App 功能與防濫用用途，不是廣告追蹤，也不是 Squirrel Stash 自建的裝置識別碼</td>
       </tr>
       <tr>
-        <td>裝置 ID</td>
-        <td><strong>Squirrel Stash 不建立自己的裝置識別碼</strong></td>
-        <td>—</td>
-        <td>—</td>
+        <td>廣告 ID / 裝置 ID</td>
+        <td>Free 使用者啟動 AI 辨識並選擇廣告支援解鎖時，獎勵式廣告供應商可能依其 SDK 與平台政策處理廣告或裝置識別資訊（例如 ATT 同意後的 IDFA）。Squirrel Stash 不建立自己的裝置識別碼。</td>
+        <td>第三方廣告供應商；Squirrel Stash 自身不儲存自建裝置 ID</td>
+        <td><strong>僅限您主動選擇廣告支援解鎖時</strong>；我們不把票券內容、圖片、分類名稱、條碼或 AI 辨識結果提供給廣告供應商做投放</td>
       </tr>
       <tr>
         <td>位置資訊</td>
@@ -258,7 +263,9 @@
   </table>
   <p>
     <strong>我們不使用 OpenRouter / Google AI Studio / Groq 等其他第三方
-    推論供應商</strong>。所有 AI 影像辨識皆透過 OpenAI 的 API 直接呼叫。
+    推論供應商</strong>。所有 AI 影像辨識皆透過 Squirrel 控制的 Firebase Cloud
+    Function 代理到 OpenAI API；App 用戶端不內嵌 OpenAI API key。Cloud Function
+    會用匿名 Firebase Auth UID 進行額度 / 獎勵式廣告 / 成本控管，但不儲存您的票券內容。
   </p>
   <p>
     <strong>我們無法控制 OpenAI 的政策變更</strong>。Squirrel Stash 提供
@@ -267,21 +274,7 @@
     輸入或條碼掃描（這兩個功能完全在本機運作）。
   </p>
 
-  <h4>3.3 AI 成本與獎勵式廣告</h4>
-  <p>
-    AI 圖片辨識有實際推論成本。Squirrel Stash v1.0 的 Free 版本不在票夾列表、
-    詳情頁或背景流程顯示被動廣告；Free 使用者在啟動 AI 辨識時，可能需要完成一個
-    由自己主動開啟的獎勵式廣告流程，才會送出該次辨識請求。Squirrel Pro 會跳過這個
-    廣告流程。
-  </p>
-  <p>
-    廣告供應商可能依其 SDK 與平台政策處理廣告播放相關資料，例如廣告請求、曝光、
-    完成狀態或平台允許的廣告識別資訊。Squirrel Stash 不會把您的票券內容、票券截圖、
-    條碼 / QR 內容、自訂分類名稱、eSIM LPA 或 AI 辨識結果提供給廣告供應商做廣告投放。
-    如果您不想觸發任何廣告請求，可以改用手動輸入 / 條碼掃描，或升級 Squirrel Pro。
-  </p>
-
-  <h4>3.4 隨同圖片傳輸的內容</h4>
+  <h4>3.3 隨同圖片傳輸的內容</h4>
   <p>
     為了讓 AI 模型給出更準確的分類結果，圖片之外
     <strong>我們會在 prompt 中夾帶</strong>：
@@ -299,7 +292,7 @@
   <ul>
     <li>票券標題、備註、條碼內容、QR 內容（這些不需要 AI 來辨識，圖片本身就有）</li>
     <li>您裝置上的其他票券 / 優惠券（每次 prompt 只看當下這張圖）</li>
-    <li>您的裝置 ID、Apple ID、Google 帳號</li>
+    <li>Squirrel Stash 自建的裝置 ID（本 App 不建立這種 ID）、Apple ID、Google 帳號；AI prompt 也不包含廣告識別碼或匿名 Firebase Auth UID。廣告 SDK / Firebase 後端識別資訊的處理見第 2、3 節。</li>
     <li>您圖片庫其他照片，<strong>僅限您主動選擇的當張票券圖片</strong></li>
   </ul>
 
@@ -332,17 +325,17 @@
   <p>明確會清除：本機 Hive boxes、所有截圖目錄、多數 SharedPreferences 設定、所有已排程的通知。</p>
   <p>明確<strong>保留</strong>（白名單機制）：</p>
   <ul>
-    <li><code>subscription_status</code> / <code>subscription_expiry_date</code> / <code>subscription_product_id</code> — IAP 訂閱狀態</li>
+    <li><code>subscription_status</code> / <code>subscription_expiry_date</code> / <code>subscription_product_id</code> — 保留 Squirrel Pro 訂閱狀態，供 App 內顯示權益與恢復購買後離線判斷使用</li>
     <li><code>onboarding_completed_v1</code> — 首次教學旗標</li>
     <li>Hive AES key — 保留以確保未來匯入過去匯出的加密備份還能解密</li>
   </ul>
   <blockquote>
     <p><strong>注意 1</strong>：刪除本機資料<strong>不會</strong>回溯刪除過去送給 AI 供應商的圖片副本。如需向各供應商請求刪除，請參考其隱私政策。</p>
-    <p><strong>注意 2</strong>：Apple App Store / Google Play 政策要求所有 App 提供帳號 / 資料刪除入口。本 App 在「設定 → 清除所有資料」即為該入口，無需另外申請或聯絡開發者。</p>
+    <p><strong>注意 2</strong>：「設定 → 清除所有資料」是本機票券 / 優惠券 / 截圖 / 設定的刪除入口。若您也要要求刪除伺服器端以匿名 Firebase Auth UID 保存的 AI 使用量、獎勵式廣告 / 預算計數或訂閱權益中繼資料，請透過 support@squirrelwallet.app 聯絡我們；因為本 App 沒有帳號系統，若無法對應到特定匿名 UID，我們可能無法辨識您的伺服器端紀錄。</p>
   </blockquote>
 
-  <h4>5.4 IAP 訂閱</h4>
-  <p>訂閱由 Apple / Google 管理，請至「設定 → Apple ID → 訂閱項目」或 Google Play 訂閱頁面管理。</p>
+  <h4>5.4 付費 / 訂閱</h4>
+  <p>Squirrel Pro 透過 Apple App Store / Google Play 的 In-App Purchase 流程購買與還原。Squirrel Stash 不營運自己的付款處理系統，也不接收信用卡號或商店帳號密碼。為了驗證 / 還原 Pro 權益，App 可能將必要的 Apple 訂閱 claim / 平台驗證資料送到 Squirrel 控制的 Firebase Function，並以匿名 Firebase Auth UID 更新 Firebase custom claim / 權益中繼資料；App 也會在本機保存必要的訂閱狀態（方案、到期日、產品 ID）以顯示權益與離線判斷。</p>
 
   <h3>6. 兒童隱私</h3>
   <p>本 App 不刻意收集 13 歲以下兒童的資料。若我們發現意外收集，將立即刪除。</p>
@@ -361,9 +354,16 @@
 
   <h3>1. Who we are</h3>
   <p>
-    Squirrel Stash is an indie ticket / coupon management app. <strong>We do
-    not operate any account backend</strong> — all your data is stored on
-    your device by default.
+    Squirrel Stash is an indie ticket / coupon management app. <strong>We have
+    no account system and no login</strong> — your ticket / coupon data is
+    stored on your device by default. To enforce the free-tier AI-recognition
+    quota and prevent abuse, we do run a <strong>minimal Firebase backend</strong>
+    (Cloud Functions + anonymous Firebase Auth + Firestore): Cloud Functions proxy
+    AI requests and reward / budget checks, and record only an
+    <strong>anonymous Firebase Auth UID</strong> plus AI-usage, ad-reward,
+    budget counters, and subscription entitlement metadata —
+    never your ticket contents, and never personal data such as your name or
+    email. See below for details.
   </p>
 
   <h3>2. What data we touch</h3>
@@ -375,12 +375,12 @@
       <tr><td>Tickets / Coupons</td><td>Titles, barcodes, expiry, notes, custom categories</td><td>Local Hive DB (AES-256 encrypted)</td><td>No</td></tr>
       <tr><td>Ticket screenshots</td><td>Photos you take or import</td><td>Local app-private dir</td><td><strong>Only when AI recognition is invoked; barcodes are masked first</strong> (§3)</td></tr>
       <tr><td>eSIM LPA</td><td>Carrier-provided activation string</td><td>Local Hive (AES-256 encrypted)</td><td>No (OS handles installation)</td></tr>
-      <tr><td>Paid purchases / subscriptions</td><td>Squirrel Pro entitlement status: plan, expiry, product ID</td><td>Local SharedPreferences</td><td>No — purchase and restore are handled by Apple / Google IAP</td></tr>
+      <tr><td>Paid purchases / subscriptions</td><td>Squirrel Pro entitlement status: plan, expiry, product ID; minimal platform data needed for subscription validation</td><td>Local SharedPreferences; Apple / Google IAP; Firebase Functions / Firebase custom claims</td><td>Purchase is processed by Apple / Google IAP. To validate or restore Pro access, the app may send necessary subscription validation data to a Squirrel-controlled Firebase Function and update custom claims / entitlement metadata keyed by the anonymous Firebase Auth UID.</td></tr>
       <tr><td>Usage analytics</td><td>Not collected in the v1.0 launch build; telemetry SDKs are not initialised</td><td>—</td><td>No</td></tr>
       <tr><td>Crash reports</td><td>Not collected in the v1.0 launch build; telemetry SDKs are not initialised</td><td>—</td><td>No</td></tr>
       <tr><td>Account IDs</td><td><strong>We do not require sign-up</strong></td><td>—</td><td>—</td></tr>
-      <tr><td>Ad-related identifiers</td><td>Free users may be asked to watch a rewarded ad before an AI recognition to support AI costs</td><td>Third-party ad provider</td><td><strong>Only when you start AI recognition and choose the rewarded-ad flow</strong>; we do not share ticket contents, images, category names, or barcodes with ad providers for ad targeting</td></tr>
-      <tr><td>Device IDs</td><td><strong>Squirrel Stash does not create its own device identifier</strong></td><td>—</td><td>—</td></tr>
+      <tr><td>Anonymous Firebase UID</td><td>A UID created by Firebase anonymous auth to key AI-usage, ad-reward, budget counters, and subscription entitlement metadata</td><td>Firebase Auth / Firestore / Firebase custom claims</td><td>Yes; this is for App Functionality and abuse prevention, not ad tracking, and it is not a Squirrel-created device identifier</td></tr>
+      <tr><td>Ad IDs / Device IDs</td><td>When a Free user starts AI recognition and chooses the ad-supported unlock, the rewarded-ad provider may process advertising or device identifiers under its SDK and platform policies (for example IDFA after ATT consent). Squirrel Stash does not create its own device identifier.</td><td>Third-party ad provider; Squirrel Stash does not store its own device ID</td><td><strong>Only when you choose the ad-supported unlock</strong>; we do not share wallet contents, images, category names, barcodes, or AI recognition results with ad providers for ad targeting</td></tr>
       <tr><td>Location</td><td><strong>Not collected</strong></td><td>—</td><td>—</td></tr>
     </tbody>
   </table>
@@ -443,7 +443,10 @@
   <p>
     <strong>We do not use OpenRouter / Google AI Studio / Groq or any
     other third-party inference provider.</strong> All AI image recognition
-    is called directly against the OpenAI API.
+    is proxied to the OpenAI API through a Squirrel-controlled Firebase Cloud
+    Function; the app client does not embed an OpenAI API key. The Cloud Function
+    uses the anonymous Firebase Auth UID for quota, rewarded-ad, and cost controls,
+    but does not store your ticket contents.
   </p>
   <p>
     <strong>We do not control OpenAI's policy changes.</strong> Barcode
@@ -453,25 +456,7 @@
     or barcode scanning instead (both run entirely on-device).
   </p>
 
-  <h4>3.3 AI costs and rewarded ads</h4>
-  <p>
-    AI image recognition has a real inference cost. In the v1.0 launch build,
-    Squirrel Stash does not show passive ads in the wallet list, detail screens,
-    or background flows. Free users may be asked to complete a user-initiated
-    rewarded ad flow before an AI recognition request is sent. Squirrel Pro
-    skips that ad flow.
-  </p>
-  <p>
-    The ad provider may process ad-playback data under its SDK and platform
-    policies, such as ad requests, impressions, completion status, or platform-
-    allowed advertising identifiers. Squirrel Stash does not share ticket
-    contents, ticket screenshots, barcode / QR contents, custom category names,
-    eSIM LPA strings, or AI recognition results with ad providers for ad targeting.
-    If you do not want to trigger any ad request, use manual entry / barcode
-    scanning, or upgrade to Squirrel Pro.
-  </p>
-
-  <h4>3.4 What travels with the image (and what doesn't)</h4>
+  <h4>3.3 What travels with the image (and what doesn't)</h4>
   <p>
     To help the model classify accurately, the prompt <strong>does
     include</strong>:
@@ -492,7 +477,7 @@
       itself carries those; no need to duplicate over the wire)</li>
     <li>Other tickets / coupons on your device (each prompt sees the
       current image only)</li>
-    <li>Device ID, Apple ID, Google account</li>
+    <li>Any Squirrel-created device ID (the app does not create one), Apple ID, Google account; the AI prompt also does not include advertising identifiers or the anonymous Firebase Auth UID. Ad SDK / Firebase backend identifier handling is described in §§2 and 3.</li>
     <li>Other photos from your library — <strong>only the one image you select</strong></li>
   </ul>
 
@@ -507,14 +492,15 @@
   <ul>
     <li><strong>Access / Export</strong>: Settings → Backup exports all data as an encrypted ZIP</li>
     <li><strong>Modify</strong>: Edit in-app</li>
-    <li><strong>Delete</strong>: Settings → Reset all data permanently removes all local data and cancels notifications. Tap the red button → type "刪除" to enable confirm → tap "Reset all data". Wipes: all Hive boxes, all screenshots, most SharedPreferences settings, all scheduled notifications. Preserves: IAP subscription status keys, onboarding completion flag, and the Hive AES key (kept so a future encrypted-backup import still decrypts).</li>
-    <li><strong>Subscriptions</strong>: Managed by Apple / Google — use the platform's subscription management UI</li>
+    <li><strong>Delete</strong>: Settings → Reset all data permanently removes all local tickets / coupons / screenshots / settings and cancels notifications. Tap the red button → type "刪除" to enable confirm → tap "Reset all data". To request deletion of server-side AI-usage, rewarded-ad / budget counters, or subscription entitlement metadata stored under an anonymous Firebase Auth UID, contact support@squirrelwallet.app; because the app has no account system, we may be unable to identify your server-side records without a matching anonymous UID.</li>
+    <li><strong>Paid purchases / subscriptions</strong>: Squirrel Pro purchase and restore use Apple / Google IAP. Squirrel Stash does not operate a payment processor and does not receive card numbers or store account credentials. To validate / restore Pro access, the app may send necessary Apple subscription claim / platform validation data to a Squirrel-controlled Firebase Function and update Firebase custom claims / entitlement metadata keyed by the anonymous Firebase Auth UID; the app also stores the minimum local entitlement state needed for display and offline checks.</li>
   </ul>
   <blockquote>
     This does not retroactively delete image copies that AI providers may
     retain per their own policies. Contact each provider for their
-    deletion process. App Store and Google Play require an in-app deletion
-    entry point — Settings → Reset all data IS that entry point.
+    deletion process. Settings → Reset all data is the deletion entry point for
+    local data; contact support@squirrelwallet.app for deletion requests covering
+    identifiable server-side anonymous Firebase records.
   </blockquote>
 
   <h3>6. Children's privacy</h3>
