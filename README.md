@@ -11,6 +11,8 @@ Hosted on GitHub Pages, served at the custom domain `squirrelwallet.app` via Clo
 | `/` | `index.html` | Landing — App intro, feature highlights, links to legal & support |
 | `/privacy/` | `privacy/index.html` | Privacy Policy (中文 + English) — required by App Store Review |
 | `/support/` | `support/index.html` | Support page (FAQ + contact email) |
+| `/robots.txt` | `robots.txt` | Search-crawler policy and sitemap location |
+| `/sitemap.xml` | `sitemap.xml` | Public page index for search engines |
 
 ## Stack
 

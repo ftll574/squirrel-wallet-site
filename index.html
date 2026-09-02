@@ -3,15 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Squirrel Stash — Tickets, coupons, and eSIM details ready when you need them</title>
+  <title>Squirrel Stash | Tickets, coupons, and eSIM details ready when you need them</title>
   <meta name="description" content="Turn screenshots into a private iPhone wallet for tickets, coupons, and eSIM activation details. Search, reminders, barcode display, and optional Pro upgrades.">
   <link rel="canonical" href="https://squirrelwallet.app/">
   <meta property="og:title" content="Squirrel Stash">
   <meta property="og:description" content="A private iPhone wallet for tickets, coupons, and eSIM activation details. Search, reminders, barcode display, and optional Pro upgrades.">
   <meta property="og:url" content="https://squirrelwallet.app/">
   <meta property="og:type" content="website">
+  <meta property="og:image" content="https://squirrelwallet.app/assets/app/app-icon.png">
   <meta name="twitter:card" content="summary">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Squirrel Stash",
+      "url": "https://squirrelwallet.app/",
+      "inLanguage": ["zh-Hant", "en"]
+    }
+  </script>
   <script>
     (function () {
       try {
@@ -22,9 +32,10 @@
       } catch (error) {}
     })();
   </script>
-  <link rel="stylesheet" href="/styles.css?v=20260606">
+  <link rel="stylesheet" href="/styles.css?v=20260902">
 </head>
 <body class="home-page">
+  <a class="skip-link" href="#main-content">跳至主要內容 / Skip to content</a>
   <nav class="product-nav" aria-label="Primary">
     <a class="product-brand" href="/">
       <img src="/assets/app/app-icon.png" width="36" height="36" alt="" aria-hidden="true">
@@ -48,16 +59,16 @@
     </div>
   </nav>
 
-  <main>
+  <main id="main-content">
     <section class="product-hero" aria-labelledby="hero-title">
       <div class="product-hero__copy">
         <p class="product-kicker" data-i18n="hero.kicker">Ticket wallet for iPhone</p>
         <h1 id="hero-title" data-i18n="hero.title">票券不再躲在相簿裡。</h1>
         <p class="product-hero__lede" data-i18n="hero.lede">Squirrel Stash 把截圖、條碼、優惠券和 eSIM 資訊整理成可搜尋、可提醒、可出示的卡片。結帳、入場、出國前，不用再翻相簿。</p>
         <div class="product-actions" aria-label="Primary actions">
-          <a class="product-button product-button--primary" href="/support/" data-i18n="cta.support">查看支援</a>
+          <a class="product-button product-button--primary" href="https://apps.apple.com/tw/app/id6778084126" data-i18n="cta.store">前往 App Store 下載</a>
+          <a class="product-button" href="/support/" data-i18n="cta.support">查看支援</a>
           <a class="product-button" href="/privacy/" data-i18n="cta.privacy">隱私權政策</a>
-          <span class="product-button product-button--disabled" data-i18n="cta.store">App Store 即將上架</span>
         </div>
       </div>
 
@@ -83,8 +94,8 @@
           <dd data-i18n="facts.private.body">不需要帳號</dd>
         </div>
         <div>
-          <dt data-i18n="facts.pro.title">Squirrel Pro</dt>
-          <dd data-i18n="facts.pro.body">免等待整理與進階外觀</dd>
+          <dt data-i18n="facts.pro.title">每日 AI</dt>
+          <dd data-i18n="facts.pro.body">符合條件每日免費 3 次</dd>
         </div>
       </dl>
     </section>
@@ -170,7 +181,7 @@
         </article>
         <article>
           <strong data-i18n="privacy.ad.title">Ad boundary</strong>
-          <span data-i18n="privacy.ad.body">免費版的廣告只用來解鎖該次辨識，不取得你的票券內容。</span>
+          <span data-i18n="privacy.ad.body">免費次數用完或裝置不符合條件時，可看廣告解鎖一次；廣告不取得票券內容。</span>
         </article>
       </div>
     </section>
@@ -180,7 +191,7 @@
         <div>
           <p class="product-kicker">Squirrel Pro</p>
           <h2 data-i18n="pro.title">更快整理，更漂亮的票夾。</h2>
-          <p data-i18n="pro.body">免費版保留核心票夾功能。Squirrel Pro 移除辨識前的等待流程，並解鎖進階卡片外觀；適合常整理票券、優惠券和出國資料的人。</p>
+          <p data-i18n="pro.body">免費版保留核心票夾功能。Squirrel Pro 提供免廣告辨識與進階卡片外觀；適合常整理票券、優惠券和出國資料的人。</p>
           <a class="product-button product-button--primary" href="/support/" data-i18n="pro.cta">了解 Pro 與訂閱</a>
         </div>
         <figure class="settings-shot">
@@ -202,7 +213,7 @@
   (function () {
     var copy = {
       zh: {
-        title: 'Squirrel Stash — 票券、優惠券、eSIM，該用時就找得到',
+        title: 'Squirrel Stash | 票券、優惠券、eSIM，該用時就找得到',
         description: '把截圖整理成私密的 iPhone 票夾，支援票券、優惠券、eSIM 資訊、搜尋、提醒、條碼出示與 Pro 升級。',
         'nav.wallet': '票夾',
         'nav.add': '新增',
@@ -213,13 +224,13 @@
         'hero.lede': 'Squirrel Stash 把截圖、條碼、優惠券和 eSIM 資訊整理成可搜尋、可提醒、可出示的卡片。結帳、入場、出國前，不用再翻相簿。',
         'cta.support': '查看支援',
         'cta.privacy': '隱私權政策',
-        'cta.store': 'App Store 即將上架',
+        'cta.store': '前往 App Store 下載',
         'facts.ready.title': 'Ready to show',
         'facts.ready.body': '結帳入場更快找到',
         'facts.private.title': 'Private by default',
         'facts.private.body': '不需要帳號',
-        'facts.pro.title': 'Squirrel Pro',
-        'facts.pro.body': '免等待整理與進階外觀',
+        'facts.pro.title': '每日 AI',
+        'facts.pro.body': '符合條件每日免費 3 次',
         'strip.tickets': '票券',
         'strip.coupons': '優惠券',
         'strip.esim': 'eSIM 資訊',
@@ -251,15 +262,15 @@
         'privacy.mask.title': 'Barcode masking',
         'privacy.mask.body': '需要圖片辨識時，條碼與 QR 會先遮罩再送出。',
         'privacy.ad.title': 'Ad boundary',
-        'privacy.ad.body': '免費版的廣告只用來解鎖該次辨識，不取得你的票券內容。',
+        'privacy.ad.body': '免費次數用完或裝置不符合條件時，可看廣告解鎖一次；廣告不取得票券內容。',
         'pro.title': '更快整理，更漂亮的票夾。',
-        'pro.body': '免費版保留核心票夾功能。Squirrel Pro 移除辨識前的等待流程，並解鎖進階卡片外觀；適合常整理票券、優惠券和出國資料的人。',
+        'pro.body': '免費版保留核心票夾功能。Squirrel Pro 提供免廣告辨識與進階卡片外觀；適合常整理票券、優惠券和出國資料的人。',
         'pro.cta': '了解 Pro 與訂閱',
         'footer.privacy': '隱私權',
         'footer.support': '支援'
       },
       en: {
-        title: 'Squirrel Stash — Tickets, coupons, and eSIM details ready when you need them',
+        title: 'Squirrel Stash | Tickets, coupons, and eSIM details ready when you need them',
         description: 'Turn screenshots into a private iPhone wallet for tickets, coupons, and eSIM activation details. Search, reminders, barcode display, and optional Pro upgrades.',
         'nav.wallet': 'Wallet',
         'nav.add': 'Add',
@@ -270,13 +281,13 @@
         'hero.lede': 'Squirrel Stash turns screenshots, barcodes, coupons, and eSIM details into cards you can search, track, and show. Checkout, entry, and travel prep stay one tap away.',
         'cta.support': 'Support',
         'cta.privacy': 'Privacy policy',
-        'cta.store': 'App Store coming soon',
+        'cta.store': 'Download on the App Store',
         'facts.ready.title': 'Ready to show',
         'facts.ready.body': 'Find it faster at checkout or entry',
         'facts.private.title': 'Private by default',
         'facts.private.body': 'No account required',
-        'facts.pro.title': 'Squirrel Pro',
-        'facts.pro.body': 'No waiting step, richer card finishes',
+        'facts.pro.title': 'Daily AI',
+        'facts.pro.body': '3 free uses per day on eligible devices',
         'strip.tickets': 'Tickets',
         'strip.coupons': 'Coupons',
         'strip.esim': 'eSIM details',
@@ -308,9 +319,9 @@
         'privacy.mask.title': 'Barcode masking',
         'privacy.mask.body': 'When image recognition is needed, barcodes and QR codes are masked before upload.',
         'privacy.ad.title': 'Ad boundary',
-        'privacy.ad.body': 'Free ads unlock that recognition request; they do not receive your ticket content.',
+        'privacy.ad.body': 'After free uses, or on ineligible devices, an ad can unlock one recognition without receiving ticket content.',
         'pro.title': 'Faster setup, better-looking cards.',
-        'pro.body': 'The free version keeps the core wallet. Squirrel Pro removes the waiting step before recognition and unlocks richer card finishes for people who organize tickets, coupons, and travel details often.',
+        'pro.body': 'The free version keeps the core wallet. Squirrel Pro provides ad-free recognition and richer card finishes for people who organize tickets, coupons, and travel details often.',
         'pro.cta': 'Learn about Pro',
         'footer.privacy': 'Privacy',
         'footer.support': 'Support'
