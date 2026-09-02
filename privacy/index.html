@@ -184,7 +184,8 @@
   <h3>3. 圖片辨識（AI VLM）：關鍵說明</h3>
   <p>
     當您使用「拍照新增票券」或「AI 辨識」功能時，App 會將處理後圖片送到 AI
-    模型供應商。當此功能在您的版本可用，且裝置為 iOS 27、Apple Intelligence
+    模型供應商。1.1.2 版本使用下述 OpenAI 路徑。未來當 PCC 功能在您的 App
+    版本可用，且裝置為 iOS 27、Apple Intelligence
     已開啟並符合系統條件時，App 會優先使用 Apple Private Cloud Compute（PCC）。
     其他情況，或 PCC 暫時無法完成辨識時，App 可能經 Squirrel 控制的 Firebase
     Cloud Function 轉送 OpenAI。您也可以改用不需上傳圖片的手動新增或本機條碼掃描。
@@ -260,10 +261,9 @@
 
   <h4>3.3 AI 成本、獎勵式廣告與同意選項</h4>
   <p>
-    在支援 Apple Intelligence 的合格 iOS 27 裝置上，Free 使用者每天可使用
-    3 次免費 AI 辨識，App 會顯示當日已使用次數。每日次數用完、裝置不符合條件，
-    或免費路徑暫時不可用時，使用者可選擇觀看一次獎勵式廣告來解鎖該次辨識。
-    Squirrel Pro 不需要觀看廣告。Squirrel Stash 不會把票券內容、截圖、條碼、
+    在 1.1.2 版本，Free 使用者可選擇觀看一次獎勵式廣告來解鎖該次辨識；
+    Squirrel Pro 不需要觀看廣告。若未來版本啟用 PCC 每日免費辨識，App 才會在
+    合格裝置上顯示當日已使用次數。Squirrel Stash 不會把票券內容、截圖、條碼、
     分類名稱、eSIM LPA 或辨識結果提供給廣告供應商做投放。
   </p>
   <p>
@@ -394,12 +394,12 @@
   <h3>3. AI Recognition (VLM): Important Disclosure</h3>
   <p>
     When you use the "scan ticket via AI" feature, the app sends a processed
-    image to an AI model provider. When this feature is available in your app
-    version, an eligible iOS 27 device with Apple Intelligence enabled uses
-    Apple Private Cloud Compute (PCC) first. Other cases, or a temporary PCC
-    failure, may use a Squirrel-controlled Firebase Cloud Function to reach
-    OpenAI. Manual entry and on-device barcode scanning remain available without
-    uploading an image.
+    image to an AI model provider. Version 1.1.2 uses the OpenAI route described
+    below. In a future version where PCC is available, an eligible iOS 27
+    device with Apple Intelligence enabled uses Apple Private Cloud Compute
+    (PCC) first. Other cases, or a temporary PCC failure, may use a
+    Squirrel-controlled Firebase Cloud Function to reach OpenAI. Manual entry
+    and on-device barcode scanning remain available without uploading an image.
   </p>
 
   <h4>3.1 Barcode masking</h4>
@@ -471,11 +471,10 @@
 
   <h4>3.3 AI costs, rewarded ads, and consent choices</h4>
   <p>
-    On an eligible iOS 27 device with Apple Intelligence enabled, Free users
-    receive three AI recognitions per day and the app shows today's usage. When
-    the daily allowance is used, the device is not eligible, or the free route
-    is temporarily unavailable, the user may choose one rewarded ad to unlock
-    that recognition. Squirrel Pro does not require ads. Squirrel Stash does not
+    In version 1.1.2, Free users may choose one rewarded ad to unlock that AI
+    recognition; Squirrel Pro does not require ads. If a future version enables
+    the daily PCC allowance, the app will show today's usage on eligible
+    devices. Squirrel Stash does not
     give wallet contents, screenshots, barcodes, category names, eSIM LPA strings,
     or recognition results to ad providers for ad targeting.
   </p>
