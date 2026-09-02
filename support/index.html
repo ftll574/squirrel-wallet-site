@@ -3,11 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>使用支援 — Squirrel Stash</title>
+  <title>使用支援 | Squirrel Stash</title>
   <meta name="description" content="Squirrel Stash 使用支援與常見問題：AI 辨識、條碼掃描、eSIM 安裝、備份還原、Pro 訂閱。">
-  <link rel="stylesheet" href="/styles.css?v=20260606">
+  <link rel="canonical" href="https://squirrelwallet.app/support/">
+  <meta property="og:title" content="使用支援 | Squirrel Stash">
+  <meta property="og:description" content="查看 Squirrel Stash 的 AI 辨識、條碼掃描、備份、eSIM 與訂閱常見問題。">
+  <meta property="og:url" content="https://squirrelwallet.app/support/">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css?v=20260902">
   <style>
-    /* Page-scoped — reuses /styles.css but adds a contact-box variant
+    /* Page-scoped: reuses /styles.css but adds a contact-box variant
        for the email card at the bottom of the page. */
     .contact-list {
       margin: 16px 0 0;
@@ -30,11 +36,12 @@
   </style>
 </head>
 <body>
-<main class="prose">
+<a class="skip-link" href="#main-content">跳至主要內容 / Skip to content</a>
+<main class="prose" id="main-content">
 
   <header class="page-header">
     <a href="/" class="back-link">← Squirrel Stash</a>
-    <nav class="lang-toggle">
+    <nav class="lang-toggle" aria-label="頁面語言 / Page language">
       <a href="#zh">繁體中文</a>
       <span aria-hidden="true">·</span>
       <a href="#en">English</a>
@@ -42,7 +49,7 @@
   </header>
 
   <h1>使用支援 / Support</h1>
-  <p class="meta">最後更新: 2026-06-10<br>Last updated: 2026-06-10 · Version: 1.0.0+</p>
+  <p class="meta">最後更新：2026-09-03<br>Last updated: 2026-09-03 · Version: 1.1.2</p>
 
   <h2 id="zh">繁體中文</h2>
 
@@ -57,28 +64,27 @@
     <details>
       <summary>AI 辨識失敗 / 結果不準怎麼辦？</summary>
       <p>
-        我們透過 OpenAI（gpt-5.4 / gpt-5.4-mini）辨識票券圖片。Pro 版主
-        模型若遇到可重試錯誤時會自動切換到 mini 版本，Free 版則直接使用
-        mini。如果辨識仍然失敗，可能是：
+        App 會先在裝置上遮罩已偵測到的條碼，再整理你主動選擇的圖片。
+        如果辨識仍然失敗，可能是：
       </p>
       <ul>
-        <li><strong>網路問題</strong> — 切換到行動網路 / Wi-Fi 再試一次。</li>
-        <li><strong>圖片內容不是票券</strong> — AI 找不到票券特徵會回傳「無法辨識」，請用「手動新增」。</li>
-        <li><strong>廣告解鎖未完成</strong> — Free 版使用 AI 辨識前可能需要完成一次獎勵式廣告；Pro 會跳過這個流程。</li>
+        <li><strong>網路問題</strong>：切換到行動網路 / Wi-Fi 再試一次。</li>
+        <li><strong>圖片內容不是票券</strong>：AI 找不到票券特徵時，請改用「手動新增」。</li>
+        <li><strong>免費次數已用完</strong>：可以觀看廣告解鎖一次，或改用手動新增與本機條碼掃描。</li>
       </ul>
       <p>辨識結果不滿意時，可以在 Step 3 預覽畫面直接編輯任一欄位再儲存。</p>
     </details>
 
     <details>
-      <summary>為什麼 AI 辨識前需要看廣告？</summary>
+      <summary>免費辨識次數和廣告怎麼計算？</summary>
       <p>
-        AI 圖片辨識每次都會產生推論成本。為了讓 Free 版仍然可以使用 AI，
-        Squirrel Stash 會把廣告限制在「使用者主動啟動 AI 辨識」這個流程：
-        你完成獎勵式廣告後，App 才送出該次 AI 請求。
+        如果你的裝置是 iOS 27、已開啟 Apple Intelligence，且系統符合使用條件，
+        Free 版每天有 3 次免費辨識。App 會顯示例如「已使用 0/3」的當日進度。
       </p>
       <p>
-        我們不在票夾列表、票券詳情頁或背景流程放被動廣告。升級 Squirrel Pro
-        後，AI 辨識會跳過廣告流程。
+        每日 3 次用完、裝置不符合條件，或免費辨識暫時不可用時，可以自行選擇
+        觀看一次廣告解鎖該次辨識。廣告不可用時，仍可重新載入、手動新增或使用
+        本機條碼掃描。Squirrel Pro 不需要觀看廣告。
       </p>
     </details>
 
@@ -112,11 +118,11 @@
         若沒反應請確認：
       </p>
       <ul>
-        <li><strong>裝置支援 eSIM</strong> — iPhone XS / SE 第 2 代以後、Pixel 4
+        <li><strong>裝置支援 eSIM</strong>：iPhone XS / SE 第 2 代以後、Pixel 4
           以後的多數 Android。</li>
-        <li><strong>LPA 字串完整</strong> — 拍照辨識可能漏字，請對照電信商
+        <li><strong>LPA 字串完整</strong>：拍照辨識可能漏字，請對照電信商
           email 確認 LPA URL 完整。</li>
-        <li><strong>該電信商支援自動安裝</strong> — 部分電信商需要 QR Code
+        <li><strong>該電信商支援自動安裝</strong>：部分電信商需要 QR Code
           手動掃，不支援 LPA URL 自動安裝。</li>
       </ul>
     </details>
@@ -175,7 +181,7 @@
     <details>
       <summary>我可以匯入其他票券 App 的資料嗎？</summary>
       <p>
-        目前不行 —— 因為其他 App 多半沒提供標準匯出格式。如果你的舊資料
+        目前不行，因為其他 App 多半沒提供標準匯出格式。如果你的舊資料
         有 JSON / CSV 結構，可以來信 support@squirrelwallet.app 提需求，
         看能不能加 importer。
       </p>
@@ -208,21 +214,18 @@
 
   <section class="faq" aria-label="Frequently asked questions">
     <details>
-      <summary>AI recognition failed / result inaccurate — what now?</summary>
+      <summary>AI recognition failed / result inaccurate: what now?</summary>
       <p>
-        We route image recognition through OpenAI
-        (gpt-5.4 / gpt-5.4-mini). Pro subscribers automatically fall
-        back from the primary model to gpt-5.4-mini on retryable
-        errors; the Free tier uses gpt-5.4-mini directly. If
-        recognition still fails, common causes are:
+        The app masks detected barcodes on-device before processing the image
+        you selected. If recognition still fails, common causes are:
       </p>
       <ul>
-        <li><strong>Network</strong> — switch between Wi-Fi and cellular
+        <li><strong>Network</strong>: switch between Wi-Fi and cellular
           and retry.</li>
-        <li><strong>Image isn't a ticket</strong> — AI returns "unrecognised"
-          when no ticket features are detected; use Manual Entry.</li>
-        <li><strong>Ad unlock incomplete</strong> — Free users may need to
-          complete a rewarded ad before AI recognition; Pro skips that flow.</li>
+        <li><strong>The image is not a ticket</strong>: use Manual Entry if
+          no ticket details can be detected.</li>
+        <li><strong>Daily allowance used</strong>: watch an ad to unlock one
+          recognition, or use Manual Entry or on-device barcode scanning.</li>
       </ul>
       <p>
         If the AI got fields wrong, every field on the Step 3 preview is
@@ -231,15 +234,18 @@
     </details>
 
     <details>
-      <summary>Why do I need to watch an ad before AI recognition?</summary>
+      <summary>How do free recognitions and ads work?</summary>
       <p>
-        AI image recognition has a real inference cost. To keep the Free tier
-        useful, Squirrel Stash limits ads to the user-initiated AI flow: once
-        you complete the rewarded ad, the app sends that recognition request.
+        On an eligible iOS 27 device with Apple Intelligence enabled, the Free
+        tier includes three recognitions per day. The app shows today's usage,
+        such as "Used 0/3."
       </p>
       <p>
-        We do not show passive ads in the wallet list, ticket detail screens, or
-        background flows. Squirrel Pro skips the ad flow for AI recognition.
+        After all three are used, when the device is not eligible, or when the
+        free route is temporarily unavailable, you may choose one ad to unlock
+        that recognition. If no ad is available, you can reload it, enter the
+        ticket manually, or use the on-device barcode scanner. Squirrel Pro does
+        not require ads.
       </p>
     </details>
 
@@ -259,7 +265,7 @@
       <p>
         13 barcode formats supported (EAN-13, Code 128, QR, etc.). Tap
         the torch button in the scanner for low-light help. If a ticket's
-        barcode is too small, use "Add via photo" — AI extracts the
+        barcode is too small, use "Add via photo." The app extracts the
         barcode and renders it large on the ticket card.
       </p>
       <p>
@@ -276,22 +282,22 @@
         built-in eSIM setup. Common causes when nothing happens:
       </p>
       <ul>
-        <li><strong>Device doesn't support eSIM</strong> — iPhone XS / SE
+        <li><strong>Device doesn't support eSIM</strong>: iPhone XS / SE
           2nd gen or later; most Pixel 4+ and recent flagship Androids.</li>
-        <li><strong>LPA string truncated</strong> — photo recognition can
+        <li><strong>LPA string truncated</strong>: photo recognition can
           miss characters; verify the LPA URL against your carrier email.</li>
-        <li><strong>Carrier requires manual scan</strong> — some carriers
+        <li><strong>Carrier requires manual scan</strong>: some carriers
           only accept QR-code scans, not LPA-URL auto-install.</li>
       </ul>
     </details>
 
     <details>
-      <summary>Backup / restore — does my data go to your cloud?</summary>
+      <summary>Backup / restore: does my data go to your cloud?</summary>
       <p>
         Settings → Backup writes an encrypted <code>.squirrel</code> ZIP
         on the device, then opens the OS share sheet so you choose where
         to send it (iCloud, Google Drive, AirDrop, email, messages …).
-        <strong>Backups are never uploaded to our servers</strong> — where
+        <strong>Backups are never uploaded to our servers.</strong> Where
         they go is entirely your choice.
       </p>
       <p>
@@ -322,7 +328,7 @@
     <details>
       <summary>Will my data survive a phone change or reinstall?</summary>
       <p>
-        Not automatically — because we don't collect accounts or sync to
+        Not automatically. Because we don't collect accounts or sync to
         the cloud, all data lives on-device. Export regularly via
         Settings → Backup and keep the <code>.squirrel</code> file in
         iCloud Drive / Google Drive. On a new device, open the app →
@@ -343,7 +349,7 @@
     <details>
       <summary>Can I import data from another ticket app?</summary>
       <p>
-        Not yet — most ticket apps don't expose a standard export. If
+        Not yet. Most ticket apps don't expose a standard export. If
         your old data is in JSON / CSV, email
         <a href="mailto:support@squirrelwallet.app">support@squirrelwallet.app</a>
         with the format details and we'll see if an importer is feasible.
