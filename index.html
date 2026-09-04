@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Squirrel Stash | Tickets, coupons, and eSIM details ready when you need them</title>
-  <meta name="description" content="Turn screenshots into a private iPhone wallet for tickets, coupons, and eSIM activation details. Search, reminders, barcode display, and optional Pro upgrades.">
+  <title>Squirrel Stash | Your tickets, coupons, and eSIM details, easy to find</title>
+  <meta name="description" content="Save a screenshot and Squirrel Stash turns it into a card you can find in seconds. It reminds you before things expire and shows the barcode when you need it. No account, and everything stays on your phone.">
   <link rel="canonical" href="https://squirrelwallet.app/">
   <meta property="og:title" content="Squirrel Stash">
-  <meta property="og:description" content="A private iPhone wallet for tickets, coupons, and eSIM activation details. Search, reminders, barcode display, and optional Pro upgrades.">
+  <meta property="og:description" content="Save a screenshot and Squirrel Stash turns it into a card you can find in seconds. It reminds you before things expire and shows the barcode when you need it. No account, and everything stays on your phone.">
   <meta property="og:url" content="https://squirrelwallet.app/">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://squirrelwallet.app/assets/app/app-icon.png">
@@ -32,31 +32,33 @@
       } catch (error) {}
     })();
   </script>
-  <link rel="stylesheet" href="/styles.css?v=20260904">
+  <link rel="stylesheet" href="/styles.css?v=20260904b">
 </head>
 <body class="home-page">
   <div class="scroll-progress" aria-hidden="true"></div>
   <div class="grain" aria-hidden="true"></div>
   <a class="skip-link" href="#main-content">跳至主要內容 / Skip to content</a>
   <nav class="product-nav" aria-label="Primary">
-    <a class="product-brand" href="/">
-      <img src="/assets/app/app-icon.png" width="36" height="36" alt="" aria-hidden="true">
-      <span>Squirrel Stash</span>
-    </a>
-    <ul class="product-nav__links">
-      <li><a href="#wallet" data-i18n="nav.wallet">Wallet</a></li>
-      <li><a href="#ai" data-i18n="nav.add">Add</a></li>
-      <li><a href="#privacy" data-i18n="nav.privacy">Privacy</a></li>
-      <li><a href="/support/" data-i18n="nav.support">Support</a></li>
-    </ul>
-    <div class="product-nav__controls" aria-label="Display controls">
-      <div class="segmented-control" role="group" aria-label="Language">
-        <button type="button" data-lang-option="zh" aria-pressed="true">中文</button>
-        <button type="button" data-lang-option="en" aria-pressed="false">EN</button>
-      </div>
-      <div class="segmented-control" role="group" aria-label="Theme">
-        <button type="button" data-theme-option="light" aria-pressed="false">Light</button>
-        <button type="button" data-theme-option="dark" aria-pressed="false">Dark</button>
+    <div class="product-nav__inner">
+      <a class="product-brand" href="/">
+        <img src="/assets/app/app-icon.png" width="36" height="36" alt="" aria-hidden="true">
+        <span>Squirrel Stash</span>
+      </a>
+      <ul class="product-nav__links">
+        <li><a href="#wallet" data-i18n="nav.wallet">票夾</a></li>
+        <li><a href="#ai" data-i18n="nav.add">新增</a></li>
+        <li><a href="#privacy" data-i18n="nav.privacy">隱私</a></li>
+        <li><a href="/support/" data-i18n="nav.support">支援</a></li>
+      </ul>
+      <div class="product-nav__controls" aria-label="Display controls">
+        <div class="segmented-control" role="group" aria-label="Language">
+          <button type="button" data-lang-option="zh" aria-pressed="true">中文</button>
+          <button type="button" data-lang-option="en" aria-pressed="false">EN</button>
+        </div>
+        <div class="segmented-control" role="group" aria-label="Theme">
+          <button type="button" data-theme-option="light" aria-pressed="false">Light</button>
+          <button type="button" data-theme-option="dark" aria-pressed="false">Dark</button>
+        </div>
       </div>
     </div>
   </nav>
@@ -64,12 +66,12 @@
   <main id="main-content">
     <section class="product-hero" aria-labelledby="hero-title">
       <div class="product-hero__copy">
-        <p class="product-kicker" data-anim="up" data-i18n="hero.kicker">Ticket wallet for iPhone</p>
-        <h1 id="hero-title" data-anim="up" data-anim-delay="90" data-i18n="hero.title">票券不再躲在相簿裡。</h1>
-        <p class="product-hero__lede" data-anim="up" data-anim-delay="180" data-i18n="hero.lede">Squirrel Stash 把截圖、條碼、優惠券和 eSIM 資訊整理成可搜尋、可提醒、可出示的卡片。結帳、入場、出國前，不用再翻相簿。</p>
+        <p class="product-kicker" data-anim="up" data-i18n="hero.kicker">iPhone 票券收納 App</p>
+        <h1 id="hero-title" data-anim="up" data-anim-delay="90" data-i18n="hero.title">要用的票，不用再從相簿裡翻。</h1>
+        <p class="product-hero__lede" data-anim="up" data-anim-delay="180" data-i18n="hero.lede">把票券、優惠券、eSIM 開通資料的截圖丟進來，Squirrel Stash 會幫你整理成一張張卡片，快過期的時候還會提醒你。結帳、進場、出國前，打開就能出示。</p>
         <div class="product-actions" data-anim="up" data-anim-delay="270" aria-label="Primary actions">
           <a class="product-button product-button--primary" href="https://apps.apple.com/tw/app/id6778084126" data-i18n="cta.store">前往 App Store 下載</a>
-          <a class="product-button" href="/support/" data-i18n="cta.support">查看支援</a>
+          <a class="product-button" href="/support/" data-i18n="cta.support">常見問題</a>
           <a class="product-button" href="/privacy/" data-i18n="cta.privacy">隱私權政策</a>
         </div>
       </div>
@@ -88,16 +90,16 @@
 
       <dl class="product-facts product-facts--hero" data-anim-stagger="90" data-anim-base="360" aria-label="Launch facts">
         <div data-anim="up">
-          <dt data-i18n="facts.ready.title">Ready to show</dt>
-          <dd data-i18n="facts.ready.body">結帳入場更快找到</dd>
+          <dt data-i18n="facts.ready.title">打開就能出示</dt>
+          <dd data-i18n="facts.ready.body">結帳、進場不用再找</dd>
         </div>
         <div data-anim="up">
-          <dt data-i18n="facts.private.title">Private by default</dt>
-          <dd data-i18n="facts.private.body">不需要帳號</dd>
+          <dt data-i18n="facts.private.title">不用註冊帳號</dt>
+          <dd data-i18n="facts.private.body">不用 email，也不用密碼</dd>
         </div>
         <div data-anim="up">
-          <dt data-i18n="facts.pro.title">每日 AI</dt>
-          <dd data-i18n="facts.pro.body">符合條件每日免費 3 次</dd>
+          <dt data-i18n="facts.pro.title">每天 3 次免費辨識</dt>
+          <dd data-i18n="facts.pro.body">支援的機型每天免費 3 次</dd>
         </div>
       </dl>
     </section>
@@ -105,21 +107,21 @@
     <section class="product-strip" data-anim-stagger="70" aria-label="Product highlights">
       <span data-anim="pop" data-i18n="strip.tickets">票券</span>
       <span data-anim="pop" data-i18n="strip.coupons">優惠券</span>
-      <span data-anim="pop" data-i18n="strip.esim">eSIM 資訊</span>
-      <span data-anim="pop" data-i18n="strip.barcodes">條碼亮屏</span>
+      <span data-anim="pop" data-i18n="strip.esim">eSIM 開通資料</span>
+      <span data-anim="pop" data-i18n="strip.barcodes">出示條碼</span>
       <span data-anim="pop" data-i18n="strip.reminders">到期提醒</span>
-      <span data-anim="pop" data-i18n="strip.backup">本機備份</span>
+      <span data-anim="pop" data-i18n="strip.backup">資料存在手機裡</span>
     </section>
 
     <section id="wallet" class="product-section product-section--split">
       <div class="section-copy" data-anim="left">
-        <p class="product-kicker" data-i18n="wallet.kicker">Everyday wallet</p>
-        <h2 data-i18n="wallet.title">結帳前、入場前，打開就能出示。</h2>
-        <p data-i18n="wallet.body">把常用票券和優惠券集中在一個安靜的票夾裡。卡片保留到期日、分類、條碼與備註；需要時搜尋或直接出示。</p>
+        <p class="product-kicker" data-i18n="wallet.kicker">日常票夾</p>
+        <h2 data-i18n="wallet.title">結帳前、進場前，打開就能出示。</h2>
+        <p data-i18n="wallet.body">常用的票券和優惠券都放在同一個地方。每張卡片會記住到期日、分類、條碼和你寫的備註，要用的時候搜尋一下就找得到。</p>
         <ul class="feature-list" data-anim-stagger="100" data-anim-base="140">
-          <li data-anim="up" data-i18n="wallet.bullet1">票券與優惠券分開整理，常用項目不再混在相簿裡</li>
-          <li data-anim="up" data-i18n="wallet.bullet2">到期日與提醒集中管理，快過期的票券更早被看見</li>
-          <li data-anim="up" data-i18n="wallet.bullet3">Pro 提供進階卡片外觀，讓票夾更像你真的會每天打開的 App</li>
+          <li data-anim="up" data-i18n="wallet.bullet1">票券和優惠券分開整理，不會再跟幾千張照片混在一起</li>
+          <li data-anim="up" data-i18n="wallet.bullet2">快到期的會先提醒你，不會又不小心放到過期</li>
+          <li data-anim="up" data-i18n="wallet.bullet3">Pro 版有更好看的卡片樣式，讓你更願意每天打開它</li>
         </ul>
       </div>
       <div class="screen-pair" data-anim="right" data-anim-delay="120" aria-hidden="true">
@@ -134,9 +136,9 @@
 
     <section id="ai" class="product-section product-section--cards">
       <div class="section-copy section-copy--center" data-anim="up">
-        <p class="product-kicker" data-i18n="add.kicker">Add anything</p>
-        <h2 data-i18n="add.title">拍照、掃碼、貼連結；少打字，多確認。</h2>
-        <p data-i18n="add.body">從照片建立卡片時，Squirrel Stash 會先幫你整理可辨識欄位。你只要確認、修正，再存進票夾。</p>
+        <p class="product-kicker" data-i18n="add.kicker">新增票券</p>
+        <h2 data-i18n="add.title">拍照、掃碼、貼網址，都可以。</h2>
+        <p data-i18n="add.body">用照片新增的時候，Squirrel Stash 會先幫你把看得出來的欄位填好。你只要檢查一下、改一改，再存起來就好。</p>
       </div>
       <div class="capture-layout">
         <figure class="feature-phone" data-anim="left">
@@ -145,18 +147,18 @@
         <div class="capture-steps" data-anim-stagger="120" data-anim-base="120">
           <article data-anim="right">
             <span>01</span>
-            <h3 data-i18n="add.step1.title">從照片開始</h3>
-            <p data-i18n="add.step1.body">選一張截圖，先帶出標題、日期、商家與分類。</p>
+            <h3 data-i18n="add.step1.title">拍張照，或選截圖</h3>
+            <p data-i18n="add.step1.body">App 會先幫你填好名稱、日期、店家和分類。</p>
           </article>
           <article data-anim="right">
             <span>02</span>
-            <h3 data-i18n="add.step2.title">確認欄位</h3>
-            <p data-i18n="add.step2.body">儲存前每個欄位都能手動調整，不需要相信一次辨識就完全正確。</p>
+            <h3 data-i18n="add.step2.title">檢查一下再存</h3>
+            <p data-i18n="add.step2.body">每個欄位存檔前都能自己改，辨識錯了也不怕。</p>
           </article>
           <article data-anim="right">
             <span>03</span>
-            <h3 data-i18n="add.step3.title">安心出示</h3>
-            <p data-i18n="add.step3.body">條碼和 QR 用於出示；需要上傳辨識時，會先在裝置上遮罩。</p>
+            <h3 data-i18n="add.step3.title">放心出示</h3>
+            <p data-i18n="add.step3.body">條碼和 QR Code 是拿來出示的。需要上傳辨識時，會先在你手機上把條碼遮起來再送出。</p>
           </article>
         </div>
       </div>
@@ -164,26 +166,26 @@
 
     <section id="privacy" class="product-section product-section--privacy">
       <div class="section-copy" data-anim="left">
-        <p class="product-kicker" data-i18n="privacy.kicker">Privacy</p>
-        <h2 data-i18n="privacy.title">你的票夾，不需要變成一個帳號。</h2>
-        <p data-i18n="privacy.body">Squirrel Stash 不要求登入，也不經營一份自己的票券資料庫。你主動選擇的照片才會進入辨識流程；不想上傳時，手動新增和條碼掃描仍可使用。</p>
+        <p class="product-kicker" data-i18n="privacy.kicker">隱私</p>
+        <h2 data-i18n="privacy.title">用這個 App，不用先開一個帳號。</h2>
+        <p data-i18n="privacy.body">Squirrel Stash 不用登入，也不會自己留一份你的票券資料。只有你主動選的照片才會拿去辨識；不想上傳的話，手動輸入和掃條碼一樣可以用。</p>
       </div>
       <div class="privacy-grid" data-anim-stagger="90" data-anim-base="80">
         <article data-anim="pop">
-          <strong data-i18n="privacy.local.title">Local first</strong>
-          <span data-i18n="privacy.local.body">票券、優惠券、eSIM 資訊預設保存在裝置上。</span>
+          <strong data-i18n="privacy.local.title">資料存在你手機裡</strong>
+          <span data-i18n="privacy.local.body">票券、優惠券、eSIM 資料預設都只留在這支手機上。</span>
         </article>
         <article data-anim="pop">
-          <strong data-i18n="privacy.account.title">No account</strong>
-          <span data-i18n="privacy.account.body">不需要 email、電話或會員登入才能建立票夾。</span>
+          <strong data-i18n="privacy.account.title">不用註冊帳號</strong>
+          <span data-i18n="privacy.account.body">不用 email、不用電話、不用密碼，打開就能開始用。</span>
         </article>
         <article data-anim="pop">
-          <strong data-i18n="privacy.mask.title">Barcode masking</strong>
-          <span data-i18n="privacy.mask.body">需要圖片辨識時，條碼與 QR 會先遮罩再送出。</span>
+          <strong data-i18n="privacy.mask.title">條碼會先遮起來</strong>
+          <span data-i18n="privacy.mask.body">需要上傳照片辨識時，條碼和 QR Code 會先遮掉再送出。</span>
         </article>
         <article data-anim="pop">
-          <strong data-i18n="privacy.ad.title">Ad boundary</strong>
-          <span data-i18n="privacy.ad.body">免費次數用完或裝置不符合條件時，可看廣告解鎖一次；廣告不取得票券內容。</span>
+          <strong data-i18n="privacy.ad.title">廣告看不到你的票</strong>
+          <span data-i18n="privacy.ad.body">免費次數用完時，可以看一支廣告換一次辨識；廣告拿不到你的票券內容。</span>
         </article>
       </div>
     </section>
@@ -192,9 +194,9 @@
       <div class="pro-panel" data-anim="zoom">
         <div>
           <p class="product-kicker">Squirrel Pro</p>
-          <h2 data-i18n="pro.title">更快整理，更漂亮的票夾。</h2>
-          <p data-i18n="pro.body">免費版保留核心票夾功能。Squirrel Pro 提供免廣告辨識與進階卡片外觀；適合常整理票券、優惠券和出國資料的人。</p>
-          <a class="product-button product-button--primary" href="/support/" data-i18n="pro.cta">了解 Pro 與訂閱</a>
+          <h2 data-i18n="pro.title">整理更快，卡片更好看。</h2>
+          <p data-i18n="pro.body">免費版就能用完整的票夾。Squirrel Pro 多的是免廣告的辨識次數，還有更多卡片樣式；適合常常在整理票券、優惠券和出國資料的人。</p>
+          <a class="product-button product-button--primary" href="/support/" data-i18n="pro.cta">看看 Pro 有什麼</a>
         </div>
         <figure class="settings-shot">
           <img class="theme-image" src="/assets/app/settings-pro-dark.png" data-light-src="/assets/app/settings-pro-light.png" data-dark-src="/assets/app/settings-pro-dark.png" width="450" height="980" alt="Settings screen showing Squirrel Pro banner and app settings">
@@ -206,13 +208,13 @@
   <footer class="product-footer" data-anim="up">
     <p>© 2026 Squirrel Stash</p>
     <nav aria-label="Footer">
-      <a href="/privacy/" data-i18n="footer.privacy">Privacy</a>
-      <a href="/support/" data-i18n="footer.support">Support</a>
+      <a href="/privacy/" data-i18n="footer.privacy">隱私權</a>
+      <a href="/support/" data-i18n="footer.support">支援</a>
       <a href="mailto:support@squirrelwallet.app">support@squirrelwallet.app</a>
     </nav>
   </footer>
 
-  <button type="button" class="back-to-top" data-i18n-aria="a11y.top" aria-label="Back to top">
+  <button type="button" class="back-to-top" data-i18n-aria="a11y.top" aria-label="回到頁面頂端">
     <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
       <path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
     </svg>
@@ -221,117 +223,117 @@
   (function () {
     var copy = {
       zh: {
-        title: 'Squirrel Stash | 票券、優惠券、eSIM，該用時就找得到',
-        description: '把截圖整理成私密的 iPhone 票夾，支援票券、優惠券、eSIM 資訊、搜尋、提醒、條碼出示與 Pro 升級。',
+        title: 'Squirrel Stash｜票券、優惠券、eSIM，要用的時候馬上找得到',
+        description: '把票券、優惠券和 eSIM 資料的截圖，整理成一張張好找的卡片。快過期會提醒你，要出示條碼也很快。不用註冊帳號，資料存在自己手機裡。',
         'nav.wallet': '票夾',
         'nav.add': '新增',
         'nav.privacy': '隱私',
         'nav.support': '支援',
-        'hero.kicker': 'iPhone 票券錢包',
-        'hero.title': '票券不再躲在相簿裡。',
-        'hero.lede': 'Squirrel Stash 把截圖、條碼、優惠券和 eSIM 資訊整理成可搜尋、可提醒、可出示的卡片。結帳、入場、出國前，不用再翻相簿。',
-        'cta.support': '查看支援',
+        'hero.kicker': 'iPhone 票券收納 App',
+        'hero.title': '要用的票，不用再從相簿裡翻。',
+        'hero.lede': '把票券、優惠券、eSIM 開通資料的截圖丟進來，Squirrel Stash 會幫你整理成一張張卡片，快過期的時候還會提醒你。結帳、進場、出國前，打開就能出示。',
+        'cta.support': '常見問題',
         'cta.privacy': '隱私權政策',
         'cta.store': '前往 App Store 下載',
-        'facts.ready.title': 'Ready to show',
-        'facts.ready.body': '結帳入場更快找到',
-        'facts.private.title': 'Private by default',
-        'facts.private.body': '不需要帳號',
-        'facts.pro.title': '每日 AI',
-        'facts.pro.body': '符合條件每日免費 3 次',
+        'facts.ready.title': '打開就能出示',
+        'facts.ready.body': '結帳、進場不用再找',
+        'facts.private.title': '不用註冊帳號',
+        'facts.private.body': '不用 email，也不用密碼',
+        'facts.pro.title': '每天 3 次免費辨識',
+        'facts.pro.body': '支援的機型每天免費 3 次',
         'strip.tickets': '票券',
         'strip.coupons': '優惠券',
-        'strip.esim': 'eSIM 資訊',
-        'strip.barcodes': '條碼亮屏',
+        'strip.esim': 'eSIM 開通資料',
+        'strip.barcodes': '出示條碼',
         'strip.reminders': '到期提醒',
-        'strip.backup': '本機備份',
+        'strip.backup': '資料存在手機裡',
         'wallet.kicker': '日常票夾',
-        'wallet.title': '結帳前、入場前，打開就能出示。',
-        'wallet.body': '把常用票券和優惠券集中在一個安靜的票夾裡。卡片保留到期日、分類、條碼與備註；需要時搜尋或直接出示。',
-        'wallet.bullet1': '票券與優惠券分開整理，常用項目不再混在相簿裡',
-        'wallet.bullet2': '到期日與提醒集中管理，快過期的票券更早被看見',
-        'wallet.bullet3': 'Pro 提供進階卡片外觀，讓票夾更像你真的會每天打開的 App',
-        'add.kicker': '新增任何票券',
-        'add.title': '拍照、掃碼、貼連結；少打字，多確認。',
-        'add.body': '從照片建立卡片時，Squirrel Stash 會先幫你整理可辨識欄位。你只要確認、修正，再存進票夾。',
-        'add.step1.title': '從照片開始',
-        'add.step1.body': '選一張截圖，先帶出標題、日期、商家與分類。',
-        'add.step2.title': '確認欄位',
-        'add.step2.body': '儲存前每個欄位都能手動調整，不需要相信一次辨識就完全正確。',
-        'add.step3.title': '安心出示',
-        'add.step3.body': '條碼和 QR 用於出示；需要上傳辨識時，會先在裝置上遮罩。',
+        'wallet.title': '結帳前、進場前，打開就能出示。',
+        'wallet.body': '常用的票券和優惠券都放在同一個地方。每張卡片會記住到期日、分類、條碼和你寫的備註，要用的時候搜尋一下就找得到。',
+        'wallet.bullet1': '票券和優惠券分開整理，不會再跟幾千張照片混在一起',
+        'wallet.bullet2': '快到期的會先提醒你，不會又不小心放到過期',
+        'wallet.bullet3': 'Pro 版有更好看的卡片樣式，讓你更願意每天打開它',
+        'add.kicker': '新增票券',
+        'add.title': '拍照、掃碼、貼網址，都可以。',
+        'add.body': '用照片新增的時候，Squirrel Stash 會先幫你把看得出來的欄位填好。你只要檢查一下、改一改，再存起來就好。',
+        'add.step1.title': '拍張照，或選截圖',
+        'add.step1.body': 'App 會先幫你填好名稱、日期、店家和分類。',
+        'add.step2.title': '檢查一下再存',
+        'add.step2.body': '每個欄位存檔前都能自己改，辨識錯了也不怕。',
+        'add.step3.title': '放心出示',
+        'add.step3.body': '條碼和 QR Code 是拿來出示的。需要上傳辨識時，會先在你手機上把條碼遮起來再送出。',
         'privacy.kicker': '隱私',
-        'privacy.title': '你的票夾，不需要變成一個帳號。',
-        'privacy.body': 'Squirrel Stash 不要求登入，也不經營一份自己的票券資料庫。你主動選擇的照片才會進入辨識流程；不想上傳時，手動新增和條碼掃描仍可使用。',
-        'privacy.local.title': 'Local first',
-        'privacy.local.body': '票券、優惠券、eSIM 資訊預設保存在裝置上。',
-        'privacy.account.title': 'No account',
-        'privacy.account.body': '不需要 email、電話或會員登入才能建立票夾。',
-        'privacy.mask.title': 'Barcode masking',
-        'privacy.mask.body': '需要圖片辨識時，條碼與 QR 會先遮罩再送出。',
-        'privacy.ad.title': 'Ad boundary',
-        'privacy.ad.body': '免費次數用完或裝置不符合條件時，可看廣告解鎖一次；廣告不取得票券內容。',
-        'pro.title': '更快整理，更漂亮的票夾。',
-        'pro.body': '免費版保留核心票夾功能。Squirrel Pro 提供免廣告辨識與進階卡片外觀；適合常整理票券、優惠券和出國資料的人。',
-        'pro.cta': '了解 Pro 與訂閱',
+        'privacy.title': '用這個 App，不用先開一個帳號。',
+        'privacy.body': 'Squirrel Stash 不用登入，也不會自己留一份你的票券資料。只有你主動選的照片才會拿去辨識；不想上傳的話，手動輸入和掃條碼一樣可以用。',
+        'privacy.local.title': '資料存在你手機裡',
+        'privacy.local.body': '票券、優惠券、eSIM 資料預設都只留在這支手機上。',
+        'privacy.account.title': '不用註冊帳號',
+        'privacy.account.body': '不用 email、不用電話、不用密碼，打開就能開始用。',
+        'privacy.mask.title': '條碼會先遮起來',
+        'privacy.mask.body': '需要上傳照片辨識時，條碼和 QR Code 會先遮掉再送出。',
+        'privacy.ad.title': '廣告看不到你的票',
+        'privacy.ad.body': '免費次數用完時，可以看一支廣告換一次辨識；廣告拿不到你的票券內容。',
+        'pro.title': '整理更快，卡片更好看。',
+        'pro.body': '免費版就能用完整的票夾。Squirrel Pro 多的是免廣告的辨識次數，還有更多卡片樣式；適合常常在整理票券、優惠券和出國資料的人。',
+        'pro.cta': '看看 Pro 有什麼',
         'footer.privacy': '隱私權',
         'footer.support': '支援',
         'a11y.top': '回到頁面頂端'
       },
       en: {
-        title: 'Squirrel Stash | Tickets, coupons, and eSIM details ready when you need them',
-        description: 'Turn screenshots into a private iPhone wallet for tickets, coupons, and eSIM activation details. Search, reminders, barcode display, and optional Pro upgrades.',
+        title: 'Squirrel Stash | Your tickets, coupons, and eSIM details, easy to find',
+        description: 'Save a screenshot and Squirrel Stash turns it into a card you can find in seconds. It reminds you before things expire and shows the barcode when you need it. No account, and everything stays on your phone.',
         'nav.wallet': 'Wallet',
         'nav.add': 'Add',
         'nav.privacy': 'Privacy',
         'nav.support': 'Support',
-        'hero.kicker': 'Ticket wallet for iPhone',
-        'hero.title': 'Tickets no longer hide in Photos.',
-        'hero.lede': 'Squirrel Stash turns screenshots, barcodes, coupons, and eSIM details into cards you can search, track, and show. Checkout, entry, and travel prep stay one tap away.',
-        'cta.support': 'Support',
+        'hero.kicker': 'A ticket wallet for iPhone',
+        'hero.title': 'Stop digging through Photos for your tickets.',
+        'hero.lede': 'Save a screenshot of a ticket, coupon, or eSIM and Squirrel Stash turns it into a card. It remembers the expiry date, reminds you before it runs out, and shows the barcode when you need it.',
+        'cta.support': 'Common questions',
         'cta.privacy': 'Privacy policy',
         'cta.store': 'Download on the App Store',
         'facts.ready.title': 'Ready to show',
-        'facts.ready.body': 'Find it faster at checkout or entry',
-        'facts.private.title': 'Private by default',
-        'facts.private.body': 'No account required',
-        'facts.pro.title': 'Daily AI',
-        'facts.pro.body': '3 free uses per day on eligible devices',
+        'facts.ready.body': 'No hunting at the counter',
+        'facts.private.title': 'No account needed',
+        'facts.private.body': 'No email, no password',
+        'facts.pro.title': '3 free scans a day',
+        'facts.pro.body': 'On supported iPhones',
         'strip.tickets': 'Tickets',
         'strip.coupons': 'Coupons',
         'strip.esim': 'eSIM details',
-        'strip.barcodes': 'Barcode display',
+        'strip.barcodes': 'Show a barcode',
         'strip.reminders': 'Expiry reminders',
-        'strip.backup': 'Local backup',
+        'strip.backup': 'Stays on your phone',
         'wallet.kicker': 'Everyday wallet',
-        'wallet.title': 'Open it before checkout, entry, or boarding.',
-        'wallet.body': 'Keep everyday tickets and coupons in a calm wallet. Each card keeps its expiry, category, barcode, and notes so you can search or show it when needed.',
-        'wallet.bullet1': 'Tickets and coupons stay organized instead of buried in Photos',
-        'wallet.bullet2': 'Expiry dates and reminders make soon-to-expire items easier to catch',
-        'wallet.bullet3': 'Pro unlocks richer card finishes for a wallet you will actually want to open',
-        'add.kicker': 'Add anything',
-        'add.title': 'Photo, scan, paste; type less and confirm more.',
-        'add.body': 'When you create a card from a photo, Squirrel Stash prepares the fields it can recognize. You review, adjust, and save.',
-        'add.step1.title': 'Start from a photo',
-        'add.step1.body': 'Pick a screenshot to prefill title, date, merchant, and category.',
-        'add.step2.title': 'Review the fields',
-        'add.step2.body': 'Every field can be edited before saving, so recognition is helpful without being final.',
-        'add.step3.title': 'Show safely',
-        'add.step3.body': 'Barcodes and QR codes are for presentation; when recognition needs upload, they are masked on device first.',
+        'wallet.title': 'Open it at the counter, the gate, or the airport.',
+        'wallet.body': 'Your everyday tickets and coupons live in one place. Each card remembers its expiry date, category, barcode, and any note you add, so you can search for it or just show it.',
+        'wallet.bullet1': 'Tickets and coupons stay in one place, not lost among thousands of photos',
+        'wallet.bullet2': 'You get a reminder before something expires, so it does not go to waste',
+        'wallet.bullet3': 'Pro adds nicer card designs, so the wallet is something you want to open',
+        'add.kicker': 'Adding a ticket',
+        'add.title': 'Take a photo, scan a code, or paste a link.',
+        'add.body': 'When you add from a photo, Squirrel Stash fills in the fields it can read. You check them, fix anything wrong, and save.',
+        'add.step1.title': 'Take a photo or pick a screenshot',
+        'add.step1.body': 'The app fills in the name, date, shop, and category for you.',
+        'add.step2.title': 'Check it before saving',
+        'add.step2.body': 'Every field can be edited, so a misread is easy to fix.',
+        'add.step3.title': 'Show it with confidence',
+        'add.step3.body': 'Barcodes and QR codes are there to be shown. If a photo has to be uploaded for scanning, they are covered up on your phone first.',
         'privacy.kicker': 'Privacy',
-        'privacy.title': 'Your wallet does not need to become an account.',
-        'privacy.body': 'Squirrel Stash does not require login or maintain its own ticket database. Only photos you choose enter recognition; manual entry and barcode scanning still work without upload.',
-        'privacy.local.title': 'Local first',
-        'privacy.local.body': 'Tickets, coupons, and eSIM details are stored on your device by default.',
-        'privacy.account.title': 'No account',
-        'privacy.account.body': 'No email, phone number, or member login is required to build your wallet.',
-        'privacy.mask.title': 'Barcode masking',
-        'privacy.mask.body': 'When image recognition is needed, barcodes and QR codes are masked before upload.',
-        'privacy.ad.title': 'Ad boundary',
-        'privacy.ad.body': 'After free uses, or on ineligible devices, an ad can unlock one recognition without receiving ticket content.',
-        'pro.title': 'Faster setup, better-looking cards.',
-        'pro.body': 'The free version keeps the core wallet. Squirrel Pro provides ad-free recognition and richer card finishes for people who organize tickets, coupons, and travel details often.',
-        'pro.cta': 'Learn about Pro',
+        'privacy.title': 'You do not have to create an account.',
+        'privacy.body': 'Squirrel Stash has no login and keeps no copy of your tickets. Only the photos you pick are scanned, and if you would rather not upload anything, typing it in and scanning barcodes still work.',
+        'privacy.local.title': 'Stays on your phone',
+        'privacy.local.body': 'Tickets, coupons, and eSIM details are kept on this phone by default.',
+        'privacy.account.title': 'No account needed',
+        'privacy.account.body': 'No email, no phone number, and no password to get started.',
+        'privacy.mask.title': 'Barcodes get covered',
+        'privacy.mask.body': 'When a photo is uploaded for scanning, barcodes and QR codes are covered up first.',
+        'privacy.ad.title': 'Ads never see your tickets',
+        'privacy.ad.body': 'When the free scans run out, you can watch an ad for one more. The ad never gets your ticket details.',
+        'pro.title': 'Quicker to sort, nicer to look at.',
+        'pro.body': 'The free version gives you the whole wallet. Squirrel Pro adds ad-free scanning and more card designs, for people who sort tickets, coupons, and travel details often.',
+        'pro.cta': 'See what Pro adds',
         'footer.privacy': 'Privacy',
         'footer.support': 'Support',
         'a11y.top': 'Back to top'

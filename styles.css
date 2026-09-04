@@ -1197,7 +1197,7 @@ html[data-theme="light"] .product-strip span {
   color: inherit;
 }
 
-.product-nav,
+.product-nav__inner,
 .product-hero,
 .product-section,
 .product-strip,
@@ -1206,18 +1206,24 @@ html[data-theme="light"] .product-strip span {
   margin-inline: auto;
 }
 
+/* The bar itself spans the full viewport so the frosted background never
+   stops short of the edges; `__inner` carries the page-width layout. */
 .product-nav {
   position: sticky;
   top: 0;
   z-index: 20;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 24px;
+  width: 100%;
   padding: 18px 0;
   background: color-mix(in srgb, var(--home-bg) 82%, transparent);
   backdrop-filter: blur(18px) saturate(160%);
   -webkit-backdrop-filter: blur(18px) saturate(160%);
+}
+
+.product-nav__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
 }
 
 .product-nav__controls {
@@ -1814,7 +1820,7 @@ html[data-theme="light"] .pro-panel {
 }
 
 @media (max-width: 640px) {
-  .product-nav,
+  .product-nav__inner,
   .product-hero,
   .product-section,
   .product-strip,
@@ -1826,7 +1832,7 @@ html[data-theme="light"] .pro-panel {
     display: none;
   }
 
-  .product-nav {
+  .product-nav__inner {
     flex-wrap: wrap;
   }
 
