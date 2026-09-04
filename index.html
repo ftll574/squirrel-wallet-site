@@ -32,9 +32,11 @@
       } catch (error) {}
     })();
   </script>
-  <link rel="stylesheet" href="/styles.css?v=20260902">
+  <link rel="stylesheet" href="/styles.css?v=20260904">
 </head>
 <body class="home-page">
+  <div class="scroll-progress" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
   <a class="skip-link" href="#main-content">跳至主要內容 / Skip to content</a>
   <nav class="product-nav" aria-label="Primary">
     <a class="product-brand" href="/">
@@ -62,17 +64,17 @@
   <main id="main-content">
     <section class="product-hero" aria-labelledby="hero-title">
       <div class="product-hero__copy">
-        <p class="product-kicker" data-i18n="hero.kicker">Ticket wallet for iPhone</p>
-        <h1 id="hero-title" data-i18n="hero.title">票券不再躲在相簿裡。</h1>
-        <p class="product-hero__lede" data-i18n="hero.lede">Squirrel Stash 把截圖、條碼、優惠券和 eSIM 資訊整理成可搜尋、可提醒、可出示的卡片。結帳、入場、出國前，不用再翻相簿。</p>
-        <div class="product-actions" aria-label="Primary actions">
+        <p class="product-kicker" data-anim="up" data-i18n="hero.kicker">Ticket wallet for iPhone</p>
+        <h1 id="hero-title" data-anim="up" data-anim-delay="90" data-i18n="hero.title">票券不再躲在相簿裡。</h1>
+        <p class="product-hero__lede" data-anim="up" data-anim-delay="180" data-i18n="hero.lede">Squirrel Stash 把截圖、條碼、優惠券和 eSIM 資訊整理成可搜尋、可提醒、可出示的卡片。結帳、入場、出國前，不用再翻相簿。</p>
+        <div class="product-actions" data-anim="up" data-anim-delay="270" aria-label="Primary actions">
           <a class="product-button product-button--primary" href="https://apps.apple.com/tw/app/id6778084126" data-i18n="cta.store">前往 App Store 下載</a>
           <a class="product-button" href="/support/" data-i18n="cta.support">查看支援</a>
           <a class="product-button" href="/privacy/" data-i18n="cta.privacy">隱私權政策</a>
         </div>
       </div>
 
-      <div class="screenshot-stage" aria-label="Squirrel Stash app screenshots">
+      <div class="screenshot-stage" data-anim="zoom" data-anim-delay="140" aria-label="Squirrel Stash app screenshots">
         <figure class="phone-shot phone-shot--main">
           <img class="theme-image" src="/assets/app/wallet-pro-dark.png" data-light-src="/assets/app/wallet-pro-light.png" data-dark-src="/assets/app/wallet-pro-dark.png" width="450" height="980" alt="Squirrel Stash Pro wallet screen showing gem-textured tickets">
         </figure>
@@ -84,43 +86,43 @@
         </figure>
       </div>
 
-      <dl class="product-facts product-facts--hero" aria-label="Launch facts">
-        <div>
+      <dl class="product-facts product-facts--hero" data-anim-stagger="90" data-anim-base="360" aria-label="Launch facts">
+        <div data-anim="up">
           <dt data-i18n="facts.ready.title">Ready to show</dt>
           <dd data-i18n="facts.ready.body">結帳入場更快找到</dd>
         </div>
-        <div>
+        <div data-anim="up">
           <dt data-i18n="facts.private.title">Private by default</dt>
           <dd data-i18n="facts.private.body">不需要帳號</dd>
         </div>
-        <div>
+        <div data-anim="up">
           <dt data-i18n="facts.pro.title">每日 AI</dt>
           <dd data-i18n="facts.pro.body">符合條件每日免費 3 次</dd>
         </div>
       </dl>
     </section>
 
-    <section class="product-strip" aria-label="Product highlights">
-      <span data-i18n="strip.tickets">票券</span>
-      <span data-i18n="strip.coupons">優惠券</span>
-      <span data-i18n="strip.esim">eSIM 資訊</span>
-      <span data-i18n="strip.barcodes">條碼亮屏</span>
-      <span data-i18n="strip.reminders">到期提醒</span>
-      <span data-i18n="strip.backup">本機備份</span>
+    <section class="product-strip" data-anim-stagger="70" aria-label="Product highlights">
+      <span data-anim="pop" data-i18n="strip.tickets">票券</span>
+      <span data-anim="pop" data-i18n="strip.coupons">優惠券</span>
+      <span data-anim="pop" data-i18n="strip.esim">eSIM 資訊</span>
+      <span data-anim="pop" data-i18n="strip.barcodes">條碼亮屏</span>
+      <span data-anim="pop" data-i18n="strip.reminders">到期提醒</span>
+      <span data-anim="pop" data-i18n="strip.backup">本機備份</span>
     </section>
 
     <section id="wallet" class="product-section product-section--split">
-      <div class="section-copy">
+      <div class="section-copy" data-anim="left">
         <p class="product-kicker" data-i18n="wallet.kicker">Everyday wallet</p>
         <h2 data-i18n="wallet.title">結帳前、入場前，打開就能出示。</h2>
         <p data-i18n="wallet.body">把常用票券和優惠券集中在一個安靜的票夾裡。卡片保留到期日、分類、條碼與備註；需要時搜尋或直接出示。</p>
-        <ul class="feature-list">
-          <li data-i18n="wallet.bullet1">票券與優惠券分開整理，常用項目不再混在相簿裡</li>
-          <li data-i18n="wallet.bullet2">到期日與提醒集中管理，快過期的票券更早被看見</li>
-          <li data-i18n="wallet.bullet3">Pro 提供進階卡片外觀，讓票夾更像你真的會每天打開的 App</li>
+        <ul class="feature-list" data-anim-stagger="100" data-anim-base="140">
+          <li data-anim="up" data-i18n="wallet.bullet1">票券與優惠券分開整理，常用項目不再混在相簿裡</li>
+          <li data-anim="up" data-i18n="wallet.bullet2">到期日與提醒集中管理，快過期的票券更早被看見</li>
+          <li data-anim="up" data-i18n="wallet.bullet3">Pro 提供進階卡片外觀，讓票夾更像你真的會每天打開的 App</li>
         </ul>
       </div>
-      <div class="screen-pair" aria-hidden="true">
+      <div class="screen-pair" data-anim="right" data-anim-delay="120" aria-hidden="true">
         <div class="theme-shot">
           <img class="theme-image" src="/assets/app/wallet-pro-dark.png" data-light-src="/assets/app/wallet-pro-light.png" data-dark-src="/assets/app/wallet-pro-dark.png" width="450" height="980" alt="">
         </div>
@@ -131,27 +133,27 @@
     </section>
 
     <section id="ai" class="product-section product-section--cards">
-      <div class="section-copy section-copy--center">
+      <div class="section-copy section-copy--center" data-anim="up">
         <p class="product-kicker" data-i18n="add.kicker">Add anything</p>
         <h2 data-i18n="add.title">拍照、掃碼、貼連結；少打字，多確認。</h2>
         <p data-i18n="add.body">從照片建立卡片時，Squirrel Stash 會先幫你整理可辨識欄位。你只要確認、修正，再存進票夾。</p>
       </div>
       <div class="capture-layout">
-        <figure class="feature-phone">
+        <figure class="feature-phone" data-anim="left">
           <img class="theme-image" src="/assets/app/add-flow-dark.png" data-light-src="/assets/app/add-flow-light.png" data-dark-src="/assets/app/add-flow-dark.png" width="450" height="980" alt="Add flow screen with scan barcode, use photo, manual entry, and paste coupon URL">
         </figure>
-        <div class="capture-steps">
-          <article>
+        <div class="capture-steps" data-anim-stagger="120" data-anim-base="120">
+          <article data-anim="right">
             <span>01</span>
             <h3 data-i18n="add.step1.title">從照片開始</h3>
             <p data-i18n="add.step1.body">選一張截圖，先帶出標題、日期、商家與分類。</p>
           </article>
-          <article>
+          <article data-anim="right">
             <span>02</span>
             <h3 data-i18n="add.step2.title">確認欄位</h3>
             <p data-i18n="add.step2.body">儲存前每個欄位都能手動調整，不需要相信一次辨識就完全正確。</p>
           </article>
-          <article>
+          <article data-anim="right">
             <span>03</span>
             <h3 data-i18n="add.step3.title">安心出示</h3>
             <p data-i18n="add.step3.body">條碼和 QR 用於出示；需要上傳辨識時，會先在裝置上遮罩。</p>
@@ -161,25 +163,25 @@
     </section>
 
     <section id="privacy" class="product-section product-section--privacy">
-      <div class="section-copy">
+      <div class="section-copy" data-anim="left">
         <p class="product-kicker" data-i18n="privacy.kicker">Privacy</p>
         <h2 data-i18n="privacy.title">你的票夾，不需要變成一個帳號。</h2>
         <p data-i18n="privacy.body">Squirrel Stash 不要求登入，也不經營一份自己的票券資料庫。你主動選擇的照片才會進入辨識流程；不想上傳時，手動新增和條碼掃描仍可使用。</p>
       </div>
-      <div class="privacy-grid">
-        <article>
+      <div class="privacy-grid" data-anim-stagger="90" data-anim-base="80">
+        <article data-anim="pop">
           <strong data-i18n="privacy.local.title">Local first</strong>
           <span data-i18n="privacy.local.body">票券、優惠券、eSIM 資訊預設保存在裝置上。</span>
         </article>
-        <article>
+        <article data-anim="pop">
           <strong data-i18n="privacy.account.title">No account</strong>
           <span data-i18n="privacy.account.body">不需要 email、電話或會員登入才能建立票夾。</span>
         </article>
-        <article>
+        <article data-anim="pop">
           <strong data-i18n="privacy.mask.title">Barcode masking</strong>
           <span data-i18n="privacy.mask.body">需要圖片辨識時，條碼與 QR 會先遮罩再送出。</span>
         </article>
-        <article>
+        <article data-anim="pop">
           <strong data-i18n="privacy.ad.title">Ad boundary</strong>
           <span data-i18n="privacy.ad.body">免費次數用完或裝置不符合條件時，可看廣告解鎖一次；廣告不取得票券內容。</span>
         </article>
@@ -187,7 +189,7 @@
     </section>
 
     <section class="product-section product-section--pro">
-      <div class="pro-panel">
+      <div class="pro-panel" data-anim="zoom">
         <div>
           <p class="product-kicker">Squirrel Pro</p>
           <h2 data-i18n="pro.title">更快整理，更漂亮的票夾。</h2>
@@ -201,7 +203,7 @@
     </section>
   </main>
 
-  <footer class="product-footer">
+  <footer class="product-footer" data-anim="up">
     <p>© 2026 Squirrel Stash</p>
     <nav aria-label="Footer">
       <a href="/privacy/" data-i18n="footer.privacy">Privacy</a>
@@ -209,6 +211,12 @@
       <a href="mailto:support@squirrelwallet.app">support@squirrelwallet.app</a>
     </nav>
   </footer>
+
+  <button type="button" class="back-to-top" data-i18n-aria="a11y.top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+      <path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
+  </button>
 <script>
   (function () {
     var copy = {
@@ -267,7 +275,8 @@
         'pro.body': '免費版保留核心票夾功能。Squirrel Pro 提供免廣告辨識與進階卡片外觀；適合常整理票券、優惠券和出國資料的人。',
         'pro.cta': '了解 Pro 與訂閱',
         'footer.privacy': '隱私權',
-        'footer.support': '支援'
+        'footer.support': '支援',
+        'a11y.top': '回到頁面頂端'
       },
       en: {
         title: 'Squirrel Stash | Tickets, coupons, and eSIM details ready when you need them',
@@ -324,7 +333,8 @@
         'pro.body': 'The free version keeps the core wallet. Squirrel Pro provides ad-free recognition and richer card finishes for people who organize tickets, coupons, and travel details often.',
         'pro.cta': 'Learn about Pro',
         'footer.privacy': 'Privacy',
-        'footer.support': 'Support'
+        'footer.support': 'Support',
+        'a11y.top': 'Back to top'
       }
     };
 
@@ -367,20 +377,38 @@
       document.querySelectorAll('[data-i18n]').forEach(function (node) {
         node.textContent = dict[node.dataset.i18n];
       });
+      document.querySelectorAll('[data-i18n-aria]').forEach(function (node) {
+        node.setAttribute('aria-label', dict[node.dataset.i18nAria]);
+      });
       document.querySelectorAll('[data-lang-option]').forEach(function (button) {
         button.setAttribute('aria-pressed', String(button.dataset.langOption === currentLang));
       });
     }
 
+    // Cross-fade the whole page when the theme or language flips, where the
+    // browser supports it. Falls back to an instant swap everywhere else.
+    function withTransition(run) {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduce && typeof document.startViewTransition === 'function') {
+        document.startViewTransition(run);
+      } else {
+        run();
+      }
+    }
+
     document.querySelectorAll('[data-lang-option]').forEach(function (button) {
       button.addEventListener('click', function () {
-        applyLanguage(button.dataset.langOption);
+        withTransition(function () {
+          applyLanguage(button.dataset.langOption);
+        });
       });
     });
 
     document.querySelectorAll('[data-theme-option]').forEach(function (button) {
       button.addEventListener('click', function () {
-        applyTheme(button.dataset.themeOption, true);
+        withTransition(function () {
+          applyTheme(button.dataset.themeOption, true);
+        });
       });
     });
 
@@ -394,5 +422,6 @@
     applyTheme(currentTheme === 'light' || currentTheme === 'dark' ? currentTheme : effectiveTheme(), currentTheme === 'light' || currentTheme === 'dark');
   })();
 </script>
+<script src="/assets/home-motion.js?v=20260904" defer></script>
 </body>
 </html>

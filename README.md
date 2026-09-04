@@ -17,6 +17,13 @@ Hosted on GitHub Pages, served at the custom domain `squirrelwallet.app` via Clo
 ## Stack
 
 - Plain HTML + a single `styles.css`. No build step, no Jekyll, no JS framework.
+- `assets/home-motion.js` (~11KB, vanilla, no dependencies) adds the homepage motion
+  layer: scroll reveals, hero parallax, card tilt, scroll progress, back-to-top. It is
+  progressive enhancement — the hidden reveal states live behind a class the script
+  adds, so the page renders and reads correctly if the file never loads, and everything
+  is disabled under `prefers-reduced-motion`.
+- Bump the `?v=` query on the `styles.css` / `home-motion.js` tags in `index.html` when
+  you change either, so Cloudflare and browsers pick the new file up.
 - The simpler this stays, the less it can break right before an App Store review.
 
 ## Editing

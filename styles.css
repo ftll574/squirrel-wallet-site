@@ -1133,8 +1133,16 @@ html[data-theme="light"] .product-button:hover {
 }
 
 html[data-theme="light"] .product-button--primary {
-  background: linear-gradient(135deg, #7c68ff, #5d4ddc);
-  box-shadow: 0 18px 44px rgba(93, 77, 220, 0.24);
+  /* Darkened a step from #7c68ff so white label text clears WCAG AA;
+     the explicit colour is needed because `.home-page a { color: inherit }`
+     outweighs the `.product-button--primary` colour. */
+  color: #fff;
+  background: linear-gradient(135deg, #6957e6, #4f3fc4);
+  box-shadow: 0 18px 44px rgba(79, 63, 196, 0.26);
+}
+
+html[data-theme="light"] .product-button--primary:hover {
+  background: linear-gradient(135deg, #7767ef, #5b49d4);
 }
 
 html[data-theme="light"] .product-facts div,
@@ -1170,8 +1178,13 @@ html[data-theme="light"] .product-strip span {
   }
 
   html:not([data-theme]) .product-button--primary {
-    background: linear-gradient(135deg, #7c68ff, #5d4ddc);
-    box-shadow: 0 18px 44px rgba(93, 77, 220, 0.24);
+    color: #fff;
+    background: linear-gradient(135deg, #6957e6, #4f3fc4);
+    box-shadow: 0 18px 44px rgba(79, 63, 196, 0.26);
+  }
+
+  html:not([data-theme]) .product-button--primary:hover {
+    background: linear-gradient(135deg, #7767ef, #5b49d4);
   }
 
   html:not([data-theme]) .product-facts div,
@@ -1493,13 +1506,18 @@ html[data-theme="light"] .pro-panel {
 .phone-shot {
   position: absolute;
   width: min(39vw, 340px);
+  --tx: 0px;
+  --px: 0px;
+  --py: 0px;
+  --rot: 0deg;
+  transform: translate3d(calc(var(--tx) + var(--px)), var(--py), 0) rotate(var(--rot));
 }
 
 .phone-shot--main {
   right: 15%;
   top: 0;
   z-index: 3;
-  transform: rotate(-2deg);
+  --rot: -2deg;
 }
 
 .phone-shot--pulse {
@@ -1508,7 +1526,7 @@ html[data-theme="light"] .pro-panel {
   z-index: 2;
   width: min(33vw, 288px);
   opacity: 0.72;
-  transform: rotate(-8deg);
+  --rot: -8deg;
 }
 
 .phone-shot--add {
@@ -1517,7 +1535,7 @@ html[data-theme="light"] .pro-panel {
   z-index: 1;
   width: min(31vw, 270px);
   opacity: 0.54;
-  transform: rotate(7deg);
+  --rot: 7deg;
 }
 
 .product-strip {
@@ -1885,7 +1903,7 @@ html[data-theme="light"] .pro-panel {
     left: 50%;
     right: auto;
     width: min(72vw, 270px);
-    transform: translateX(-50%) rotate(-2deg);
+    --tx: -50%;
   }
 
   .phone-shot--pulse {
@@ -1943,4 +1961,701 @@ html[data-theme="light"] .pro-panel {
   .product-footer {
     flex-direction: column;
   }
+}
+
+/* =============================================================
+   Homepage motion & effects
+   Scroll reveals, hero parallax, ambient aurora, hover polish.
+   Everything below is opt-in: the hidden reveal state only applies
+   once assets/home-motion.js adds `.motion-ready`, so the page is
+   fully readable if JS never runs.
+   ============================================================= */
+
+/* ---------- keyframes ---------- */
+@keyframes swAuroraA {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  50%  { transform: translate3d(-6vw, 5vh, 0) scale(1.14); }
+  100% { transform: translate3d(4vw, -4vh, 0) scale(0.94); }
+}
+
+@keyframes swAuroraB {
+  0%   { transform: translate3d(0, 0, 0) scale(1.06); }
+  50%  { transform: translate3d(7vw, -6vh, 0) scale(0.9); }
+  100% { transform: translate3d(-5vw, 4vh, 0) scale(1.16); }
+}
+
+@keyframes swPhoneFloat {
+  0%, 100% { transform: translate3d(calc(var(--tx) + var(--px)), var(--py), 0) rotate(var(--rot)); }
+  50%      { transform: translate3d(calc(var(--tx) + var(--px)), calc(var(--py) - 18px), 0) rotate(calc(var(--rot) + 1deg)); }
+}
+
+@keyframes swScan {
+  0%          { transform: translateY(-115%); opacity: 0; }
+  6%          { opacity: 1; }
+  46%         { opacity: 1; }
+  60%, 100%   { transform: translateY(115%); opacity: 0; }
+}
+
+@keyframes swSheen {
+  from { transform: translateX(-130%); }
+  to   { transform: translateX(130%); }
+}
+
+@keyframes swCtaGlow {
+  0%, 100% { box-shadow: 0 18px 44px rgba(110, 91, 255, 0.34); }
+  50%      { box-shadow: 0 20px 56px rgba(140, 116, 255, 0.55); }
+}
+
+@keyframes swPulseRing {
+  0%        { box-shadow: 0 0 0 0 rgba(149, 119, 255, 0.45); }
+  70%, 100% { box-shadow: 0 0 0 11px rgba(149, 119, 255, 0); }
+}
+
+@keyframes swSpin {
+  to { transform: rotate(1turn); }
+}
+
+@keyframes swTextSheen {
+  to { background-position: -200% center; }
+}
+
+/* ---------- ambient aurora behind the page ---------- */
+.home-page::before,
+.home-page::after {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 50%;
+  will-change: transform;
+}
+
+.home-page::before {
+  top: -20vmax;
+  right: -14vmax;
+  width: 58vmax;
+  height: 58vmax;
+  background: radial-gradient(circle, rgba(149, 119, 255, 0.26), transparent 66%);
+  animation: swAuroraA 28s ease-in-out infinite alternate;
+}
+
+.home-page::after {
+  bottom: -26vmax;
+  left: -18vmax;
+  width: 56vmax;
+  height: 56vmax;
+  background: radial-gradient(circle, rgba(208, 74, 169, 0.2), transparent 66%);
+  animation: swAuroraB 36s ease-in-out infinite alternate;
+}
+
+html[data-theme="light"] .home-page::before {
+  background: radial-gradient(circle, rgba(103, 85, 223, 0.16), transparent 66%);
+}
+
+html[data-theme="light"] .home-page::after {
+  background: radial-gradient(circle, rgba(200, 69, 150, 0.12), transparent 66%);
+}
+
+@media (prefers-color-scheme: light) {
+  html:not([data-theme]) .home-page::before {
+    background: radial-gradient(circle, rgba(103, 85, 223, 0.16), transparent 66%);
+  }
+
+  html:not([data-theme]) .home-page::after {
+    background: radial-gradient(circle, rgba(200, 69, 150, 0.12), transparent 66%);
+  }
+}
+
+/* ---------- scroll progress bar ---------- */
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 60;
+  height: 3px;
+  pointer-events: none;
+  background: linear-gradient(90deg, var(--home-accent), var(--home-accent-2));
+  transform: scaleX(var(--sw-progress, 0));
+  transform-origin: 0 50%;
+  opacity: 0.92;
+}
+
+/* ---------- scroll reveal ---------- */
+.motion-ready [data-anim] {
+  opacity: 0;
+}
+
+.motion-ready [data-anim="up"]    { transform: translateY(26px); }
+.motion-ready [data-anim="left"]  { transform: translateX(-30px); }
+.motion-ready [data-anim="right"] { transform: translateX(30px); }
+.motion-ready [data-anim="pop"]   { transform: scale(0.9); }
+.motion-ready [data-anim="zoom"]  { transform: scale(0.96) translateY(22px); }
+
+.motion-ready [data-anim].is-in {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.75s cubic-bezier(0.22, 0.8, 0.25, 1) var(--d, 0ms),
+    transform 0.75s cubic-bezier(0.22, 0.8, 0.25, 1) var(--d, 0ms);
+}
+
+/* ---------- sticky nav ---------- */
+.product-nav {
+  border-bottom: 1px solid transparent;
+  transition: padding 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-nav.is-stuck {
+  padding: 11px 0;
+  border-bottom-color: var(--home-line);
+  box-shadow: 0 14px 34px -26px rgba(0, 0, 0, 0.9);
+}
+
+.product-brand img {
+  transition: transform 0.4s cubic-bezier(0.22, 0.8, 0.25, 1), box-shadow 0.4s ease;
+}
+
+.product-brand:hover img {
+  transform: rotate(-8deg) scale(1.08);
+  box-shadow: 0 14px 34px rgba(149, 119, 255, 0.45);
+}
+
+.product-nav__links a {
+  position: relative;
+  transition: color 0.22s ease, background 0.22s ease;
+}
+
+.product-nav__links a::after {
+  content: "";
+  position: absolute;
+  left: 11px;
+  right: 11px;
+  bottom: 3px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--home-accent);
+  transform: scaleX(0);
+  transition: transform 0.3s cubic-bezier(0.22, 0.8, 0.25, 1);
+}
+
+.product-nav__links a:hover::after,
+.product-nav__links a.is-active::after {
+  transform: scaleX(1);
+}
+
+.product-nav__links a.is-active {
+  color: var(--home-text);
+}
+
+.segmented-control button {
+  transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.segmented-control button:active {
+  transform: scale(0.94);
+}
+
+/* ---------- buttons ---------- */
+.product-button {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  translate: var(--mgx, 0px) calc(var(--mgy, 0px) + var(--lift, 0px));
+  transition:
+    translate 0.28s cubic-bezier(0.22, 0.8, 0.25, 1),
+    scale 0.18s ease,
+    background 0.28s ease,
+    border-color 0.28s ease,
+    box-shadow 0.28s ease;
+}
+
+.product-button:hover {
+  --lift: -2px;
+}
+
+.product-button:active {
+  --lift: 0px;
+  scale: 0.97;
+}
+
+.product-button--primary {
+  animation: swCtaGlow 3.6s ease-in-out infinite;
+}
+
+.product-button--primary::after {
+  content: "";
+  position: absolute;
+  inset: -20% -40%;
+  z-index: -1;
+  background: linear-gradient(104deg, transparent 38%, rgba(255, 255, 255, 0.5) 50%, transparent 62%);
+  transform: translateX(-130%);
+}
+
+.product-button--primary:hover::after {
+  animation: swSheen 0.85s cubic-bezier(0.3, 0.7, 0.4, 1);
+}
+
+/* ---------- hero phones: float, parallax, scan sweep ---------- */
+.phone-shot {
+  will-change: transform;
+  transition: opacity 0.5s ease, scale 0.5s cubic-bezier(0.22, 0.8, 0.25, 1), box-shadow 0.5s ease;
+}
+
+.phone-shot--main  { animation: swPhoneFloat 9s ease-in-out infinite; }
+.phone-shot--pulse { animation: swPhoneFloat 11.5s ease-in-out -3.4s infinite; }
+.phone-shot--add   { animation: swPhoneFloat 13.5s ease-in-out -6.8s infinite; }
+
+.screenshot-stage:hover .phone-shot--pulse { opacity: 0.9; }
+.screenshot-stage:hover .phone-shot--add   { opacity: 0.78; }
+
+.screenshot-stage .phone-shot:hover {
+  opacity: 1;
+  z-index: 5;
+  scale: 1.035;
+  box-shadow:
+    0 44px 110px rgba(0, 0, 0, 0.62),
+    0 0 0 1px rgba(149, 119, 255, 0.4);
+}
+
+.phone-shot--main::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(149, 119, 255, 0.14) 44%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(149, 119, 255, 0.14) 56%,
+    transparent 100%
+  );
+  animation: swScan 8s cubic-bezier(0.5, 0, 0.5, 1) 2.4s infinite;
+}
+
+.screen-pair .theme-shot,
+.feature-phone,
+.settings-shot {
+  transition: translate 0.45s cubic-bezier(0.22, 0.8, 0.25, 1), box-shadow 0.45s ease;
+}
+
+.screen-pair .theme-shot:hover,
+.feature-phone:hover,
+.settings-shot:hover {
+  translate: 0 -10px;
+  box-shadow:
+    0 46px 110px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(149, 119, 255, 0.34);
+}
+
+/* ---------- headline sheen ---------- */
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .product-hero h1 {
+    background-image: linear-gradient(
+      100deg,
+      var(--home-text) 0%,
+      var(--home-text) 34%,
+      var(--home-accent) 50%,
+      var(--home-text) 66%,
+      var(--home-text) 100%
+    );
+    background-size: 220% auto;
+    background-position: 0% center;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: swTextSheen 9s linear infinite;
+  }
+}
+
+/* ---------- pills ---------- */
+.product-strip span {
+  transition:
+    translate 0.25s cubic-bezier(0.22, 0.8, 0.25, 1),
+    scale 0.25s cubic-bezier(0.22, 0.8, 0.25, 1),
+    color 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+.product-strip span:hover {
+  translate: 0 -3px;
+  scale: 1.05;
+  color: var(--home-text);
+  border-color: color-mix(in srgb, var(--home-accent) 55%, transparent);
+  background: color-mix(in srgb, var(--home-accent) 16%, transparent);
+}
+
+/* ---------- feature bullets ---------- */
+.feature-list li::before {
+  animation: swPulseRing 3s ease-out infinite;
+  animation-delay: calc(var(--i, 0) * 0.45s);
+}
+
+.feature-list li:nth-child(2)::before { --i: 1; }
+.feature-list li:nth-child(3)::before { --i: 2; }
+.feature-list li:nth-child(4)::before { --i: 3; }
+
+/* ---------- cards: lift + cursor spotlight ---------- */
+.product-facts div,
+.capture-steps article,
+.privacy-grid article,
+.pro-panel {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  rotate: var(--rax, 0) var(--ray, 0) 0 var(--rang, 0deg);
+  transition:
+    translate 0.35s cubic-bezier(0.22, 0.8, 0.25, 1),
+    rotate 0.28s cubic-bezier(0.22, 0.8, 0.25, 1),
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.product-facts div::before,
+.capture-steps article::before,
+.privacy-grid article::before,
+.pro-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    260px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(149, 119, 255, 0.22),
+    transparent 68%
+  );
+  transition: opacity 0.35s ease;
+}
+
+.product-facts div:hover::before,
+.capture-steps article:hover::before,
+.privacy-grid article:hover::before,
+.pro-panel:hover::before {
+  opacity: 1;
+}
+
+.product-facts div > *,
+.capture-steps article > *,
+.privacy-grid article > *,
+.pro-panel > * {
+  position: relative;
+  z-index: 1;
+}
+
+.product-facts div:hover,
+.capture-steps article:hover,
+.privacy-grid article:hover {
+  translate: 0 -5px;
+  border-color: color-mix(in srgb, var(--home-accent) 50%, transparent);
+  box-shadow: 0 26px 60px -30px rgba(149, 119, 255, 0.8);
+}
+
+.capture-steps span {
+  display: inline-block;
+  transition: transform 0.35s cubic-bezier(0.22, 0.8, 0.25, 1);
+}
+
+.capture-steps article:hover span {
+  transform: translateX(4px);
+}
+
+/* ---------- pro panel sweep ---------- */
+.pro-panel::after {
+  content: "";
+  position: absolute;
+  inset: -60%;
+  z-index: -1;
+  pointer-events: none;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(149, 119, 255, 0.34) 46deg,
+    transparent 120deg,
+    transparent 360deg
+  );
+  animation: swSpin 16s linear infinite;
+}
+
+/* ---------- footer ---------- */
+.product-footer a {
+  transition: color 0.22s ease, translate 0.22s ease;
+}
+
+.product-footer a:hover {
+  translate: 0 -2px;
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .motion-ready [data-anim] {
+    opacity: 1;
+    transform: none;
+  }
+
+  .motion-ready [data-anim].is-in {
+    transition: none;
+  }
+
+  .home-page::before,
+  .home-page::after,
+  .phone-shot,
+  .phone-shot--main::after,
+  .product-button--primary,
+  .product-button--primary::after,
+  .pro-panel::after,
+  .feature-list li::before,
+  .product-hero h1 {
+    animation: none !important;
+  }
+
+  .phone-shot--main::after,
+  .pro-panel::after {
+    display: none;
+  }
+
+  .scroll-progress {
+    display: none;
+  }
+}
+
+/* =============================================================
+   Homepage motion, part two
+   Film grain, 3D card tilt, magnetic buttons, masked heading
+   reveals, step rails, back-to-top, offscreen animation pausing.
+   ============================================================= */
+
+/* ---------- film grain ---------- */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+html[data-theme="light"] .grain {
+  opacity: 0.028;
+  mix-blend-mode: multiply;
+}
+
+@media (prefers-color-scheme: light) {
+  html:not([data-theme]) .grain {
+    opacity: 0.028;
+    mix-blend-mode: multiply;
+  }
+}
+
+/* ---------- theme / language cross-fade ---------- */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.38s;
+  animation-timing-function: cubic-bezier(0.22, 0.8, 0.25, 1);
+}
+
+/* ---------- 3D card tilt ---------- */
+.product-facts,
+.capture-steps,
+.privacy-grid {
+  perspective: 1100px;
+}
+
+.product-facts div,
+.capture-steps article,
+.privacy-grid article {
+  rotate: var(--rax, 0) var(--ray, 0) 0 var(--rang, 0deg);
+  transition:
+    translate 0.35s cubic-bezier(0.22, 0.8, 0.25, 1),
+    rotate 0.28s cubic-bezier(0.22, 0.8, 0.25, 1),
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+/* ---------- masked heading reveal ---------- */
+/* clip-path based, so the text nodes stay untouched and survive the
+   language switch rewriting textContent. */
+.motion-ready .product-section h2 {
+  clip-path: inset(0 0 108% 0);
+  translate: 0 0.22em;
+}
+
+.motion-ready .section-copy.is-in h2,
+.motion-ready .pro-panel.is-in h2 {
+  clip-path: inset(-30% -30% -30% -30%);
+  translate: 0 0;
+  transition:
+    clip-path 0.85s cubic-bezier(0.22, 0.8, 0.25, 1) calc(var(--d, 0ms) + 90ms),
+    translate 0.85s cubic-bezier(0.22, 0.8, 0.25, 1) calc(var(--d, 0ms) + 90ms);
+}
+
+/* ---------- capture step rails ---------- */
+.capture-steps article::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: linear-gradient(180deg, var(--home-accent), var(--home-accent-2));
+  transform: scaleY(0);
+  transform-origin: 50% 0;
+  transition: transform 0.9s cubic-bezier(0.22, 0.8, 0.25, 1) calc(var(--d, 0ms) + 200ms);
+}
+
+.capture-steps article.is-in::after {
+  transform: scaleY(1);
+}
+
+/* ---------- back to top ---------- */
+.back-to-top {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 1px solid var(--home-line);
+  border-radius: 50%;
+  color: var(--home-text);
+  background: color-mix(in srgb, var(--home-bg) 72%, transparent);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  box-shadow: 0 14px 34px -14px rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+  opacity: 0;
+  translate: 0 14px;
+  scale: 0.86;
+  pointer-events: none;
+  transition:
+    opacity 0.35s ease,
+    translate 0.35s cubic-bezier(0.22, 0.8, 0.25, 1),
+    scale 0.35s cubic-bezier(0.22, 0.8, 0.25, 1),
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+.back-to-top.is-shown {
+  opacity: 1;
+  translate: 0 0;
+  scale: 1;
+  pointer-events: auto;
+}
+
+.back-to-top:hover {
+  border-color: color-mix(in srgb, var(--home-accent) 60%, transparent);
+  background: color-mix(in srgb, var(--home-accent) 22%, var(--home-bg));
+  scale: 1.08;
+}
+
+.back-to-top:active {
+  scale: 0.94;
+}
+
+.back-to-top svg {
+  transition: translate 0.25s cubic-bezier(0.22, 0.8, 0.25, 1);
+}
+
+.back-to-top:hover svg {
+  translate: 0 -2px;
+}
+
+@media (max-width: 640px) {
+  .back-to-top {
+    right: 14px;
+    bottom: 14px;
+  }
+}
+
+/* ---------- pause animations that are off screen ---------- */
+.motion-ready .screenshot-stage:not(.is-onscreen) .phone-shot,
+.motion-ready .screenshot-stage:not(.is-onscreen) .phone-shot--main::after,
+.motion-ready .pro-panel:not(.is-onscreen)::after,
+.motion-ready .feature-list:not(.is-onscreen) li::before {
+  animation-play-state: paused;
+}
+
+/* ---------- staggered hero phone entrance ---------- */
+.motion-ready .screenshot-stage:not(.is-in) .phone-shot {
+  scale: 0.88;
+}
+
+.motion-ready .screenshot-stage.is-in .phone-shot {
+  scale: 1;
+  transition:
+    opacity 0.5s ease,
+    scale 0.85s cubic-bezier(0.22, 0.8, 0.25, 1) var(--pd, 0ms),
+    box-shadow 0.5s ease;
+}
+
+.motion-ready .screenshot-stage.is-in .phone-shot:hover {
+  scale: 1.035;
+  transition:
+    opacity 0.5s ease,
+    scale 0.4s cubic-bezier(0.22, 0.8, 0.25, 1),
+    box-shadow 0.5s ease;
+}
+
+/* ---------- reduced motion (part two) ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .grain {
+    display: none;
+  }
+
+  .motion-ready .product-section h2 {
+    clip-path: none;
+    translate: 0 0;
+  }
+
+  .capture-steps article::after {
+    transform: scaleY(1);
+  }
+
+  .motion-ready .screenshot-stage:not(.is-in) .phone-shot,
+  .motion-ready .screenshot-stage.is-in .phone-shot {
+    scale: 1;
+  }
+
+  .product-facts div,
+  .capture-steps article,
+  .privacy-grid article,
+  .pro-panel {
+    rotate: none;
+  }
+
+  .back-to-top {
+    transition: opacity 0.2s ease;
+    translate: 0 0;
+    scale: 1;
+  }
+}
+
+/* On narrow screens the sideways reveals would push content past the right
+   edge before they land, so they enter vertically instead. */
+@media (max-width: 640px) {
+  .motion-ready [data-anim="left"],
+  .motion-ready [data-anim="right"] {
+    transform: translateY(26px);
+  }
+}
+
+/* Focus rings for the homepage controls, which the global `a:focus-visible`
+   rule does not reach (buttons) or styles with the wrong accent (links). */
+.product-button:focus-visible,
+.product-nav__links a:focus-visible,
+.product-brand:focus-visible,
+.segmented-control button:focus-visible,
+.back-to-top:focus-visible,
+.product-footer a:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--home-accent) 60%, transparent);
+  outline-offset: 3px;
 }
