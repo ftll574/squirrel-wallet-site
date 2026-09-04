@@ -83,26 +83,19 @@
     </nav>
   </header>
 
-  <h1>Squirrel Stash 隱私權政策</h1>
-  <p class="meta">最後更新 / Last updated: 2026-09-03 · App 版本 / version: 1.1.2</p>
+  <h1>Squirrel Stash 隱私權政策</h1><p class="meta">最後更新 / Last updated: 2026-09-03 · App 版本 / version: 1.1.2</p>
 
   <p>
-    本文件以繁體中文為主，English follows below。兩個版本內容等價，若有衝突
-    以英文版為準（App Store / Play Store 審查依據）。
+    本文件以繁體中文為主，English follows below。兩個版本內容等價，若有衝突以英文版為準（App Store / Play Store 審查依據）。
   </p>
 
   <h2 id="zh">繁體中文版</h2>
 
   <h3>1. 我們是誰</h3>
   <p>
-    「Squirrel Stash（松鼠票夾）」是一款獨立開發的票券管理 App。我們
-    <strong>沒有帳號系統、不需登入</strong>，您的票券、優惠券、設定預設
-    <strong>只儲存在您的裝置上</strong>。為了控管免費版 AI 辨識額度、防止濫用，
-    我們有一個<strong>最小化的 Firebase 後端服務</strong>（Cloud Functions +
+    「Squirrel Stash（松鼠票夾）」是一款獨立開發的票券管理 App。我們<strong>沒有帳號系統、不需登入</strong>，您的票券、優惠券、設定預設<strong>只儲存在您的裝置上</strong>。為了控管免費版 AI 辨識額度、防止濫用，我們有一個<strong>最小化的 Firebase 後端服務</strong>（Cloud Functions +
     Firebase 匿名驗證 + Firestore）：Cloud Functions 代理 AI 請求與獎勵式廣告 /
-    預算檢查，並只記錄一個<strong>匿名 Firebase Auth UID</strong>與 AI 使用量／
-    廣告獎勵／預算計數，不含您的票券內容，
-    也不含姓名、email 等個人資料。詳見下方說明。
+    預算檢查，並只記錄一個<strong>匿名 Firebase Auth UID</strong>與 AI 使用量／廣告獎勵／預算計數，不含您的票券內容，也不含姓名、email 等個人資料。詳見下方說明。
   </p>
 
   <h3>2. 我們收集哪些資料</h3>
@@ -110,54 +103,36 @@
   <table>
     <thead>
       <tr>
-        <th>類別</th>
-        <th>內容</th>
-        <th>儲存位置</th>
-        <th>是否離開您的裝置</th>
+        <th>類別</th><th>內容</th><th>儲存位置</th><th>是否離開您的裝置</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>票券 / 優惠券資料</td>
-        <td>標題、條碼、到期日、備註、自訂分類</td>
-        <td>本機 Hive 資料庫（AES-256 加密）</td>
-        <td>否</td>
+        <td>票券 / 優惠券資料</td><td>標題、條碼、到期日、備註、自訂分類</td><td>本機 Hive 資料庫（AES-256 加密）</td><td>否</td>
       </tr>
       <tr>
-        <td>票券截圖</td>
-        <td>您拍照或從相簿匯入的票券圖片</td>
-        <td>本機檔案系統（App 私有目錄）</td>
-        <td><strong>僅在使用 AI 辨識時上傳；上傳前會自動遮罩條碼</strong>（見第 3 節）</td>
+        <td>票券截圖</td><td>您拍照或從相簿匯入的票券圖片</td><td>本機檔案系統（App 私有目錄）</td><td><strong>僅在使用 AI 辨識時上傳；上傳前會自動遮罩條碼</strong>（見第 3 節）</td>
       </tr>
       <tr>
-        <td>eSIM LPA 字串</td>
-        <td>電信商提供的 eSIM 啟用字串</td>
-        <td>本機 Hive（AES-256 加密）</td>
-        <td>否（安裝時透過 OS 系統 URL 啟動）</td>
+        <td>eSIM LPA 字串</td><td>電信商提供的 eSIM 啟用字串</td><td>本機 Hive（AES-256 加密）</td><td>否（安裝時透過 OS 系統 URL 啟動）</td>
       </tr>
       <tr>
         <td>付費 / 訂閱資料</td>
-        <td>Squirrel Pro 權益狀態：方案、到期日、產品 ID；訂閱驗證所需的最小平台資料</td>
-        <td>本機 SharedPreferences；Apple / Google IAP；Firebase Functions / Firebase custom claims</td>
+        <td>Squirrel Pro 權益狀態：方案、到期日、產品 ID；訂閱驗證所需的最小平台資料</td><td>本機 SharedPreferences；Apple / Google IAP；Firebase Functions / Firebase custom claims</td>
         <td>購買由 Apple / Google IAP 處理；為驗證或還原 Pro 權益，App 可能將必要訂閱驗證資料送到 Squirrel 控制的 Firebase Function，並以匿名 Firebase Auth UID 更新 custom claim / 權益中繼資料</td>
       </tr>
       <tr>
         <td>App 使用記錄</td>
         <td>v1.1 上架版本預設關閉 telemetry；只有未來明確啟用且您主動同意時才會收集</td>
-        <td>Firebase Analytics（目前停用）</td>
-        <td>目前否</td>
+        <td>Firebase Analytics（目前停用）</td><td>目前否</td>
       </tr>
       <tr>
         <td>崩潰報告</td>
         <td>v1.1 上架版本預設關閉遠端崩潰回報；只有未來明確啟用且您主動同意時才會收集</td>
-        <td>Firebase Crashlytics（目前停用）</td>
-        <td>目前否</td>
+        <td>Firebase Crashlytics（目前停用）</td><td>目前否</td>
       </tr>
       <tr>
-        <td>帳號識別</td>
-        <td><strong>我們不要求註冊帳號</strong>，不會收集 email、電話、姓名</td>
-        <td>不適用</td>
-        <td>不適用</td>
+        <td>帳號識別</td><td><strong>我們不要求註冊帳號</strong>，不會收集 email、電話、姓名</td><td>不適用</td><td>不適用</td>
       </tr>
       <tr>
         <td>匿名 Firebase UID</td>
@@ -167,15 +142,11 @@
       </tr>
       <tr>
         <td>廣告 ID / 裝置 ID</td>
-        <td>Free 使用者啟動 AI 辨識並選擇廣告支援解鎖時，獎勵式廣告供應商可能依其 SDK 與平台政策處理廣告或裝置識別資訊（例如 ATT 同意後的 IDFA）。Squirrel Stash 不建立自己的裝置識別碼。</td>
-        <td>第三方廣告供應商；Squirrel Stash 自身不儲存自建裝置 ID</td>
+        <td>Free 使用者啟動 AI 辨識並選擇廣告支援解鎖時，獎勵式廣告供應商可能依其 SDK 與平台政策處理廣告或裝置識別資訊（例如 ATT 同意後的 IDFA）。Squirrel Stash 不建立自己的裝置識別碼。</td><td>第三方廣告供應商；Squirrel Stash 自身不儲存自建裝置 ID</td>
         <td><strong>僅限您主動選擇廣告支援解鎖時</strong>；我們不把票券內容、圖片、分類名稱、條碼或 AI 辨識結果提供給廣告供應商做投放</td>
       </tr>
       <tr>
-        <td>位置資訊</td>
-        <td><strong>不收集</strong></td>
-        <td>不適用</td>
-        <td>不適用</td>
+        <td>位置資訊</td><td><strong>不收集</strong></td><td>不適用</td><td>不適用</td>
       </tr>
     </tbody>
   </table>
@@ -186,15 +157,13 @@
     當您使用「拍照新增票券」或「AI 辨識」功能時，App 會將處理後圖片送到 AI
     模型供應商。1.1.2 版本使用下述 OpenAI 路徑。未來當 PCC 功能在您的 App
     版本可用，且裝置為 iOS 27、Apple Intelligence
-    已開啟並符合系統條件時，App 會優先使用 Apple Private Cloud Compute（PCC）。
-    其他情況，或 PCC 暫時無法完成辨識時，App 可能經 Squirrel 控制的 Firebase
+    已開啟並符合系統條件時，App 會優先使用 Apple Private Cloud Compute（PCC）。其他情況，或 PCC 暫時無法完成辨識時，App 可能經 Squirrel 控制的 Firebase
     Cloud Function 轉送 OpenAI。您也可以改用不需上傳圖片的手動新增或本機條碼掃描。
   </p>
 
   <h4>3.1 條碼遮罩</h4>
   <p>
-    <strong>我們在上傳前會用本機程式偵測條碼 / QR Code，並以黑色方塊覆蓋
-    已偵測到的區域</strong>。圖片也會重新編碼為 JPEG，以移除 EXIF/GPS
+    <strong>我們在上傳前會用本機程式偵測條碼 / QR Code，並以黑色方塊覆蓋已偵測到的區域</strong>。圖片也會重新編碼為 JPEG，以移除 EXIF/GPS
     中繼資料。這些動作在您的裝置上發生。
   </p>
   <p>遮罩流程（概念虛擬碼，僅作說明用）：</p>
@@ -208,12 +177,10 @@
         canvas.fillRect(bbox, color=BLACK)   # 純黑覆蓋
     return encodeJpeg(canvas, quality=90)</code></pre>
   <p>
-    偵測失敗或像素填充失敗時，App <strong>會中止上傳</strong>而非送出未遮罩
-    的原圖（強制中止，不降級）。
+    偵測失敗或像素填充失敗時，App <strong>會中止上傳</strong>而非送出未遮罩的原圖（強制中止，不降級）。
   </p>
   <p>
-    條碼可能包含兌換碼、eSIM LPA、會員號碼或付款 QR。遮罩已偵測到的區域
-    可降低外洩與盜用風險，但無法保證每一個條碼都一定能被偵測。
+    條碼可能包含兌換碼、eSIM LPA、會員號碼或付款 QR。遮罩已偵測到的區域可降低外洩與盜用風險，但無法保證每一個條碼都一定能被偵測。
   </p>
 
   <h4>3.2 我們會把圖片送到哪裡</h4>
@@ -221,11 +188,7 @@
   <table>
     <thead>
       <tr>
-        <th>供應商</th>
-        <th>模型</th>
-        <th>用途</th>
-        <th>隱私政策</th>
-        <th>資料保留</th>
+        <th>供應商</th><th>模型</th><th>用途</th><th>隱私政策</th><th>資料保留</th>
       </tr>
     </thead>
     <tbody>
@@ -247,107 +210,65 @@
   </table>
   </div>
   <p>
-    <strong>我們不使用 Apple PCC 與 OpenAI 以外的推論供應商。</strong>PCC 成功時，
-    Squirrel 後端不會收到圖片或辨識結果。Free 使用者的後端會保存與匿名 Firebase UID
+    <strong>我們不使用 Apple PCC 與 OpenAI 以外的推論供應商。</strong>PCC 成功時，Squirrel 後端不會收到圖片或辨識結果。Free 使用者的後端會保存與匿名 Firebase UID
     關聯的每日使用量計數、獎勵保留 / scan-session 識別碼、狀態與時間，用於額度與防濫用控管。OpenAI 路徑透過
     Squirrel 控制的 Firebase Cloud Function，App 用戶端不內嵌 OpenAI API key。
   </p>
   <p>
-    <strong>我們無法控制 OpenAI 的政策變更</strong>。Squirrel Stash 提供
-    的條碼遮罩是一道防線，但您仍應評估自身敏感資料的風險。如果您不希望
-    任何圖片離開裝置，請<strong>不要使用 AI 辨識功能</strong>，改用手動
-    輸入或條碼掃描（這兩個功能完全在本機運作）。
+    <strong>我們無法控制 OpenAI 的政策變更</strong>。Squirrel Stash 提供的條碼遮罩是一道防線，但您仍應評估自身敏感資料的風險。如果您不希望任何圖片離開裝置，請<strong>不要使用 AI 辨識功能</strong>，改用手動輸入或條碼掃描（這兩個功能完全在本機運作）。
   </p>
 
   <h4>3.3 AI 成本、獎勵式廣告與同意選項</h4>
   <p>
-    在 1.1.2 版本，Free 使用者可選擇觀看一次獎勵式廣告來解鎖該次辨識；
-    Squirrel Pro 不需要觀看廣告。若未來版本啟用 PCC 每日免費辨識，App 才會在
-    合格裝置上顯示當日已使用次數。Squirrel Stash 不會把票券內容、截圖、條碼、
-    分類名稱、eSIM LPA 或辨識結果提供給廣告供應商做投放。
+    在 1.1.2 版本，Free 使用者可選擇觀看一次獎勵式廣告來解鎖該次辨識；Squirrel Pro 不需要觀看廣告。若未來版本啟用 PCC 每日免費辨識，App 才會在合格裝置上顯示當日已使用次數。Squirrel Stash 不會把票券內容、截圖、條碼、分類名稱、eSIM LPA 或辨識結果提供給廣告供應商做投放。
   </p>
   <p>
     在 Google Mobile Ads 初始化或提出任何廣告請求前，App 會先透過 Google
-    User Messaging Platform（UMP）更新所在地區適用的同意狀態，並在需要時
-    顯示表單。只有 UMP 回報可提出廣告請求後才會繼續；法規要求時可從
-    「設定 → 資料與隱私 → 廣告隱私選項」再次開啟表單。
+    User Messaging Platform（UMP）更新所在地區適用的同意狀態，並在需要時顯示表單。只有 UMP 回報可提出廣告請求後才會繼續；法規要求時可從「設定 → 資料與隱私 → 廣告隱私選項」再次開啟表單。
   </p>
   <p>
-    UMP 與 Apple App Tracking Transparency（ATT）是不同控制：UMP 管理地區
-    廣告資料處理同意，ATT 控制 IDFA 跨 App 追蹤。拒絕 ATT 不影響 App 功能，
-    也不會替您回答 UMP；拒絕後廣告請求不得使用 IDFA 進行跨 App 追蹤。
+    UMP 與 Apple App Tracking Transparency（ATT）是不同控制：UMP 管理地區廣告資料處理同意，ATT 控制 IDFA 跨 App 追蹤。拒絕 ATT 不影響 App 功能，也不會替您回答 UMP；拒絕後廣告請求不得使用 IDFA 進行跨 App 追蹤。
   </p>
 
   <h4>3.4 隨同圖片傳輸的內容</h4>
   <p>
-    為了讓 AI 模型給出更準確的分類結果，圖片之外
-    <strong>我們會在 prompt 中夾帶</strong>：
+    為了讓 AI 模型給出更準確的分類結果，圖片之外<strong>我們會在 prompt 中夾帶</strong>：
   </p>
   <ul>
     <li>您在「設定 → 自訂分類」建立的<strong>分類名稱列表</strong>（不含
-      icon / 顏色），讓模型可以建議現有的分類而非生造一個。
-      <strong>如果您把公司名 / 個人標籤當分類名（例如「公司福委會」「老婆生日」），這些字串會出現在
-      prompt 中</strong>。如果不希望這類資訊離開裝置，請避免用敏感字串作為
-      分類名稱。</li>
-    <li>您在「設定 → 國家偏好」的 active 國家清單（用於 eSIM 國別判定）</li>
-    <li>當下使用者選擇的 kind（ticket / coupon），讓模型解 ambiguous 案例</li>
+      icon / 顏色），讓模型可以建議現有的分類而非生造一個。<strong>如果您把公司名 / 個人標籤當分類名（例如「公司福委會」「老婆生日」），這些字串會出現在
+      prompt 中</strong>。如果不希望這類資訊離開裝置，請避免用敏感字串作為分類名稱。</li><li>您在「設定 → 國家偏好」的 active 國家清單（用於 eSIM 國別判定）</li><li>當下使用者選擇的 kind（ticket / coupon），讓模型解 ambiguous 案例</li>
   </ul>
   <p>我們<strong>不會傳輸</strong>：</p>
   <ul>
-    <li>票券標題、備註、條碼內容、QR 內容（這些不需要 AI 來辨識，圖片本身就有）</li>
-    <li>您裝置上的其他票券 / 優惠券（每次 prompt 只看當下這張圖）</li>
-    <li>Squirrel Stash 自建的裝置 ID（本 App 不建立這種 ID）、Apple ID、Google 帳號；AI prompt 也不包含廣告識別碼或匿名 Firebase Auth UID。廣告 SDK / Firebase 後端識別資訊的處理見第 2、3 節。</li>
-    <li>您圖片庫其他照片，<strong>僅限您主動選擇的當張票券圖片</strong></li>
+    <li>票券標題、備註、條碼內容、QR 內容（這些不需要 AI 來辨識，圖片本身就有）</li><li>您裝置上的其他票券 / 優惠券（每次 prompt 只看當下這張圖）</li><li>Squirrel Stash 自建的裝置 ID（本 App 不建立這種 ID）、Apple ID、Google 帳號；AI prompt 也不包含廣告識別碼或匿名 Firebase Auth UID。廣告 SDK / Firebase 後端識別資訊的處理見第 2、3 節。</li><li>您圖片庫其他照片，<strong>僅限您主動選擇的當張票券圖片</strong></li>
   </ul>
 
   <h3>4. 本機資料安全</h3>
   <ul>
-    <li>所有票券 / 優惠券資料以 <strong>AES-256</strong> 加密儲存於 Hive 本機資料庫</li>
-    <li>加密金鑰存於系統安全儲存（iOS Keychain / Android Keystore），即使裝置 root / jailbreak 也無法直接讀取</li>
-    <li>截圖檔案存於 App 私有目錄，OS 層級已隔離其他 App 存取</li>
+    <li>所有票券 / 優惠券資料以 <strong>AES-256</strong> 加密儲存於 Hive 本機資料庫</li><li>加密金鑰存於系統安全儲存（iOS Keychain / Android Keystore），即使裝置 root / jailbreak 也無法直接讀取</li><li>截圖檔案存於 App 私有目錄，OS 層級已隔離其他 App 存取</li>
   </ul>
 
-  <h3>5. 您的權利（GDPR / 台灣個資法）</h3>
-
-  <h4>5.1 存取 / 匯出</h4>
-  <p>您隨時可以透過「設定 → 備份」匯出所有資料（加密 ZIP 檔）。</p>
-
-  <h4>5.2 修改</h4>
-  <p>所有資料皆可在 App 內直接編輯。</p>
-
-  <h4>5.3 刪除</h4>
+  <h3>5. 您的權利（GDPR / 台灣個資法）</h3><h4>5.1 存取 / 匯出</h4><p>您隨時可以透過「設定 → 備份」匯出所有資料（加密 ZIP 檔）。</p><h4>5.2 修改</h4><p>所有資料皆可在 App 內直接編輯。</p><h4>5.3 刪除</h4>
   <p>
-    「設定 → 清除所有資料」會永久刪除所有本機票券、優惠券、截圖、設定，
-    並 cancel 所有通知排程。
+    「設定 → 清除所有資料」會永久刪除所有本機票券、優惠券、截圖、設定，並 cancel 所有通知排程。
   </p>
   <p>操作流程：</p>
   <ol>
-    <li>點擊「設定 → 清除所有資料」紅色按鈕</li>
-    <li>在彈出對話框中<strong>輸入「刪除」二字</strong>啟用確認鈕</li>
-    <li>點擊「清除所有資料」立即執行</li>
+    <li>點擊「設定 → 清除所有資料」紅色按鈕</li><li>在彈出對話框中<strong>輸入「刪除」二字</strong>啟用確認鈕</li><li>點擊「清除所有資料」立即執行</li>
   </ol>
-  <p>明確會清除：本機 Hive boxes（包含加密的備份還原暫存快照）、所有截圖目錄、多數 SharedPreferences 設定、所有已排程的通知。</p>
-  <p>明確<strong>保留</strong>（白名單機制）：</p>
+  <p>明確會清除：本機 Hive boxes（包含加密的備份還原暫存快照）、所有截圖目錄、多數 SharedPreferences 設定、所有已排程的通知。</p><p>明確<strong>保留</strong>（白名單機制）：</p>
   <ul>
     <li><code>subscription_status</code> / <code>subscription_expiry_date</code> / <code>subscription_product_id</code>：保留 Squirrel Pro 訂閱狀態，供 App 內顯示權益與恢復購買後離線判斷使用</li>
     <li><code>onboarding_completed_v1</code>：首次教學旗標</li>
     <li>Hive AES key：保留以確保未來匯入過去匯出的加密備份還能解密</li>
   </ul>
   <blockquote>
-    <p><strong>注意 1</strong>：刪除本機資料<strong>不會</strong>回溯刪除過去送給 AI 供應商的圖片副本。如需向各供應商請求刪除，請參考其隱私政策。</p>
-    <p><strong>注意 2</strong>：「設定 → 清除所有資料」是本機票券 / 優惠券 / 截圖 / 設定的刪除入口。若您也要要求刪除伺服器端以匿名 Firebase Auth UID 保存的 AI 使用量、獎勵式廣告 / 預算計數或訂閱權益中繼資料，請透過 support@squirrelwallet.app 聯絡我們；因為本 App 沒有帳號系統，若無法對應到特定匿名 UID，我們可能無法辨識您的伺服器端紀錄。</p>
+    <p><strong>注意 1</strong>：刪除本機資料<strong>不會</strong>回溯刪除過去送給 AI 供應商的圖片副本。如需向各供應商請求刪除，請參考其隱私政策。</p><p><strong>注意 2</strong>：「設定 → 清除所有資料」是本機票券 / 優惠券 / 截圖 / 設定的刪除入口。若您也要要求刪除伺服器端以匿名 Firebase Auth UID 保存的 AI 使用量、獎勵式廣告 / 預算計數或訂閱權益中繼資料，請透過 support@squirrelwallet.app 聯絡我們；因為本 App 沒有帳號系統，若無法對應到特定匿名 UID，我們可能無法辨識您的伺服器端紀錄。</p>
   </blockquote>
 
   <h4>5.4 付費 / 訂閱</h4>
-  <p>Squirrel Pro 透過 Apple App Store / Google Play 的 In-App Purchase 流程購買與還原。Squirrel Stash 不營運自己的付款處理系統，也不接收信用卡號或商店帳號密碼。為了驗證 / 還原 Pro 權益，App 可能將必要的 Apple 訂閱 claim / 平台驗證資料送到 Squirrel 控制的 Firebase Function，並以匿名 Firebase Auth UID 更新 Firebase custom claim / 權益中繼資料；App 也會在本機保存必要的訂閱狀態（方案、到期日、產品 ID）以顯示權益與離線判斷。</p>
-
-  <h3>6. 兒童隱私</h3>
-  <p>本 App 不刻意收集 13 歲以下兒童的資料。若我們發現意外收集，將立即刪除。</p>
-
-  <h3>7. 政策變更</h3>
-  <p>本政策若有重大變更，會在 App 內顯示提示，並更新本頁的 "Last updated" 日期。</p>
-
-  <h3>8. 聯絡我們</h3>
+  <p>Squirrel Pro 透過 Apple App Store / Google Play 的 In-App Purchase 流程購買與還原。Squirrel Stash 不營運自己的付款處理系統，也不接收信用卡號或商店帳號密碼。為了驗證 / 還原 Pro 權益，App 可能將必要的 Apple 訂閱 claim / 平台驗證資料送到 Squirrel 控制的 Firebase Function，並以匿名 Firebase Auth UID 更新 Firebase custom claim / 權益中繼資料；App 也會在本機保存必要的訂閱狀態（方案、到期日、產品 ID）以顯示權益與離線判斷。</p><h3>6. 兒童隱私</h3><p>本 App 不刻意收集 13 歲以下兒童的資料。若我們發現意外收集，將立即刪除。</p><h3>7. 政策變更</h3><p>本政策若有重大變更，會在 App 內顯示提示，並更新本頁的 "Last updated" 日期。</p><h3>8. 聯絡我們</h3>
   <ul>
     <li>Email: <a href="mailto:support@squirrelwallet.app">support@squirrelwallet.app</a></li>
   </ul>
