@@ -2665,3 +2665,13 @@ html[data-theme="light"] .grain {
   outline: 3px solid color-mix(in srgb, var(--home-accent) 60%, transparent);
   outline-offset: 3px;
 }
+
+/* Footnote under the capture steps: who gets the free daily scans, and what
+   happens when you do not. */
+.capture-note {
+  margin: 4px 0 0;
+  padding-left: 2px;
+  color: var(--home-faint);
+  font-size: 14px;
+  line-height: 1.6;
+}
