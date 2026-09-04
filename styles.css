@@ -1569,6 +1569,12 @@ html[data-theme="light"] .pro-panel {
 .product-section {
   padding: clamp(68px, 9vw, 126px) 0;
   border-top: 1px solid var(--home-line);
+  /* The sideways reveal parks elements 30px off to one side before they land,
+     but the page gutter is only 16px, so below ~1212px that stuck out past the
+     viewport and made the document horizontally scrollable. `clip` (unlike
+     `hidden`) does not create a scroll container, so the vertical axis stays
+     visible and hover shadows still spill downward. */
+  overflow-x: clip;
 }
 
 .product-section--split {
@@ -2646,6 +2652,18 @@ html[data-theme="light"] .grain {
     transition: opacity 0.2s ease;
     translate: 0 0;
     scale: 1;
+  }
+}
+
+/* Above ~1212px the page gutter is wide enough to absorb the hero phones'
+   rotated corners, so they bleed into it on purpose. Below that the gutter is
+   a fixed 16px and the corners cleared the viewport instead, leaving the
+   document horizontally scrollable. Clipping the hero trims at the container
+   edge rather than the screen edge - at most 16px different from where the
+   viewport was already cutting them - and costs nothing on wide screens. */
+@media (max-width: 1240px) {
+  .product-hero {
+    overflow-x: clip;
   }
 }
 
