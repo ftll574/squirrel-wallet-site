@@ -1547,9 +1547,13 @@ html[data-theme="light"] .pro-panel {
 .product-strip {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  /* Left-aligned, not centred: everything above it in the hero starts at the
+     container's left edge, so a centred row began at x=366 with nothing to
+     line up against. The top padding also has to clear the hero phones, whose
+     rotated boxes hang about 100px below the stage. */
+  justify-content: flex-start;
   gap: 10px;
-  padding: 18px 0 84px;
+  padding: 56px 0 76px;
 }
 
 .product-strip span {
